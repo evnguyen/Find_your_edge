@@ -123,6 +123,7 @@
 <!--TODO: Make the text translatable through php AND check accessibility levels-->
 <!--TODO: Adjust the alignment of the buttons -->
 <!--TODO: Hover effect bug -->
+<!--TODO: Stop webpage refresh from re-running the function calls -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -153,10 +154,12 @@
     <p>Component 2: Career Development Course</p>
   </div>
 
-  <?php print
+  <?php
+    $comp2 = getComp2();
+    print
     '<div class="component2_block height_adjust">' .
-    '<a href="' . genLink("AHS 107") . '"' . ' class="component_square alignment">' .
-    '<p class="font_default">'. getComp2() . '</p>'.
+    '<a href="' . genLink($comp2) . '"' . ' class="component_square alignment">' .
+    '<p class="font_default">'. $comp2 . '</p>'.
     '</a>' .
     '</div>'
   ?>
