@@ -21,8 +21,14 @@
 ?>
 
 <?php
-  //Variable declarations
+  //Global declarations
   $sid = $_GET['sid'];
+  global $submission;
+  global $comp1_ahs_courses;
+  global $comp1_env_courses;
+  global $comp1_math_courses;
+  global $comp2_arts_all_courses;
+  global $comp2_arts_psci_courses;
   $submission = webform_get_submission($node->nid, $sid);
     //$submission->data[i][j] where i is the question number and j is = 0
 
@@ -43,10 +49,10 @@
     2 => "PD1", );
 
   //Debug
-  dsm($submission);
-  dsm($node);
+  //dsm($submission);
+  //dsm($node);
   $test = webform_submission_data($node, $submission->data);
-  dsm($test);
+  //dsm($test);
 
 /**
  * Generate the results for Component 1: Skills identification
@@ -64,10 +70,20 @@
     global $comp2_arts_all_courses;
     global $comp2_arts_psci_courses;
 
-    if($submission->data[1][0] == "ART" && $submission[2][0] == ""){
+    if($submission->data[2][0] == "ART" && $submission->data[4][0] == "PSCI"){
       $max = count($comp2_arts_psci_courses);
+      $min = 0;
+      $index = rand($min, $max);
+      $retval = $comp2_arts_psci_courses[$index];
+      return $retval;
     }
-
+    else{
+      $max = count($comp2_arts_psci_courses);
+      $min = 0;
+      $index = rand($min, $max);
+      $retval = $comp2_arts_all_courses[$index];
+      return $retval;
+    }
   }
 
 /**
@@ -137,11 +153,13 @@
     <p>Component 2: Career Development Course</p>
   </div>
 
-  <div class="component2_block height_adjust">
-    <div class="component_square alignment">
-      <p class="font_default"> <?php print $comp1_ahs_courses[2]?></p>
-    </div>
-  </div>
+  <?php print
+    '<div class="component2_block height_adjust">' .
+    '<a href="' . genLink("AHS 107") . '"' . ' class="component_square alignment">' .
+    '<p class="font_default">'. getComp2() . '</p>'.
+    '</a>' .
+    '</div>'
+  ?>
 
   <div class="component2_descr">
     <div>
