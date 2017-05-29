@@ -13,6 +13,7 @@
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
   //dsm($theme_registry);
+  //WMS-DEV nid = 36
   $theme_registry['webform_confirmation_19'] = array(
     'template' => 'webform-confirmation-19',
     'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',

@@ -72,14 +72,14 @@
 
     if($submission->data[2][0] == "ART" && $submission->data[4][0] == "PSCI"){
       $max = count($comp2_arts_psci_courses);
-      $min = 0;
+      $min = 1;
       $index = rand($min, $max);
       $retval = $comp2_arts_psci_courses[$index];
       return $retval;
     }
     else{
       $max = count($comp2_arts_psci_courses);
-      $min = 0;
+      $min = 1;
       $index = rand($min, $max);
       $retval = $comp2_arts_all_courses[$index];
       return $retval;
