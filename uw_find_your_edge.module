@@ -1,0 +1,49 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: evnguyen
+ * Date: 5/5/2017
+ * Time: 3:49 PM
+ */
+
+
+/**
+ * @param $theme_registry
+ * Changes the confirmation page's theme
+ */
+function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
+  //dsm($theme_registry);
+  $theme_registry['webform_confirmation_19'] = array(
+    'template' => 'webform-confirmation-19',
+    'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',
+    'theme path' => drupal_get_path('module', 'uw_find_your_edge'),
+    'type' => 'theme',
+  );
+}
+
+
+/**
+ * Defines a new field type for the webform
+ */
+function uw_find_your_edge_webform_component_info(){
+  $components = array();
+  $components['btn'] = array(
+    'label' => t('Btn Test'),
+    'description' => t('Create a new button with similar properties to a radio buttton'),
+    'features' => array(
+      'csv' => TRUE,
+      'email' => TRUE,
+      'email_address' => FALSE,
+      'email_name' => FALSE,
+      'required' => FALSE,
+      'title_display' => TRUE,
+      'title_inline' => FALSE,
+      'conditional' => FALSE,
+      'group' => FALSE,
+      'spam_analysis' => FALSE,
+      'attachment' => FALSE,
+    ),
+    'file' => 'btn_test.inc',
+  );
+  return $components;
+}

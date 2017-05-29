@@ -1,0 +1,89 @@
+.container-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /*grid-template-rows: repeat(7,1fr);*/
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "comp1 comp1"
+    "comp1_block comp1_descr"
+    "comp2 comp2"
+    "comp2_block comp2_descr"
+    "comp3 comp3"
+    "comp3_block comp3_descr"
+    "comp4 comp4"
+    "comp4_block comp4_descr";
+}
+
+
+.alignment{
+  text-align: center;
+  align-self: center;
+}
+
+.height_adjust{
+  height:100%;
+}
+
+.font_default{
+  font-family: "BureauGrotCond Book",impact,"avenir next condensed heavy","Droid Sans",sans-serif;
+  font-size: 1.42383rem;
+
+}
+
+.margin_top{
+  margin-top: 50px;
+}
+
+.webform-confirmation{
+  grid-area: header;
+}
+
+
+.component_square{
+  background-color: #fdd54f;
+  border-radius: 5px;
+  display: inline-block;
+  padding-top: 15%;
+  padding-bottom: 15%;
+  width: 60%;
+}
+
+.component_square:link{
+  text-decoration: none;
+}
+
+.component1{
+  grid-area: comp1;
+}
+
+.component1_block{
+  grid-area: comp1_block;
+  width: 100%;
+  height: 100%;
+}
+
+
+.component1_descr{
+  grid-area: comp1_descr;
+}
+
+.component2{
+  grid-area: comp2;
+}
+
+.component2_block{
+  grid-area: comp2_block;
+}
+
+.component2_descr{
+  grid-area: comp2_descr;
+}
+
+.component3{
+  grid-area: comp3;
+}
+
+.component4{
+  grid-area: comp4;
+}
