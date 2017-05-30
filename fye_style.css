@@ -21,8 +21,12 @@
   align-self: center;
 }
 
-.height_adjust{
-  height:100%;
+.width_adjust{
+  width:60%;
+}
+
+.border_radius{
+  border-radius: 5px;
 }
 
 .font_default{

@@ -135,18 +135,26 @@
     <p>Component 1: Skills identification and Articulation Workshop</p>
   </div>
 
-
   <?php print
-  '<div class="component1_block height_adjust">' .
-    '<a href="' . genLink("AHS 107") . '"' . ' class="component_square alignment">' .
-      '<p class="font_default">'. $comp1_ahs_courses[1] . '</p>'.
-    '</a>' .
+  '<div class="component1_block">' .
+    '<div class="width_adjust">'.
+      '<div class="call-to-action-top-wrapper">'.
+        '<a href="' . genLink("AHS 107") . '"' . '>' .
+          '<div class="call-to-action-wrapper">' .
+            '<div class="call-to-action-theme-uWaterloo border_radius">'.
+              '<div class="call-to-action-big-text">'. $comp1_ahs_courses[1] .
+              '</div>' .
+            '</div>'.
+          '</div>' .
+        '</a>' .
+      '</div>' .
+  '</div>'.
   '</div>'
   ?>
 
   <div class="component1_descr">
     <div>
-      <?php print "<p>" . t("Some text that describes tescribes the block.  Some text that describes the block") . "</p>" ?>
+      <?php print "<p>" . t("Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. ") . "</p>" ?>
     </div>
   </div>
 
@@ -154,15 +162,25 @@
     <p>Component 2: Career Development Course</p>
   </div>
 
+
   <?php
-    $comp2 = getComp2();
+  $comp2 = getComp2();
     print
-    '<div class="component2_block height_adjust">' .
-    '<a href="' . genLink($comp2) . '"' . ' class="component_square alignment">' .
-    '<p class="font_default">'. $comp2 . '</p>'.
-    '</a>' .
-    '</div>'
+      '<div class="component2_block">' .
+        '<div class="width_adjust">'.
+          '<div class="call-to-action-top-wrapper">'.
+            '<a href="' . genLink($comp2) . '"' . '>' .
+              '<div class="call-to-action-wrapper">' .
+                '<div class="call-to-action-theme-uWaterloo">'.
+                  '<div class="call-to-action-big-text">'. $comp2 . '</div>' .
+                '</div>'.
+              '</div>' .
+            '</a>' .
+          '</div>' .
+        '</div>'.
+      '</div>'
   ?>
+
 
   <div class="component2_descr">
     <div>
