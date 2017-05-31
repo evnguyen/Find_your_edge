@@ -22,18 +22,11 @@
 
 <?php
 /**
- * Declaration of global variable.
- * This section declares the following list of variables to have global access.
- * Having global access lets the variable be used within a function
+ * Include constant definitions
+ * This section includes the file that holds all the constant definitions
  */
-  global $submission;
-  global $comp1_all_courses;
-  global $comp1_ahs_courses;
-  global $comp1_env_courses;
-  global $comp1_math_courses;
-  global $comp2_all_courses;
-  global $comp2_arts_all_courses;
-  global $comp2_arts_psci_courses;
+  include 'const_defs.php';
+
 
 /**
  * Variable definitions.
@@ -43,89 +36,8 @@
  * TODO: Change variable names for compX_all_courses
  */
   $sid = $_GET['sid'];
+  global $submission;
   $submission = webform_get_submission($node->nid, $sid);
-
-  $comp1_all_courses = array(
-    1 => "CCA Workshop",
-    );
-  $comp1_ahs_courses = array(
-    1 => "AHS 107",
-    2 => "CCA Workshop",
-    );
-  $comp1_env_courses = array(
-    1 => "ENVS 178",
-    2 => "CCA Workshop",
-    );
-  $comp1_math_courses = array(
-    1 => "ENGL 119",
-    2 => "CCA Workshop",
-    );
-
-  $comp2_all_courses = array(
-    1 => "PD1",
-    );
-  $comp2_arts_all_courses = array(
-    1 => "ARTS 111",
-    2 => "PD1",
-    );
-  $comp2_arts_psci_courses = array(
-    1 => "PSCI 299",
-    2 => "ARTS 111",
-    3 => "PD1",
-    );
-
-  $comp3_arts_drama_courses = array(
-    1 => "DRAMA 206",
-    2 => "DRAMA 207",
-    3 => "DRAMA 243",
-    4 => "DRAMA 244",
-    5 => "DRAMA 306",
-    6 => "DRAMA 307",
-    7 => "DRAMA 316",
-    8 => "DRAMA 317",
-    9 => "DRAMA 400",
-    10 => "DRAMA 406",
-    11 => "DRAMA 407",
-    12 => "DRAMA 416",
-    13 => "DRAMA 417",
-  );
-  $comp3_arts_fine_courses = array(
-    1 => "FINE 243",
-    2 => "FINE 343",
-  );
-  $comp3_arts_gbda_courses = array(
-    1 => "GBDA 301",
-    2 => "GBDA 302",
-    3 => "GBDA 401",
-    4 => "GBDA 402",
-  );
-  $comp3_arts_ger_courses = array(
-    1 => "GER 407",
-  );
-  $comp3_arts_ls_courses = array(
-    1 => "LS 434",
-  );
-  $comp3_arts_pac_courses = array(
-    1 => "PAC 390",
-    2 => "PAC 395",
-  );
-  $comp3_arts_psci_courses = array(
-    1 => "PSCI 498C",
-  );
-  $comp3_arts_psych_courses = array(
-    1 => "PSYCH 465",
-    2 => "PSYCH 466",
-    3 => "PSYCH 467",
-  );
-  $comp3_arts_sds_courses = array(
-    1 => "SDS 370R",
-    2 => "SDS 496R",
-  );
-
-
-
-
-
 
 
 /**
@@ -261,6 +173,7 @@
 <!--TODO: Make the text translatable through php AND check accessibility levels-->
 <!--TODO: Stop webpage refresh from re-running the function calls -->
 <!--TODO: Make the width of the confirmation page wider -->
+<!--TODO: Shift description column further to left -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up dead code -->
 <!--TODO: Clean up using coding standards -->
