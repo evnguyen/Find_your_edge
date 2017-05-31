@@ -10,7 +10,9 @@
     "comp2 comp2"
     "comp2_block comp2_descr"
     "comp3 comp3"
-    "comp3_block comp3_descr"
+    "comp3_block1 comp3_descr1"
+    "comp3_block2 comp3_descr2"
+    "comp3_block3 comp3_descr3"
     "comp4 comp4"
     "comp4_block comp4_descr";
 }
@@ -25,9 +27,6 @@
   width:60%;
 }
 
-.border_radius{
-  border-radius: 5px;
-}
 
 .font_default{
   font-family: "BureauGrotCond Book",impact,"avenir next condensed heavy","Droid Sans",sans-serif;
@@ -86,6 +85,30 @@
 
 .component3{
   grid-area: comp3;
+}
+
+.component3_block1{
+  grid-area: comp3_block1;
+}
+
+.component3_block2{
+  grid-area: comp3_block2;
+}
+
+.component3_block3{
+  grid-area: comp3_block3;
+}
+
+.component3_descr1{
+  grid-area: comp3_descr1;
+}
+
+.component3_descr2{
+  grid-area: comp3_descr2;
+}
+
+.component3_descr3{
+  grid-area: comp3_descr3;
 }
 
 .component4{
