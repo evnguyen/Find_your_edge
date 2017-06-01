@@ -171,7 +171,7 @@
             break;
         }
       }
-      elseif($faculty == "ARTS"){
+      elseif($faculty == "ART"){
         switch($major){
           case "THEAT":
             $results_list = array_merge($results_list, $comp3_arts_health_courses);
