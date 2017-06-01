@@ -128,7 +128,7 @@
     global $comp3_ahs_health_courses;
     global $comp3_ahs_kin_courses;
     global $comp3_ahs_rec_courses;
-    global $comp3_arts_health_courses;
+    global $comp3_arts_drama_courses;
     global $comp3_arts_fine_courses;
     global $comp3_arts_gbda_courses;
     global $comp3_arts_ger_courses;
@@ -155,8 +155,8 @@
     $results_list = array();
     if(in_array("ACA", $submission->data[8])){
       $faculty = $submission->data[2][0];
-      $major = $submission->data[3][0];
       if($faculty == "AHS"){
+        $major = $submission->data[3][0];
         switch($major){
           case "HLTH":
             $results_list = array_merge($results_list, $comp3_ahs_health_courses);
@@ -172,9 +172,10 @@
         }
       }
       elseif($faculty == "ART"){
+        $major = $submission->data[4][0];
         switch($major){
           case "THEAT":
-            $results_list = array_merge($results_list, $comp3_arts_health_courses);
+            $results_list = array_merge($results_list, $comp3_arts_drama_courses);
             break;
           case "FINE":
             $results_list = array_merge($results_list, $comp3_arts_fine_courses);
@@ -211,6 +212,7 @@
         }
       }
       elseif($faculty == "ENV"){
+        $major = $submission->data[5][0];
         switch($major){
           case "ENBUS":
             $results_list = array_merge($results_list, $comp3_env_enbus_courses);
@@ -229,6 +231,7 @@
         }
       }
       elseif($faculty == "SCI"){
+        $major = $submission->data[6][0];
         switch($major){
           case "SCBUS":
             $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
@@ -337,6 +340,8 @@
 <!--TODO: Clean up dead code -->
 <!--TODO: Clean up using coding standards -->
 <!--TODO: Change call to action hover effect based on faculty -->
+<!--TODO: Make the buttons either larger OR make text wrap -->
+<!--TODO: Make helper function that finds major based on faculty -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
