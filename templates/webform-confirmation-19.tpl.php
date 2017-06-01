@@ -49,8 +49,8 @@
  * Helper function for getting a random element in an array
  */
   function getRandomElement($list){
-    $min = 1;
-    $max = count($list);
+    $min = 0;
+    $max = count($list) - 1;
     $index = rand($min, $max);
     $retval = $list[$index];
     return $retval;
@@ -137,7 +137,7 @@
     global $comp3_arts_psci_courses;
     global $comp3_arts_psych_courses;
     global $comp3_arts_sds_courses;
-    global $comp3_arts_gbda_courses;
+    global $comp3_arts_smf_courses;
     global $comp3_arts_soc_courses;
     global $comp3_env_enbus_courses;
     global $comp3_env_ers_courses;
@@ -174,26 +174,37 @@
       elseif($faculty == "ARTS"){
         switch($major){
           case "THEAT":
+            $results_list = array_merge($results_list, $comp3_arts_health_courses);
             break;
           case "FINE":
+            $results_list = array_merge($results_list, $comp3_arts_fine_courses);
             break;
           case "GBDA":
+            $results_list = array_merge($results_list, $comp3_arts_gbda_courses);
             break;
           case "GER":
+            $results_list = array_merge($results_list, $comp3_arts_ger_courses);
             break;
           case "LS":
+            $results_list = array_merge($results_list, $comp3_arts_ls_courses);
             break;
           case "PACS":
+            $results_list = array_merge($results_list, $comp3_arts_pac_courses);
             break;
           case "PSCI":
+            $results_list = array_merge($results_list, $comp3_arts_psci_courses);
             break;
           case "PSYCH":
+            $results_list = array_merge($results_list, $comp3_arts_psych_courses);
             break;
           case "SDS":
+            $results_list = array_merge($results_list, $comp3_arts_sds_courses);
             break;
           case "SMF":
+            $results_list = array_merge($results_list, $comp3_arts_smf_courses);
             break;
           case "SOC":
+            $results_list = array_merge($results_list, $comp3_arts_soc_courses);
             break;
           default:
             break;
@@ -202,17 +213,30 @@
       elseif($faculty == "ENV"){
         switch($major){
           case "ENBUS":
+            $results_list = array_merge($results_list, $comp3_env_enbus_courses);
             break;
           case "ERS":
+            $results_list = array_merge($results_list, $comp3_env_ers_courses);
             break;
           case "INDEV":
+            $results_list = array_merge($results_list, $comp3_env_indev_courses);
             break;
           case "INTEG":
+            $results_list = array_merge($results_list, $comp3_env_integ_courses);
+            break;
+          default:
             break;
         }
       }
       elseif($faculty == "SCI"){
-
+        switch($major){
+          case "SCBUS":
+            $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
+            break;
+          case "BIOTECO":
+            $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
+            break;
+        }
       }
     }//End outer if (type==aca)
     if(in_array("ON", $submission->data[8])){
@@ -254,8 +278,9 @@
     $results = array();
     for($i = 0; $i < 3; $i++){
       $results[$i] = getRandomElement($results_list);
-      //Delete from array to avoid duplicate
-      unset($results_list[$results[$i]]);
+      //Delete from array to avoid duplicates
+      $element = array_search($results[$i], $results_list);
+      unset($results_list[$element]);
       //Reindex the keys in array
       $results_list = array_values($results_list);
     }
@@ -311,6 +336,7 @@
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up dead code -->
 <!--TODO: Clean up using coding standards -->
+<!--TODO: Change call to action hover effect based on faculty -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
