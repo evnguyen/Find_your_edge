@@ -23,10 +23,10 @@
   align-self: center;
 }
 
-.width_adjust{
-  width:60%;
-}
 
+.debug{
+  background-color: blue;
+}
 
 .font_default{
   font-family: "BureauGrotCond Book",impact,"avenir next condensed heavy","Droid Sans",sans-serif;
@@ -44,12 +44,8 @@
 
 
 .component_square{
-  background-color: #fdd54f;
-  border-radius: 5px;
-  display: inline-block;
-  padding-top: 15%;
-  padding-bottom: 15%;
   width: 60%;
+  margin-bottom: 1rem;
 }
 
 .component_square:link{
@@ -113,4 +109,8 @@
 
 .component4{
   grid-area: comp4;
+}
+
+.component4_descr{
+  grid-area: comp4_descr;
 }

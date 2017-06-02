@@ -45,6 +45,7 @@
   global $comp3_uni_college;
   global $comp3_student_soc;
   global $comp3_offices_services;
+  global $comp3_faculties;
   global $comp3_full_time;
   global $comp3_part_time;
   global $comp3_volunteering;
@@ -170,8 +171,7 @@
   );
   $comp3_env_indev_courses = array(
     "INDEV 401",
-    "INDEV 401",
-    "ERS 382",
+    "INDEV 402",
   );
   $comp3_env_integ_courses = array(
     "INTEG 452A", //INTEG 452A includes 452B
@@ -180,13 +180,16 @@
     "SCBUS 223",
   );
   $comp3_uni_college = array(
-    "University/College",
+    "Universities Colleges",
   );
   $comp3_student_soc = array(
-    "Student Society",
+    "Student Societies",
   );
   $comp3_offices_services = array(
     "Offices and Services",
+  );
+  $comp3_faculties = array(
+    "Faculties",
   );
   $comp3_full_time = array(
     "Full Time",

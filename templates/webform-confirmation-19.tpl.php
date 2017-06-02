@@ -58,6 +58,35 @@
 
 /**
  * @return string
+ * Helper function to return the major selected
+ */
+  function getMajor(){
+    global $submission;
+    $faculty = $submission->data[2][0];
+    if($faculty == "AHS"){
+      $major = $submission->data[3][0];
+    }
+    elseif($faculty == "ART"){
+      $major = $submission->data[4][0];
+    }
+    elseif($faculty == "ENV"){
+      $major = $submission->data[5][0];
+    }
+    elseif($faculty == "MATH"){
+      $major = $submission->data[6][0];
+    }
+    elseif($faculty == "SCI"){
+      $major = $submission->data[7][0];
+    }
+    else{
+      //TODO: Do a proper error handling
+      return "null";
+    }
+    return $major;
+  }
+
+/**
+ * @return string
  * Generate the results for Component 1: Skills identification
  */
   //TODO: Change if conditions to switch statements if required
@@ -97,7 +126,8 @@
     global $comp2_arts_all_courses;
     global $comp2_arts_psci_courses;
 
-    if($submission->data[2][0] == "ART" && $submission->data[4][0] == "PSCI"){
+    $major = getMajor();
+    if($submission->data[2][0] == "ART" && $major == "PSCI"){
       $retval = getRandomElement($comp2_arts_psci_courses);
       return $retval;
     }
@@ -116,12 +146,6 @@
 /**
  * @return array
  * Generate the results for Component 3: Work/Community Experiences
- * First check Faculty and Major
- * Then check "Kinds of Experiences"
- * Generate an empty array
- * If academic, add corresponding array to the empty array
- * If On-campus, ....
- * Return 3 elements
  */
   function getComp3(){
     global $submission;
@@ -147,6 +171,7 @@
     global $comp3_uni_college;
     global $comp3_student_soc;
     global $comp3_offices_services;
+    global $comp3_faculties;
     global $comp3_full_time;
     global $comp3_part_time;
     global $comp3_volunteering;
@@ -155,8 +180,8 @@
     $results_list = array();
     if(in_array("ACA", $submission->data[8])){
       $faculty = $submission->data[2][0];
+      $major = getMajor();
       if($faculty == "AHS"){
-        $major = $submission->data[3][0];
         switch($major){
           case "HLTH":
             $results_list = array_merge($results_list, $comp3_ahs_health_courses);
@@ -172,7 +197,6 @@
         }
       }
       elseif($faculty == "ART"){
-        $major = $submission->data[4][0];
         switch($major){
           case "THEAT":
             $results_list = array_merge($results_list, $comp3_arts_drama_courses);
@@ -212,7 +236,6 @@
         }
       }
       elseif($faculty == "ENV"){
-        $major = $submission->data[5][0];
         switch($major){
           case "ENBUS":
             $results_list = array_merge($results_list, $comp3_env_enbus_courses);
@@ -231,7 +254,6 @@
         }
       }
       elseif($faculty == "SCI"){
-        $major = $submission->data[6][0];
         switch($major){
           case "SCBUS":
             $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
@@ -246,7 +268,7 @@
       $exp = $submission->data[9][0];
       switch($exp){
         case "FAC":
-          //
+          $results_list = array_merge($results_list, $comp3_faculties);
           break;
         case "UC":
           $results_list = array_merge($results_list, $comp3_uni_college);
@@ -277,17 +299,24 @@
       }
     }
 
-    //TODO: bug check -> will a situation occur where results_list has < 3 elements?
     $results = array();
-    for($i = 0; $i < 3; $i++){
-      $results[$i] = getRandomElement($results_list);
-      //Delete from array to avoid duplicates
-      $element = array_search($results[$i], $results_list);
-      unset($results_list[$element]);
-      //Reindex the keys in array
-      $results_list = array_values($results_list);
+    if(count($results_list) < 3){
+      while(count($results_list) < 3){
+        $results_list[] = "N/A";
+      }
+      return $results_list;
     }
-    return $results;
+    else{
+      for($i = 0; $i < 3; $i++){
+        $results[$i] = getRandomElement($results_list);
+        //Delete from array to avoid duplicates
+        $element = array_search($results[$i], $results_list);
+        unset($results_list[$element]);
+        //Reindex the keys in array
+        $results_list = array_values($results_list);
+      }
+      return $results;
+    }
 
   }//End function
 
@@ -305,8 +334,18 @@
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
     //TODO: replace placeholder link
-    elseif($string == "Full Time" || $string == "Part Time"){
+    //TODO: code refactor on this?
+    elseif($string == "Full Time" || $string == "Part Time" ||
+      $string == "University or College" || $string == "Student Society" ||
+      $string == "Offices and Services" || $string == "Volunteering" ||
+      $string == "Service Learning"){
       return "https://uwaterloo.ca/edge/students/edge-experiences";
+    }
+    elseif($string == "CAPSTONE"){
+      return "https://uwaterloo.ca/edge/capstone-workshop";
+    }
+    elseif($string == "N/A"){
+      return "";
     }
     else{
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
@@ -340,8 +379,8 @@
 <!--TODO: Clean up dead code -->
 <!--TODO: Clean up using coding standards -->
 <!--TODO: Change call to action hover effect based on faculty -->
-<!--TODO: Make the buttons either larger OR make text wrap -->
-<!--TODO: Make helper function that finds major based on faculty -->
+<!--TODO: Make helper function that finds type of EXP -->
+<!--TODO: Remove message regarding already completeed quiz -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -357,8 +396,8 @@
   <?php
   $comp1 = getComp1();
   print
-  '<div class="component1_block">' .
-    '<div class="width_adjust">'.
+  '<div class="component1_block debug">' .
+    '<div class="component_square">'.
       '<div class="call-to-action-top-wrapper">'.
         '<a href="' . genLink($comp1) . '"' . '>' .
           '<div class="call-to-action-wrapper">' .
@@ -388,7 +427,7 @@
   $comp2 = getComp2();
   print
     '<div class="component2_block">' .
-      '<div class="width_adjust">'.
+      '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp2) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
@@ -405,7 +444,7 @@
 
   <div class="component2_descr">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
     </div>
   </div>
 
@@ -418,7 +457,7 @@
   $comp3 = getComp3();
   print
     '<div class="component3_block1">' .
-      '<div class="width_adjust">'.
+      '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3[0]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
@@ -434,14 +473,14 @@
 
   <div class="component3_descr1">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
     </div>
   </div>
 
   <?php
   print
     '<div class="component3_block2">' .
-      '<div class="width_adjust">'.
+      '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3[1]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
@@ -457,14 +496,14 @@
 
   <div class="component3_descr2">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
     </div>
   </div>
 
   <?php
   print
     '<div class="component3_block3">' .
-      '<div class="width_adjust">'.
+      '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3[2]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
@@ -480,15 +519,38 @@
 
   <div class="component3_descr3">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
     </div>
   </div>
 
 
 
   <!-- COMPONENT 4 -->
-  <div class="component4">
+  <div class="component4 margin_top">
     <p>Component 4: Capstone Workshop</p>
+  </div>
+
+  <?php
+  $comp4 = "CAPSTONE";
+  print
+    '<div class="component4_block">' .
+      '<div class="component_square">'.
+        '<div class="call-to-action-top-wrapper">'.
+          '<a href="' . genLink($comp4) . '"' . '>' .
+            '<div class="call-to-action-wrapper">' .
+              '<div class="call-to-action-theme-uWaterloo">'.
+                '<div class="call-to-action-big-text">'. $comp4 . '</div>' .
+              '</div>'.
+            '</div>' .
+          '</a>' .
+        '</div>' .
+      '</div>'.
+    '</div>'
+  ?>
+  <div class="component4_descr">
+    <div>
+      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+    </div>
   </div>
 
 </div>
