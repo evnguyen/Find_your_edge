@@ -396,7 +396,7 @@
   <?php
   $comp1 = getComp1();
   print
-  '<div class="component1_block debug">' .
+  '<div class="component1_block">' .
     '<div class="component_square">'.
       '<div class="call-to-action-top-wrapper">'.
         '<a href="' . genLink($comp1) . '"' . '>' .
