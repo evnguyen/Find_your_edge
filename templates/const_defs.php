@@ -223,7 +223,7 @@
   );
 
   $comp4_capstone_grad = array(
-    "Graduate/Profession school"
+    "Graduate/ Professional school"
   );
 
   $comp4_capstone_timeoff = array(
@@ -251,7 +251,6 @@
     "COURSE" => " counts as an equivalency for the skills identification
     and articulation workshop. Visit our list of EDGE courses for a full list of
     equivalencies.",
-
   );
 
 
@@ -307,7 +306,7 @@
     "Working full-time" => "You’ll use the capstone workshop to make a plan of 
       action for the beginning of your professional life.",
 
-    "Graduate/Profession school" => "You’ll use the capstone workshop to make a 
+    "Graduate/ Professional school" => "You’ll use the capstone workshop to make a 
       plan of action for your transition into graduate or professional school.",
 
     "Time off" => "You’ll use the capstone workshop to make a plan of action 

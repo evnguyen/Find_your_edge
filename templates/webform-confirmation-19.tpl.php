@@ -142,7 +142,7 @@
   }
 
 /**
- * @return string
+ * @return array
  * Generate the results for Component 2: Career Development Course
  */
   function getComp2(){
@@ -150,20 +150,22 @@
     global $comp2_all_courses;
     global $comp2_arts_all_courses;
     global $comp2_arts_psci_courses;
+    global $comp2_descr;
 
     $major = getMajor();
     if($submission->data[2][0] == "ART" && $major == "PSCI"){
-      $retval = getRandomElement($comp2_arts_psci_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp2_arts_psci_courses);
     }
     elseif($submission->data[2][0] == "ART"){
-      $retval = getRandomElement($comp2_arts_all_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp2_arts_all_courses);
     }
     else{
-      $retval = getRandomElement($comp2_all_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp2_all_courses);
     }
+
+    $retval[] = $retval[0] . $comp2_descr["COURSE"];
+    return $retval;
+
   }
 
 
@@ -201,6 +203,7 @@
     global $comp3_part_time;
     global $comp3_volunteering;
     global $comp3_service_learning;
+    global $comp3_descr;
 
     $results_list = array();
     if(in_array("ACA", $submission->data[8])){
@@ -322,11 +325,12 @@
     }
 
     $results = array();
+    $descr = array();
     if(count($results_list) < 3){
       while(count($results_list) < 3){
         $results_list[] = "N/A";
       }
-      return $results_list;
+      $results = $results_list;
     }
     else{
       for($i = 0; $i < 3; $i++){
@@ -337,8 +341,21 @@
         //Reindex the keys in array
         $results_list = array_values($results_list);
       }
-      return $results;
     }
+
+    for($i = 0; $i < 3; $i++){
+      if(isCourse($results[$i])){
+        $descr[] = $results[$i] . $comp3_descr["COURSE"];
+      }  
+      else{
+        $descr[] = $comp3_descr[$results[$i]];
+      }
+    }
+    $retval = array(
+      "RESULT" => $results,
+      "DESCR" => $descr,
+    );
+    return $retval;
 
   }//End function
 
@@ -394,12 +411,14 @@
     //TODO: replace placeholder link
     //TODO: code refactor on this?
     elseif($string == "Full Time" || $string == "Part Time" ||
-      $string == "University or College" || $string == "Student Society" ||
+      $string == "Universities Colleges" || $string == "Student Societies" ||
       $string == "Offices and Services" || $string == "Volunteering" ||
-      $string == "Service Learning"){
+      $string == "Service Learning" || $string == "Faculties"){
       return "https://uwaterloo.ca/edge/students/edge-experiences";
     }
-    elseif($string == "CAPSTONE"){
+    elseif($string == "Working full-time" ||
+      $string == "Graduate/ Professional school" || $string == "Time off" ||
+      $string == "No plans"){
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
     elseif($string == "N/A"){
@@ -435,10 +454,9 @@
 <!--TODO: Shift description column further to left -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up dead code -->
-<!--TODO: Clean up using coding standards -->
+<!--TODO: Clean up using coding standards/use drupal wrapper functions -->
 <!--TODO: Change call to action hover effect based on faculty -->
 <!--TODO: Make helper function that finds type of EXP -->
-<!--TODO: Remove message regarding already completeed quiz -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -487,10 +505,10 @@
     '<div class="component2_block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp2) . '"' . '>' .
+          '<a href="' . genLink($comp2[0]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp2 . '</div>' .
+                '<div class="call-to-action-big-text">'. $comp2[0] . '</div>' .
               '</div>'.
             '</div>' .
           '</a>' .
@@ -502,7 +520,7 @@
 
   <div class="component2_descr">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <?php print "<p>" . t($comp2[1]) . "</p>" ?>
     </div>
   </div>
 
@@ -517,10 +535,10 @@
     '<div class="component3_block1">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3[0]) . '"' . '>' .
+          '<a href="' . genLink($comp3["RESULT"][0]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3[0] . '</div>' .
+                '<div class="call-to-action-big-text">'. $comp3["RESULT"][0] . '</div>' .
               '</div>'.
             '</div>' .
           '</a>' .
@@ -531,7 +549,7 @@
 
   <div class="component3_descr1">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <?php print "<p>" . t($comp3["DESCR"][0]) . "</p>" ?>
     </div>
   </div>
 
@@ -540,10 +558,10 @@
     '<div class="component3_block2">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3[1]) . '"' . '>' .
+          '<a href="' . genLink($comp3["RESULT"][1]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3[1] . '</div>' .
+                '<div class="call-to-action-big-text">'. $comp3["RESULT"][1] . '</div>' .
               '</div>'.
             '</div>' .
           '</a>' .
@@ -554,7 +572,7 @@
 
   <div class="component3_descr2">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <?php print "<p>" . t($comp3["DESCR"][1]) . "</p>" ?>
     </div>
   </div>
 
@@ -563,10 +581,10 @@
     '<div class="component3_block3">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3[2]) . '"' . '>' .
+          '<a href="' . genLink($comp3["RESULT"][2]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3[2] . '</div>' .
+                '<div class="call-to-action-big-text">'. $comp3["RESULT"][2] . '</div>' .
               '</div>'.
             '</div>' .
           '</a>' .
@@ -577,7 +595,7 @@
 
   <div class="component3_descr3">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <?php print "<p>" . t($comp3["DESCR"][2]) . "</p>" ?>
     </div>
   </div>
 
