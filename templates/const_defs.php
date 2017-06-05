@@ -51,6 +51,16 @@
   global $comp3_volunteering;
   global $comp3_service_learning;
 
+  global $comp4_capstone_work;
+  global $comp4_capstone_grad;
+  global $comp4_capstone_timeoff;
+  global $comp4_capstone_noplan;
+
+  global $comp1_descr;
+  global $comp2_descr;
+  global $comp3_descr;
+  global $comp4_descr;
+
 
 
 /**
@@ -203,4 +213,108 @@
   $comp3_service_learning = array(
     "Service Learning",
   );
+
+
+/**
+ * Arrays specific to COMPONENT 3
+ */
+  $comp4_capstone_work = array(
+    "Working full-time"
+  );
+
+  $comp4_capstone_grad = array(
+    "Graduate/Profession school"
+  );
+
+  $comp4_capstone_timeoff = array(
+    "Time off"
+  );
+
+  $comp4_capstone_noplan = array(
+    "No plans"
+  );
+
+
+  /**
+   * Array for descriptions. Each key represents their own description
+   */
+
+  $comp1_descr = array(
+    "N/A" => "We’re having trouble filling out your path through EDGE based on your 
+    responses. Consider retaking the quiz or contacting the EDGE team for 
+    assistance.",
+
+    "CCA Workshop" => "You can earn this credit by completing a workshop with
+    the Centre for Career Action (CCA).",
+
+    //Note: this description is to be appended to the course code
+    "COURSE" => " counts as an equivalency for the skills identification
+    and articulation workshop. Visit our list of EDGE courses for a full list of
+    equivalencies.",
+
+  );
+
+
+  $comp2_descr = array(
+    "PD1" => "You can earn this credit by completing PD1: Career Fundamentals
+      online.",
+
+    //Note: This description is to be appended to the appropriate course code
+    "COURSE" => " counts as an equivalency for the career development
+      course. Visit our list of EDGE courses for a full list of equivalencies.",
+  );
+
+  $comp3_descr = array(
+
+    //Note: This description is to be appended to the appropriate course code
+    "COURSE" => " counts as an equivalency for a work/community experience.
+      Visit our list of EDGE courses for a full list of equivalencies.",
+
+    "Faculties" => "You can earn credit for a work/community experience by being 
+      active within your faculty. Visit our list of EDGE experiences for full
+      details.",
+
+    "Universities Colleges" => "You can earn credit for a work/community experience
+      by being active within a university college. Visit our list of EDGE
+      experiences for full details. ",
+
+    "Student Societies" => "You can earn credit for a work/community experience by
+      being active within a student society. Visit our list of EDGE experiences
+      for full details. ",
+
+    "Offices and Services" => "You can earn credit for a work/community
+      experience by giving your time to a club, office, or service on campus. 
+      Visit our list of EDGE experiences for full details.",
+
+    "Full Time" => "You can earn credit for a work/community experience
+      by working full-time during any term. Visit our experiential definitions
+      page for more information.",
+
+    "Part Time" => "You can earn credit for a work/community experience 
+      by working part-time during any term. Visit our experiential definitions 
+      page for more information.",
+
+    "Volunteering" => "You can earn credit for a work/community experience by
+     volunteering off-campus during any term. Visit our experiential definitions 
+     page for more information.",
+
+    "Service Learning" => "You can earn credit for a work/community experience 
+      by completing engaging in short-term service learning during any term. 
+      Visit our experiential definitions page for more information."
+  );
+
+  $comp4_descr = array(
+    "Working full-time" => "You’ll use the capstone workshop to make a plan of 
+      action for the beginning of your professional life.",
+
+    "Graduate/Profession school" => "You’ll use the capstone workshop to make a 
+      plan of action for your transition into graduate or professional school.",
+
+    "Time off" => "You’ll use the capstone workshop to make a plan of action 
+      for your hard-earned time off post-graduation.",
+
+    "No plans" => "You’ll use the capstone workshop to make a plan of action for 
+      your life post-graduation, whatever it entails.",
+  );
+
 

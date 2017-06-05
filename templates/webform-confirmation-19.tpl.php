@@ -28,6 +28,7 @@
   include 'const_defs.php';
 
 
+
 /**
  * Variable definitions.
  * This section defines the values associated with each variable.
@@ -86,7 +87,23 @@
   }
 
 /**
- * @return string
+ * Helper function to check if string is a course code
+ * This assumes all course code will always start with a letter and end with a number
+ */
+  function isCourse($string){
+    $first = $string[0];
+    $last = $string[strlen($string) - 1];
+
+    if(ctype_alpha($first) && ctype_digit($last)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+/**
+ * @return array
  * Generate the results for Component 1: Skills identification
  */
   //TODO: Change if conditions to switch statements if required
@@ -96,24 +113,32 @@
     global $comp1_ahs_courses;
     global $comp1_env_courses;
     global $comp1_math_courses;
+    global $comp1_descr;
 
     if($submission->data[2][0] == "AHS"){
-      $retval = getRandomElement($comp1_ahs_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp1_ahs_courses);
+
     }
     elseif ($submission->data[2][0] == "ENV"){
-      $retval = getRandomElement($comp1_env_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp1_env_courses);
+
     }
     elseif ($submission->data[2][0] == "MATH"){
-      $retval = getRandomElement($comp1_math_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp1_math_courses);
+
     }
     else{
-      $retval = getRandomElement($comp1_all_courses);
-      return $retval;
+      $retval[] = getRandomElement($comp1_all_courses);
+
     }
 
+    if(isCourse($retval[0])){
+      $retval[] = $retval[0] . $comp1_descr["COURSE"];
+    }
+    else{
+      $retval[] = $comp1_descr[$retval[0]];
+    }
+    return $retval;
   }
 
 /**
@@ -142,10 +167,10 @@
   }
 
 
-
 /**
  * @return array
  * Generate the results for Component 3: Work/Community Experiences
+ * TODO: Refactor code to use a class instead of listing global variables?
  */
   function getComp3(){
     global $submission;
@@ -264,38 +289,35 @@
         }
       }
     }//End outer if (type==aca)
+
     if(in_array("ON", $submission->data[8])){
-      $exp = $submission->data[9][0];
-      switch($exp){
-        case "FAC":
-          $results_list = array_merge($results_list, $comp3_faculties);
-          break;
-        case "UC":
-          $results_list = array_merge($results_list, $comp3_uni_college);
-          break;
-        case "SSOC":
-          $results_list = array_merge($results_list, $comp3_student_soc);
-          break;
-        case "OAS":
-          $results_list = array_merge($results_list, $comp3_offices_services);
-          break;
+      $exp = $submission->data[9];
+      if(in_array("FAC", $exp)){
+        $results_list = array_merge($results_list, $comp3_faculties);
+      }
+      if(in_array("UC", $exp)){
+        $results_list = array_merge($results_list, $comp3_uni_college);
+      }
+      if(in_array("SSOC", $exp)){
+        $results_list = array_merge($results_list, $comp3_student_soc);
+      }
+      if(in_array("OAS", $exp)){
+        $results_list = array_merge($results_list, $comp3_offices_services);
       }
     }
     if(in_array("OFF", $submission->data[8])){
-      $exp = $submission->data[10][0];
-      switch($exp){
-        case "FULL":
-          $results_list = array_merge($results_list, $comp3_full_time);
-          break;
-        case "PART":
-          $results_list = array_merge($results_list, $comp3_part_time);
-          break;
-        case "VOL":
-          $results_list = array_merge($results_list, $comp3_volunteering);
-          break;
-        case "SERVICE":
-          $results_list = array_merge($results_list, $comp3_service_learning);
-          break;
+      $exp = $submission->data[10];
+      if(in_array("FULL", $exp)){
+        $results_list = array_merge($results_list, $comp3_full_time);
+      }
+      if(in_array("PART", $exp)){
+        $results_list = array_merge($results_list, $comp3_part_time);
+      }
+      if(in_array("VOL", $exp)){
+        $results_list = array_merge($results_list, $comp3_volunteering);
+      }
+      if(in_array("SERVICE", $exp)){
+        $results_list = array_merge($results_list, $comp3_service_learning);
       }
     }
 
@@ -319,6 +341,42 @@
     }
 
   }//End function
+
+
+/**
+ * Generate result for Component 4: Capstone Workshop
+ */
+  function getComp4(){
+    global $submission;
+    global $comp4_capstone_work;
+    global $comp4_capstone_grad;
+    global $comp4_capstone_timeoff;
+    global $comp4_capstone_noplan;
+    global $comp4_descr;
+
+    $plans = $submission->data[11][0];
+    $retval = array();
+    switch($plans){
+      case "WORK":
+        $retval[] = getRandomElement($comp4_capstone_work);
+        break;
+      case "GRAD":
+        $retval[] = getRandomElement($comp4_capstone_grad);
+        break;
+      case "TIMEOFF":
+        $retval[] = getRandomElement($comp4_capstone_timeoff);
+        break;
+      case "NOPLAN":
+        $retval[] = getRandomElement($comp4_capstone_noplan);
+        break;
+      default:
+        break;
+    }
+    $retval[] = $comp4_descr[$retval[0]];
+    return $retval;
+  }
+
+
 
 
 
@@ -399,10 +457,10 @@
   '<div class="component1_block">' .
     '<div class="component_square">'.
       '<div class="call-to-action-top-wrapper">'.
-        '<a href="' . genLink($comp1) . '"' . '>' .
+        '<a href="' . genLink($comp1[0]) . '"' . '>' .
           '<div class="call-to-action-wrapper">' .
             '<div class="call-to-action-theme-uWaterloo">'.
-              '<div class="call-to-action-big-text">'. $comp1 .
+              '<div class="call-to-action-big-text">'. $comp1[0] .
               '</div>' .
             '</div>'.
           '</div>' .
@@ -414,7 +472,7 @@
 
   <div class="component1_descr">
     <div>
-      <?php print "<p>" . t("Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block. ") . "</p>" ?>
+      <?php print "<p>" . t($comp1[1]) . "</p>" ?>
     </div>
   </div>
 
@@ -531,15 +589,15 @@
   </div>
 
   <?php
-  $comp4 = "CAPSTONE";
+  $comp4 = getComp4();
   print
     '<div class="component4_block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp4) . '"' . '>' .
+          '<a href="' . genLink($comp4[0]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp4 . '</div>' .
+                '<div class="call-to-action-big-text">'. $comp4[0] . '</div>' .
               '</div>'.
             '</div>' .
           '</a>' .
@@ -549,7 +607,7 @@
   ?>
   <div class="component4_descr">
     <div>
-      <p>Some text that describes the block. Some text that describes the block. Some text that describes the block. Some text that describes the block.</p>
+      <?php print "<p>" . t($comp4[1]) . "</p>" ?>
     </div>
   </div>
 
