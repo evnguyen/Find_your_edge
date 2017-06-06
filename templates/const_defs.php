@@ -241,20 +241,24 @@
 
   $comp1_descr = array(
     "N/A" => "We’re having trouble filling out your path through EDGE based on your 
-    responses. Consider retaking the quiz or contacting the EDGE team for 
-    assistance.",
+      responses. Consider retaking the quiz or contacting the EDGE team for 
+      assistance.",
 
     "CCA Workshop" => "You can earn this credit by completing a workshop with
-    the Centre for Career Action (CCA).",
+      the Centre for Career Action (CCA).",
 
     //Note: this description is to be appended to the course code
     "COURSE" => " counts as an equivalency for the skills identification
-    and articulation workshop. Visit our list of EDGE courses for a full list of
-    equivalencies.",
+      and articulation workshop. Visit our list of EDGE courses for a full list of
+      equivalencies.",
   );
 
 
   $comp2_descr = array(
+    "N/A" => "We’re having trouble filling out your path through EDGE based on your 
+      responses. Consider retaking the quiz or contacting the EDGE team for 
+      assistance.",
+
     "PD1" => "You can earn this credit by completing PD1: Career Fundamentals
       online.",
 
@@ -264,6 +268,9 @@
   );
 
   $comp3_descr = array(
+    "N/A" => "We’re having trouble filling out your path through EDGE based on your 
+      responses. Consider retaking the quiz or contacting the EDGE team for 
+      assistance.",
 
     //Note: This description is to be appended to the appropriate course code
     "COURSE" => " counts as an equivalency for a work/community experience.

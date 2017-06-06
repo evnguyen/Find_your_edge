@@ -457,6 +457,7 @@
 <!--TODO: Clean up using coding standards/use drupal wrapper functions -->
 <!--TODO: Change call to action hover effect based on faculty -->
 <!--TODO: Make helper function that finds type of EXP -->
+<!--TODO: Make load time faster?? -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -629,11 +630,43 @@
     </div>
   </div>
 
+
+  <!--Bottom buttons-->
+  <div class="back_btn_wrapper margin_top">
+    <div class="footer_actions_wrapper">
+      <div class="call-to-action-top-wrapper">
+        <a href="/edge/find-your-edge">
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-gray">
+              <div class="call-to-action-big-text">
+                <?php print t("Go back") ?>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="redo_btn_wrapper margin_top">
+    <div class="footer_actions_wrapper">
+      <div class="call-to-action-top-wrapper">
+        <a href="">
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-gray">
+              <div class="call-to-action-big-text">
+                <?php print t("Process again") ?>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 
-<!--Bottom buttons-->
-<div class="links">
-  <!-- TODO: Add the href link -->
-  <a href=""><?php print t('Go back to the form'); ?></a>
-</div>
+
+

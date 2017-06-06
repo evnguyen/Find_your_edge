@@ -1,6 +1,6 @@
 .container-grid{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 35% 65%;
   /*grid-template-rows: repeat(7,1fr);*/
   grid-template-rows: auto;
   grid-template-areas:
@@ -14,7 +14,8 @@
     "comp3_block2 comp3_descr2"
     "comp3_block3 comp3_descr3"
     "comp4 comp4"
-    "comp4_block comp4_descr";
+    "comp4_block comp4_descr"
+    "back_btn redo_btn";
 }
 
 
@@ -44,7 +45,7 @@
 
 
 .component_square{
-  width: 60%;
+  width: 90%;
   margin-bottom: 1rem;
 }
 
@@ -113,4 +114,12 @@
 
 .component4_descr{
   grid-area: comp4_descr;
+}
+
+.back_btn_wrapper{
+  grid-area: back_btn;
+}
+
+.redo_btn_wrapper{
+  grid-area: redo_btn;
 }
