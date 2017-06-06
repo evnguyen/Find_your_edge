@@ -80,7 +80,7 @@
       $major = $submission->data[7][0];
     }
     else{
-      //TODO: Do a proper error handling
+      print '<script> console.log("Error: Having trouble find $major")</script>';
       return "null";
     }
     return $major;
@@ -94,7 +94,7 @@
     $first = $string[0];
     $last = $string[strlen($string) - 1];
 
-    if(ctype_alpha($first) && ctype_digit($last)){
+    if(ctype_alpha($first) && (ctype_digit($last) || $last == "A")){
       return true;
     }
     else{
@@ -367,6 +367,7 @@
     global $submission;
     global $comp4_capstone_work;
     global $comp4_capstone_grad;
+    global $comp4_capstone_prof;
     global $comp4_capstone_timeoff;
     global $comp4_capstone_noplan;
     global $comp4_descr;
@@ -380,6 +381,9 @@
       case "GRAD":
         $retval[] = getRandomElement($comp4_capstone_grad);
         break;
+      case "PROF":
+        $retval[] = getRandomElement($comp4_capstone_prof);
+        break;
       case "TIMEOFF":
         $retval[] = getRandomElement($comp4_capstone_timeoff);
         break;
@@ -392,8 +396,6 @@
     $retval[] = $comp4_descr[$retval[0]];
     return $retval;
   }
-
-
 
 
 
@@ -417,8 +419,8 @@
       return "https://uwaterloo.ca/edge/students/edge-experiences";
     }
     elseif($string == "Working full-time" ||
-      $string == "Graduate/ Professional school" || $string == "Time off" ||
-      $string == "No plans"){
+      $string == "Graduate school" || $string == "Professional school"
+      || $string == "Time off" || $string == "No plans"){
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
     elseif($string == "N/A"){
@@ -451,13 +453,12 @@
 <!--TODO: Make the text translatable through php AND check accessibility levels-->
 <!--TODO: Stop webpage refresh from re-running the function calls -->
 <!--TODO: Make the width of the confirmation page wider -->
-<!--TODO: Shift description column further to left -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
-<!--TODO: Clean up dead code -->
-<!--TODO: Clean up using coding standards/use drupal wrapper functions -->
+<!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Change call to action hover effect based on faculty -->
 <!--TODO: Make helper function that finds type of EXP -->
-<!--TODO: Make load time faster?? -->
+<!--TODO: Test case -> Select On campus stuff, but then unselect On campus -->
+<!--TODO: Split REC major up-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -632,6 +633,34 @@
 
 
   <!--Bottom buttons-->
+  <!--<div class="back_btn_wrapper margin_top">
+    <div class="footer_actions_wrapper">
+      <div class="call-to-action-top-wrapper">
+        <a href="/edge/find-your-edge">
+          <div class="call-to-action-wrapper">
+            <div class="pager pager-load-more">
+              <li class="pager-next first last">
+                <?php print t("Go back") ?>
+              </li>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="redo_btn_wrapper">
+    <div class="">
+      <div class="button ">
+        <span class="home-listing-block-more-link">
+          <a href="" class="">
+            <?php print t("Process again") ?>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>-->
+
   <div class="back_btn_wrapper margin_top">
     <div class="footer_actions_wrapper">
       <div class="call-to-action-top-wrapper">

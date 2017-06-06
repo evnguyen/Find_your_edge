@@ -53,6 +53,7 @@
 
   global $comp4_capstone_work;
   global $comp4_capstone_grad;
+  global $comp4_capstone_prof;
   global $comp4_capstone_timeoff;
   global $comp4_capstone_noplan;
 
@@ -219,19 +220,23 @@
  * Arrays specific to COMPONENT 3
  */
   $comp4_capstone_work = array(
-    "Working full-time"
+    "Working full-time",
   );
 
   $comp4_capstone_grad = array(
-    "Graduate/ Professional school"
+    "Graduate school",
+  );
+
+  $comp4_capstone_prof = array(
+    "Professional school",
   );
 
   $comp4_capstone_timeoff = array(
-    "Time off"
+    "Time off",
   );
 
   $comp4_capstone_noplan = array(
-    "No plans"
+    "No plans",
   );
 
 
@@ -313,8 +318,11 @@
     "Working full-time" => "You’ll use the capstone workshop to make a plan of 
       action for the beginning of your professional life.",
 
-    "Graduate/ Professional school" => "You’ll use the capstone workshop to make a 
-      plan of action for your transition into graduate or professional school.",
+    "Graduate school" => "You’ll use the capstone workshop to make a 
+      plan of action for your transition into graduate school",
+
+    "Professional school" => "You’ll use the capstone workshop to make a 
+      plan of action for your transition into professional school",
 
     "Time off" => "You’ll use the capstone workshop to make a plan of action 
       for your hard-earned time off post-graduation.",
