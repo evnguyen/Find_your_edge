@@ -370,6 +370,7 @@
     global $comp4_capstone_prof;
     global $comp4_capstone_timeoff;
     global $comp4_capstone_noplan;
+    global $comp4_capstone_other;
     global $comp4_descr;
 
     $plans = $submission->data[11][0];
@@ -389,6 +390,9 @@
         break;
       case "NOPLAN":
         $retval[] = getRandomElement($comp4_capstone_noplan);
+        break;
+      case "OTHER":
+        $retval[] = getRandomElement($comp4_capstone_other);
         break;
       default:
         break;
@@ -459,6 +463,8 @@
 <!--TODO: Make helper function that finds type of EXP -->
 <!--TODO: Test case -> Select On campus stuff, but then unselect On campus -->
 <!--TODO: Split REC major up-->
+<!--TODO: Add international student conditionals -->
+<!--TODO: FIX IE layout-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -645,6 +651,9 @@
               <div class="call-to-action-big-text">
                 <?php print t("Go back") ?>
               </div>
+              <div class="call-to-action-small-text">
+                <?php print t("Start over from the beginning") ?>
+              </div>
             </div>
           </div>
         </a>
@@ -660,6 +669,9 @@
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Process again") ?>
+              </div>
+              <div class="call-to-action-small-text">
+                <?php print t("Re-submit form") ?>
               </div>
             </div>
           </div>

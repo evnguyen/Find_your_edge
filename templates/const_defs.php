@@ -56,6 +56,7 @@
   global $comp4_capstone_prof;
   global $comp4_capstone_timeoff;
   global $comp4_capstone_noplan;
+  global $comp4_capstone_other;
 
   global $comp1_descr;
   global $comp2_descr;
@@ -239,6 +240,10 @@
     "No plans",
   );
 
+  $comp4_capstone_other = array(
+    "Other",
+  );
+
 
   /**
    * Array for descriptions. Each key represents their own description
@@ -328,6 +333,9 @@
       for your hard-earned time off post-graduation.",
 
     "No plans" => "You’ll use the capstone workshop to make a plan of action for 
+      your life post-graduation, whatever it entails.",
+
+    "Other" => "You’ll use the capstone workshop to make a plan of action for 
       your life post-graduation, whatever it entails.",
   );
 

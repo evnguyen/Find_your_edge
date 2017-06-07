@@ -4,7 +4,12 @@
 (function ($){
   Drupal.behaviors.convertBehavior = {
     attach: function (context){
-      $(".call-to-action-theme-gray:hover").css("background-color","red");
+      var isIE = window.navigator.userAgent.indexOf("MSIE");
+      if (!!navigator.userAgent.match(/Trident\/7\./)){
+        $(".alignment").css("float", "left");
+      }
     }//End attach
   };
 }(jQuery));
+
+
