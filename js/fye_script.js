@@ -4,6 +4,7 @@
 (function ($){
   Drupal.behaviors.convertBehavior = {
     attach: function (context){
+      $(".call-to-action-theme-gray:hover").css("background-color","red");
     }//End attach
   };
 }(jQuery));

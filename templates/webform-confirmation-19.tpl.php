@@ -632,41 +632,16 @@
   </div>
 
 
-  <!--Bottom buttons-->
-  <!--<div class="back_btn_wrapper margin_top">
-    <div class="footer_actions_wrapper">
-      <div class="call-to-action-top-wrapper">
-        <a href="/edge/find-your-edge">
-          <div class="call-to-action-wrapper">
-            <div class="pager pager-load-more">
-              <li class="pager-next first last">
-                <?php print t("Go back") ?>
-              </li>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <div class="redo_btn_wrapper">
-    <div class="">
-      <div class="button ">
-        <span class="home-listing-block-more-link">
-          <a href="" class="">
-            <?php print t("Process again") ?>
-          </a>
-        </span>
-      </div>
-    </div>
-  </div>-->
-
+<!--Bottom buttons-->
+<div class="container-grid-footer">
   <div class="back_btn_wrapper margin_top">
     <div class="footer_actions_wrapper">
       <div class="call-to-action-top-wrapper">
         <a href="/edge/find-your-edge">
           <div class="call-to-action-wrapper">
-            <div class="call-to-action-theme-gray">
+            <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Go back") ?>
               </div>
@@ -678,11 +653,11 @@
   </div>
 
   <div class="redo_btn_wrapper margin_top">
-    <div class="footer_actions_wrapper">
+    <div class="footer_actions_wrapper alignment">
       <div class="call-to-action-top-wrapper">
         <a href="">
           <div class="call-to-action-wrapper">
-            <div class="call-to-action-theme-gray">
+            <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Process again") ?>
               </div>
@@ -692,8 +667,6 @@
       </div>
     </div>
   </div>
-
-
 </div>
 
 

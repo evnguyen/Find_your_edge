@@ -19,11 +19,6 @@
 }
 
 
-.alignment{
-  text-align: center;
-  align-self: center;
-}
-
 
 .debug{
   background-color: blue;
@@ -116,10 +111,45 @@
   grid-area: comp4_descr;
 }
 
+.container-grid-footer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "back_btn redo_btn";
+}
+
 .back_btn_wrapper{
   grid-area: back_btn;
 }
 
 .redo_btn_wrapper{
   grid-area: redo_btn;
+
 }
+
+.fye_action_btn{
+  background-color: #757575;
+  color: #fff;
+  display: table-cell;
+  vertical-align: middle;
+  -webkit-transition: .3s linear;
+  -moz-transition: .3s linear;
+  -ms-transition: .3s linear;
+  -o-transition: .3s linear;
+  transition: .3s linear;
+}
+
+.fye_action_btn:hover{
+  background-color: #eee;
+  color: #757575;
+}
+
+.footer_actions_wrapper{
+  width:80%;
+}
+
+.alignment{
+  float: right;
+}
+
