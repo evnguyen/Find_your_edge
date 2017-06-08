@@ -19,7 +19,6 @@
 }
 
 
-
 .debug{
   background-color: blue;
 }
@@ -37,7 +36,6 @@
 .webform-confirmation{
   grid-area: header;
 }
-
 
 .component_square{
   width: 90%;
@@ -153,3 +151,6 @@
   float: right;
 }
 
+.form-actions{
+  text-align: left;
+}

@@ -40,7 +40,7 @@
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
   //Debug
-  dsm($submission);
+  //dsm($submission);
 
 
 
@@ -465,6 +465,8 @@
 <!--TODO: Split REC major up-->
 <!--TODO: Add international student conditionals -->
 <!--TODO: FIX IE layout-->
+<!--TODO: On N/A, remove href attribute? -->
+<!--TODO: Add note about PD courses -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 <div class="container-grid">
   <div class="grid-item webform-confirmation">
@@ -652,7 +654,7 @@
                 <?php print t("Go back") ?>
               </div>
               <div class="call-to-action-small-text">
-                <?php print t("Start over from the beginning") ?>
+                <?php print t("Start over") ?>
               </div>
             </div>
           </div>
