@@ -91,6 +91,7 @@ background-color: blue;
 
 .form-actions{
   text-align: left;
+  float:none;
 }
 
 .call-to-action-small-text{

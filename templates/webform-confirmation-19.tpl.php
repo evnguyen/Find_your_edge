@@ -469,6 +469,7 @@
 <!--TODO: BUG: On N/A , IE will redirect to beginning of webform instead of refresh -->
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
+<!--TODO: BUG: Double click on submit button -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
