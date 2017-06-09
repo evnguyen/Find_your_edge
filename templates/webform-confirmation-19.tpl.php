@@ -310,10 +310,11 @@
     }
     if(in_array("OFF", $submission->data[8])){
       $exp = $submission->data[10];
-      if(in_array("FULL", $exp)){
+      //Full time and Part time can only available to Non-international students
+      if(in_array("FULL", $exp) && $submission->data[1][0] == 2){
         $results_list = array_merge($results_list, $comp3_full_time);
       }
-      if(in_array("PART", $exp)){
+      if(in_array("PART", $exp) && $submission->data[1][0] == 2){
         $results_list = array_merge($results_list, $comp3_part_time);
       }
       if(in_array("VOL", $exp)){
@@ -328,7 +329,7 @@
     $descr = array();
     if(count($results_list) < 3){
       while(count($results_list) < 3){
-        $results_list[] = "N/A";
+        $results_list[] = "No Experiences";
       }
       $results = $results_list;
     }
@@ -410,16 +411,16 @@
  * The purpose of this function is to generate the href for the course code.
  */
   function genLink($string){
-    //TODO: replace placeholder link for CCA workshop
-    if($string == "CCA Workshop"){
+    //TODO: replace placeholder link for CCA/EDGE Workshop
+    if($string == "CCA/EDGE Workshop"){
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
     //TODO: replace placeholder link
     //TODO: code refactor on this?
     elseif($string == "Full Time" || $string == "Part Time" ||
-      $string == "Universities Colleges" || $string == "Student Societies" ||
-      $string == "Offices and Services" || $string == "Volunteering" ||
-      $string == "Service Learning" || $string == "Faculties"){
+      $string == "University colleges" || $string == "Student societies" ||
+      $string == "Offices and services" || $string == "Volunteering" ||
+      $string == "Service learning" || $string == "Faculties"){
       return "https://uwaterloo.ca/edge/students/edge-experiences";
     }
     elseif($string == "Working full-time" ||
@@ -427,7 +428,7 @@
       || $string == "Time off" || $string == "No plans"){
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    elseif($string == "N/A"){
+    elseif($string == "No Experiences"){
       return "";
     }
     else{
@@ -451,6 +452,10 @@
     }
   }
 
+  function link_to_edge_courses(){
+    print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses') . '</a>';
+  }
+
 ?>
 
 <!--HTML section -->
@@ -460,29 +465,27 @@
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Change call to action hover effect based on faculty -->
-<!--TODO: Make helper function that finds type of EXP -->
-<!--TODO: Test case -> Select On campus stuff, but then unselect On campus -->
 <!--TODO: Split REC major up-->
-<!--TODO: Add international student conditionals -->
-<!--TODO: FIX IE layout-->
-<!--TODO: On N/A, remove href attribute? -->
-<!--TODO: Add note about PD courses -->
+<!--TODO: BUG: On N/A , IE will redirect to beginning of webform instead of refresh -->
+<!--TODO: Add a print option/button -->
+<!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
-<div class="container-grid">
-  <div class="grid-item webform-confirmation">
+
+<div class="flex-container">
+  <div class="flex-message">
     <p>Based on your program of study and interests, here are some courses and
-    experiences you can take to fulfill the components of the EDGE program</p>
+      experiences you can take to fulfill the components of the EDGE program</p>
   </div>
 
-  <!-- COMPONENT 1 -->
-  <div class="component1 margin_top">
-    <p>Component 1: Skills identification and Articulation Workshop</p>
+  <div class="flex-comp-title margin_top">
+    <p>Component 1: Skills Identification and Articulation Workshop</p>
   </div>
+
 
   <?php
   $comp1 = getComp1();
   print
-  '<div class="component1_block">' .
+  '<div class="flex-comp-block">' .
     '<div class="component_square">'.
       '<div class="call-to-action-top-wrapper">'.
         '<a href="' . genLink($comp1[0]) . '"' . '>' .
@@ -498,21 +501,24 @@
   '</div>'
   ?>
 
-  <div class="component1_descr">
+  <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp1[1]) . "</p>" ?>
+      <?php
+        print "<p>" . t($comp1[1]);
+        if(isCourse($comp1[0])) link_to_edge_courses();
+        print "</p>";
+      ?>
     </div>
   </div>
 
-  <!-- COMPONENT 2 -->
-  <div class="component2 margin_top">
+  <div class="flex-comp-title margin_top">
     <p>Component 2: Career Development Course</p>
   </div>
 
   <?php
   $comp2 = getComp2();
   print
-    '<div class="component2_block">' .
+    '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp2[0]) . '"' . '>' .
@@ -527,22 +533,24 @@
     '</div>'
   ?>
 
-
-  <div class="component2_descr">
+  <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp2[1]) . "</p>" ?>
+      <?php
+        print "<p>" . t($comp2[1]);
+        if(isCourse($comp2[0])) link_to_edge_courses();
+        print "</p>";
+      ?>
     </div>
   </div>
 
-  <!-- COMPONENT 3 -->
-  <div class="component3 margin_top">
+   <div class="flex-comp-title margin_top">
     <p>Component 3: Work/Community Experiences</p>
   </div>
 
   <?php
   $comp3 = getComp3();
   print
-    '<div class="component3_block1">' .
+    '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3["RESULT"][0]) . '"' . '>' .
@@ -557,15 +565,19 @@
     '</div>'
   ?>
 
-  <div class="component3_descr1">
+  <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp3["DESCR"][0]) . "</p>" ?>
+      <?php
+        print "<p>" . t($comp3["DESCR"][0]);
+        if(isCourse($comp3["RESULT"][0])) link_to_edge_courses();
+        print "</p>";
+      ?>
     </div>
   </div>
 
   <?php
   print
-    '<div class="component3_block2">' .
+    '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3["RESULT"][1]) . '"' . '>' .
@@ -580,15 +592,19 @@
     '</div>'
   ?>
 
-  <div class="component3_descr2">
+  <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp3["DESCR"][1]) . "</p>" ?>
+      <?php
+        print "<p>" . t($comp3["DESCR"][1]);
+        if(isCourse($comp3["RESULT"][1])) link_to_edge_courses();
+        print "</p>";
+      ?>
     </div>
   </div>
 
   <?php
   print
-    '<div class="component3_block3">' .
+    '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp3["RESULT"][2]) . '"' . '>' .
@@ -603,23 +619,24 @@
     '</div>'
   ?>
 
-  <div class="component3_descr3">
+  <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp3["DESCR"][2]) . "</p>" ?>
+      <?php
+        print "<p>" . t($comp3["DESCR"][2]);
+        if(isCourse($comp3["RESULT"][2])) link_to_edge_courses();
+        print "</p>";
+      ?>
     </div>
   </div>
 
-
-
-  <!-- COMPONENT 4 -->
-  <div class="component4 margin_top">
+  <div class="flex-comp-title margin_top">
     <p>Component 4: Capstone Workshop</p>
   </div>
 
   <?php
   $comp4 = getComp4();
   print
-    '<div class="component4_block">' .
+    '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
           '<a href="' . genLink($comp4[0]) . '"' . '>' .
@@ -633,29 +650,45 @@
       '</div>'.
     '</div>'
   ?>
-  <div class="component4_descr">
+  <div class="flex-comp-descr">
     <div>
       <?php print "<p>" . t($comp4[1]) . "</p>" ?>
     </div>
   </div>
 
-
-</div>
-
-<!--Bottom buttons-->
-<div class="container-grid-footer">
-  <div class="back_btn_wrapper margin_top">
+  <div class="flex-back-btn-wrapper margin_top">
     <div class="footer_actions_wrapper">
       <div class="call-to-action-top-wrapper">
         <a href="/edge/find-your-edge">
           <div class="call-to-action-wrapper">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
-                <?php print t("Go back") ?>
-              </div>
-              <div class="call-to-action-small-text">
                 <?php print t("Start over") ?>
+                <?php //print t("Go back") ?>
               </div>
+              <!--<div class="call-to-action-small-text">
+                <?php //print t("Start over") ?>
+              </div>-->
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+</div>
+
+  <div class="flex-redo-btn-wrapper margin_top">
+    <div class="footer_actions_wrapper alignment">
+      <div class="call-to-action-top-wrapper">
+        <a href="">
+          <div class="call-to-action-wrapper">
+            <div class="fye_action_btn">
+              <div class="call-to-action-big-text">
+                <?php //print t("Process again") ?>
+                <?php print t("Generate new EDGE path") ?>
+              </div>
+              <!--<div class="call-to-action-small-text">
+                <?php //print t("Re-submit form") ?>
+              </div>-->
             </div>
           </div>
         </a>
@@ -663,24 +696,6 @@
     </div>
   </div>
 
-  <div class="redo_btn_wrapper margin_top">
-    <div class="footer_actions_wrapper alignment">
-      <div class="call-to-action-top-wrapper">
-        <a href="">
-          <div class="call-to-action-wrapper">
-            <div class="fye_action_btn">
-              <div class="call-to-action-big-text">
-                <?php print t("Process again") ?>
-              </div>
-              <div class="call-to-action-small-text">
-                <?php print t("Re-submit form") ?>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
 
 

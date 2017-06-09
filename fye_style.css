@@ -1,26 +1,47 @@
-.container-grid{
-  display: grid;
-  grid-template-columns: 35% 65%;
-  /*grid-template-rows: repeat(7,1fr);*/
-  grid-template-rows: auto;
-  grid-template-areas:
-    "header header"
-    "comp1 comp1"
-    "comp1_block comp1_descr"
-    "comp2 comp2"
-    "comp2_block comp2_descr"
-    "comp3 comp3"
-    "comp3_block1 comp3_descr1"
-    "comp3_block2 comp3_descr2"
-    "comp3_block3 comp3_descr3"
-    "comp4 comp4"
-    "comp4_block comp4_descr"
-    "back_btn redo_btn";
+.flex-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  flex-flow: row;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
 }
 
+.flex-comp-title{
+  flex-basis:100%;
+  -webkit-flex-basis: 100%;
+}
+
+.flex-message{
+  flex-basis:100%;
+  -webkit-flex-basis: 100%;
+}
+
+.flex-comp-block{
+  flex-basis: 35%;
+  -webkit-flex-basis: 35%;
+}
+
+.flex-comp-descr{
+  flex-basis: 65%;
+  -webkit-flex-basis: 65%;
+}
+
+.flex-back-btn-wrapper{
+  flex-basis: 50%;
+  -webkit-flex-basis: 50%;
+}
+
+.flex-redo-btn-wrapper{
+  flex-basis: 50%;
+  -webkit-flex-basis: 50%;
+}
 
 .debug{
-  background-color: blue;
+background-color: blue;
 }
 
 .font_default{
@@ -33,9 +54,6 @@
   margin-top: 50px;
 }
 
-.webform-confirmation{
-  grid-area: header;
-}
 
 .component_square{
   width: 90%;
@@ -44,86 +62,6 @@
 
 .component_square:link{
   text-decoration: none;
-}
-
-.component1{
-  grid-area: comp1;
-}
-
-.component1_block{
-  grid-area: comp1_block;
-  width: 100%;
-  height: 100%;
-}
-
-
-.component1_descr{
-  grid-area: comp1_descr;
-}
-
-.component2{
-  grid-area: comp2;
-}
-
-.component2_block{
-  grid-area: comp2_block;
-}
-
-.component2_descr{
-  grid-area: comp2_descr;
-}
-
-.component3{
-  grid-area: comp3;
-}
-
-.component3_block1{
-  grid-area: comp3_block1;
-}
-
-.component3_block2{
-  grid-area: comp3_block2;
-}
-
-.component3_block3{
-  grid-area: comp3_block3;
-}
-
-.component3_descr1{
-  grid-area: comp3_descr1;
-}
-
-.component3_descr2{
-  grid-area: comp3_descr2;
-}
-
-.component3_descr3{
-  grid-area: comp3_descr3;
-}
-
-.component4{
-  grid-area: comp4;
-}
-
-.component4_descr{
-  grid-area: comp4_descr;
-}
-
-.container-grid-footer{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "back_btn redo_btn";
-}
-
-.back_btn_wrapper{
-  grid-area: back_btn;
-}
-
-.redo_btn_wrapper{
-  grid-area: redo_btn;
-
 }
 
 .fye_action_btn{
@@ -154,3 +92,8 @@
 .form-actions{
   text-align: left;
 }
+
+.call-to-action-small-text{
+  color: inherit;
+}
+
