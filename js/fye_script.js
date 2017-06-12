@@ -40,7 +40,7 @@
       }
 
       var text = $(".comp-text").text();
-      if(isWithin("No Experiences", text)){
+      if(isWithin("No experiences", text)){
         $(".comp-text").removeAttr("href");
       }
 

@@ -250,7 +250,7 @@
    */
 
   $comp1_descr = array(
-    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting 
      the EDGE team for assistance.",
 
@@ -266,7 +266,7 @@
 
 
   $comp2_descr = array(
-    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting 
      the EDGE team for assistance.",
 
@@ -280,7 +280,7 @@
   );
 
   $comp3_descr = array(
-    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting 
      the EDGE team for assistance.",
 

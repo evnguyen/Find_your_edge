@@ -332,7 +332,7 @@
     $descr = array();
     if(count($results_list) < 3){
       while(count($results_list) < 3){
-        $results_list[] = "No Experiences";
+        $results_list[] = "No experiences";
       }
       $results = $results_list;
     }
@@ -428,10 +428,10 @@
     }
     elseif($string == "Working full-time" ||
       $string == "Graduate school" || $string == "Professional school"
-      || $string == "Time off" || $string == "No plans"){
+      || $string == "Time off" || $string == "No plans" || $string == "Other"){
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    elseif($string == "No Experiences"){
+    elseif($string == "No experiences"){
       //This is used in case javascript is disabled
       return "#";
     }
@@ -473,7 +473,7 @@
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
-<!--TODO: IE BUG: conditionals don't work -->
+<!--TODO: BUG: webform_get_submission() being called -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
@@ -483,7 +483,7 @@
   </div>
 
   <div class="flex-comp-title margin_top">
-    <p>Component 1: Skills Identification and Articulation Workshop</p>
+    <h5 class="comp-header">Component 1: Skills Identification and Articulation Workshop</h5>
   </div>
 
 
@@ -517,7 +517,7 @@
   </div>
 
   <div class="flex-comp-title margin_top">
-    <p>Component 2: Career Development Course</p>
+    <h5>Component 2: Career Development Course</h5>
   </div>
 
   <?php
@@ -549,7 +549,7 @@
   </div>
 
    <div class="flex-comp-title margin_top">
-    <p>Component 3: Work/Community Experiences</p>
+    <h5>Component 3: Work/Community Experiences</h5>
   </div>
 
   <?php
@@ -635,7 +635,7 @@
   </div>
 
   <div class="flex-comp-title margin_top">
-    <p>Component 4: Capstone Workshop</p>
+    <h5>Component 4: Capstone Workshop</h5>
   </div>
 
   <?php
