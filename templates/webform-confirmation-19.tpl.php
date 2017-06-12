@@ -79,8 +79,11 @@
     elseif($faculty == "SCI"){
       $major = $submission->data[7][0];
     }
+    elseif($faculty == "NOFAC"){
+      $major = "NOMAJOR";
+    }
     else{
-      print '<script> console.log("Error: Having trouble find $major")</script>';
+      print '<script> console.log("Error: Having trouble finding $major")</script>';
       return "null";
     }
     return $major;
@@ -429,7 +432,8 @@
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
     elseif($string == "No Experiences"){
-      return "";
+      //This is used in case javascript is disabled
+      return "#";
     }
     else{
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
@@ -466,10 +470,10 @@
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Change call to action hover effect based on faculty -->
 <!--TODO: Split REC major up-->
-<!--TODO: BUG: On N/A , IE will redirect to beginning of webform instead of refresh -->
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
+<!--TODO: IE BUG: conditionals don't work -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
@@ -554,7 +558,7 @@
     '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3["RESULT"][0]) . '"' . '>' .
+          '<a class="comp-text" href="' . genLink($comp3["RESULT"][0]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
                 '<div class="call-to-action-big-text">'. $comp3["RESULT"][0] . '</div>' .
@@ -581,7 +585,7 @@
     '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3["RESULT"][1]) . '"' . '>' .
+          '<a class="comp-text" href="' . genLink($comp3["RESULT"][1]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
                 '<div class="call-to-action-big-text">'. $comp3["RESULT"][1] . '</div>' .
@@ -608,7 +612,7 @@
     '<div class="flex-comp-block">' .
       '<div class="component_square">'.
         '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp3["RESULT"][2]) . '"' . '>' .
+          '<a class="comp-text" href="' . genLink($comp3["RESULT"][2]) . '"' . '>' .
             '<div class="call-to-action-wrapper">' .
               '<div class="call-to-action-theme-uWaterloo">'.
                 '<div class="call-to-action-big-text">'. $comp3["RESULT"][2] . '</div>' .

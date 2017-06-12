@@ -98,3 +98,7 @@ background-color: blue;
   color: inherit;
 }
 
+input[type=submit]{
+  width: 30%;
+}
+
