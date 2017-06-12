@@ -101,8 +101,6 @@ background-color: blue;
 input[type=submit]{
   width: 30%;
 }
-
-.comp-header{
-
+.adjust-height{
+  height: 70%;
 }
-

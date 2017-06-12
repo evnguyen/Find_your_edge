@@ -457,7 +457,7 @@
   }
 
   function link_to_edge_courses(){
-    print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses') . '</a>';
+    print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses.') . '</a>';
   }
 
 ?>
@@ -474,6 +474,8 @@
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
 <!--TODO: BUG: webform_get_submission() being called -->
+<!--TODO: To incorporate conditionals for international students easier, make a function that gets called in comp3 -->
+<!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
@@ -483,7 +485,7 @@
   </div>
 
   <div class="flex-comp-title margin_top">
-    <h5 class="comp-header">Component 1: Skills Identification and Articulation Workshop</h5>
+    <h5>Component 1: Skills Identification and Articulation Workshop</h5>
   </div>
 
 
@@ -627,11 +629,20 @@
   <div class="flex-comp-descr">
     <div>
       <?php
-        print "<p>" . t($comp3["DESCR"][2]);
+        print '<p>' . t($comp3["DESCR"][2]);
         if(isCourse($comp3["RESULT"][2])) link_to_edge_courses();
-        print "</p>";
+        print '</p>';
       ?>
     </div>
+  </div>
+  <div>
+    <?php
+        if($submission->data[1][0] == 1){
+          print '<p><i>' . t("Note:") . '</i>' .
+            t(" International students will be excluded from Full/Part time work in their EDGE path.").
+            '</p>';
+        };
+      ?>
   </div>
 
   <div class="flex-comp-title margin_top">
@@ -661,39 +672,32 @@
     </div>
   </div>
 
+
   <div class="flex-back-btn-wrapper margin_top">
     <div class="footer_actions_wrapper">
       <div class="call-to-action-top-wrapper">
         <a href="/edge/find-your-edge">
-          <div class="call-to-action-wrapper">
+          <div class="adjust-height call-to-action-wrapper">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Start over") ?>
-                <?php //print t("Go back") ?>
               </div>
-              <!--<div class="call-to-action-small-text">
-                <?php //print t("Start over") ?>
-              </div>-->
             </div>
           </div>
         </a>
       </div>
     </div>
-</div>
+  </div>
 
   <div class="flex-redo-btn-wrapper margin_top">
     <div class="footer_actions_wrapper alignment">
       <div class="call-to-action-top-wrapper">
         <a href="">
-          <div class="call-to-action-wrapper">
+          <div class="adjust-height call-to-action-wrapper">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
-                <?php //print t("Process again") ?>
                 <?php print t("Generate new EDGE path") ?>
               </div>
-              <!--<div class="call-to-action-small-text">
-                <?php //print t("Re-submit form") ?>
-              </div>-->
             </div>
           </div>
         </a>
