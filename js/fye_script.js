@@ -4,18 +4,30 @@
 (function ($){
   Drupal.behaviors.convertBehavior = {
     attach: function (context){
-      $('.webform-next').css("float","right");
-      $('.webform-previous').css("float","none");
-      $('.button-primary').css("float","right");
+      var width = $(window).width();
+      if(width < 900){
+        $('input[type=submit]').css("width", "100%");
+        $('.webform-next').css("float","");
+        $('.webform-previous').css("float","");
+        $('.button-primary').css("float","");
+      }
+      else{
+        $('input[type=submit]').css("width", "30%");
+        $('.webform-next').css("float","right");
+        $('.webform-previous').css("float","none");
+        $('.button-primary').css("float","right");
+      }
 
       $(window).resize(function() {
         var width = $(window).width();
-        if(width < 800){
+        if(width < 900){
+          $('input[type=submit]').css("width", "100%");
           $('.webform-next').css("float","");
           $('.webform-previous').css("float","");
           $('.button-primary').css("float","");
         }
         else{
+          $('input[type=submit]').css("width", "30%");
           $('.webform-next').css("float","right");
           $('.webform-previous').css("float","none");
           $('.button-primary').css("float","right");
