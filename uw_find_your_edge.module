@@ -11,8 +11,26 @@
  * Implements Hook_init()
  */
 function uw_find_your_edge_init(){
-  drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') . '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
+  drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') .
+    '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
+
 }
+
+/**
+ * Implements hook_page_build()
+ * Builds the breadcrumbs for the confirmation page.
+ * Note this builds the breadcrumbs according to the nid
+ */
+function uw_find_your_edge_page_build(){
+  $path = current_path();
+  if($path == "node/19/done"){
+    $breadcrumb = drupal_get_breadcrumb();
+    $breadcrumb[1] = l(t('Find your EDGE'), '/find-your-edge');
+    array_pop($breadcrumb);
+    drupal_set_breadcrumb($breadcrumb);
+  }
+}
+
 
 
 /**
