@@ -99,8 +99,10 @@ background-color: blue;
 }
 
 input[type=submit]{
+  margin-top: 5%;
   width: 30%;
 }
 .adjust-height{
   height: 70%;
 }
+

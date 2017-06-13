@@ -40,6 +40,8 @@
        * @param text
        */
       function isWithin(string, text){
+        //Remove whitespaces
+        text = text.replace(/\s/g,'');
         var len = string.length;
         var retval = false;
         for(var i = 0; i < len; i++){
@@ -52,11 +54,9 @@
       }
 
       var text = $(".comp-text").text();
-      if(isWithin("No experiences", text)){
+      if(isWithin("Noexperiences", text)){
         $(".comp-text").removeAttr("href");
       }
-
-
 
     }//End attach
   };

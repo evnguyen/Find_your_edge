@@ -461,6 +461,13 @@
     print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses.') . '</a>';
   }
 
+
+
+  $comp1 = getComp1();
+  $comp2 = getComp2();
+  $comp3 = getComp3();
+  $comp4 = getComp4();
+
 ?>
 
 <!--HTML section -->
@@ -474,8 +481,6 @@
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
-<!--TODO: BUG: webform_get_submission() being called -->
-<!--TODO: To incorporate conditionals for international students easier, make a function that gets called in comp3 -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
@@ -490,24 +495,20 @@
   </div>
 
 
-  <?php
-  $comp1 = getComp1();
-  print
-  '<div class="flex-comp-block">' .
-    '<div class="component_square">'.
-      '<div class="call-to-action-top-wrapper">'.
-        '<a href="' . genLink($comp1[0]) . '"' . '>' .
-          '<div class="call-to-action-wrapper">' .
-            '<div class="call-to-action-theme-uWaterloo">'.
-              '<div class="call-to-action-big-text">'. $comp1[0] .
-              '</div>' .
-            '</div>'.
-          '</div>' .
-        '</a>' .
-      '</div>' .
-    '</div>'.
-  '</div>'
-  ?>
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+      <?php print  '<a href="' . genLink($comp1[0]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp1[0] ?> </div>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+
 
   <div class="flex-comp-descr">
     <div>
@@ -523,23 +524,20 @@
     <h5>Component 2: Career Development Course</h5>
   </div>
 
-  <?php
-  $comp2 = getComp2();
-  print
-    '<div class="flex-comp-block">' .
-      '<div class="component_square">'.
-        '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp2[0]) . '"' . '>' .
-            '<div class="call-to-action-wrapper">' .
-              '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp2[0] . '</div>' .
-              '</div>'.
-            '</div>' .
-          '</a>' .
-        '</div>' .
-      '</div>'.
-    '</div>'
-  ?>
+
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+        <?php print  '<a href="' . genLink($comp2[0]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="flex-comp-descr">
     <div>
@@ -551,27 +549,25 @@
     </div>
   </div>
 
+
    <div class="flex-comp-title margin_top">
     <h5>Component 3: Work/Community Experiences</h5>
   </div>
 
-  <?php
-  $comp3 = getComp3();
-  print
-    '<div class="flex-comp-block">' .
-      '<div class="component_square">'.
-        '<div class="call-to-action-top-wrapper">'.
-          '<a class="comp-text" href="' . genLink($comp3["RESULT"][0]) . '"' . '>' .
-            '<div class="call-to-action-wrapper">' .
-              '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3["RESULT"][0] . '</div>' .
-              '</div>'.
-            '</div>' .
-          '</a>' .
-        '</div>' .
-      '</div>'.
-    '</div>'
-  ?>
+
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][0]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="flex-comp-descr">
     <div>
@@ -583,22 +579,19 @@
     </div>
   </div>
 
-  <?php
-  print
-    '<div class="flex-comp-block">' .
-      '<div class="component_square">'.
-        '<div class="call-to-action-top-wrapper">'.
-          '<a class="comp-text" href="' . genLink($comp3["RESULT"][1]) . '"' . '>' .
-            '<div class="call-to-action-wrapper">' .
-              '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3["RESULT"][1] . '</div>' .
-              '</div>'.
-            '</div>' .
-          '</a>' .
-        '</div>' .
-      '</div>'.
-    '</div>'
-  ?>
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][1]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="flex-comp-descr">
     <div>
@@ -610,22 +603,19 @@
     </div>
   </div>
 
-  <?php
-  print
-    '<div class="flex-comp-block">' .
-      '<div class="component_square">'.
-        '<div class="call-to-action-top-wrapper">'.
-          '<a class="comp-text" href="' . genLink($comp3["RESULT"][2]) . '"' . '>' .
-            '<div class="call-to-action-wrapper">' .
-              '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp3["RESULT"][2] . '</div>' .
-              '</div>'.
-            '</div>' .
-          '</a>' .
-        '</div>' .
-      '</div>'.
-    '</div>'
-  ?>
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][2]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="flex-comp-descr">
     <div>
@@ -650,23 +640,20 @@
     <h5>Component 4: Capstone Workshop</h5>
   </div>
 
-  <?php
-  $comp4 = getComp4();
-  print
-    '<div class="flex-comp-block">' .
-      '<div class="component_square">'.
-        '<div class="call-to-action-top-wrapper">'.
-          '<a href="' . genLink($comp4[0]) . '"' . '>' .
-            '<div class="call-to-action-wrapper">' .
-              '<div class="call-to-action-theme-uWaterloo">'.
-                '<div class="call-to-action-big-text">'. $comp4[0] . '</div>' .
-              '</div>'.
-            '</div>' .
-          '</a>' .
-        '</div>' .
-      '</div>'.
-    '</div>'
-  ?>
+  <div class="flex-comp-block">
+    <div class="component_square">
+      <div class="call-to-action-top-wrapper">
+        <?php print  '<a href="' . genLink($comp4[0]) . '">' ?>
+        <div class="call-to-action-wrapper">
+          <div class="call-to-action-theme-uWaterloo">
+            <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>
+          </div>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="flex-comp-descr">
     <div>
       <?php print "<p>" . t($comp4[1]) . "</p>" ?>
