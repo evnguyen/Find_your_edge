@@ -489,8 +489,7 @@
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
-<!--TODO: REQUIRED: adjust links (confirmation url redirect, footer buttons) to match site hierarchy of production site -->
-<!--TODO: REQUIRED: adjust nid for production site -->
+<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file) -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
@@ -538,11 +537,11 @@
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php print  '<a href="' . genLink($comp2[0]) . '">' ?>
-        <div class="call-to-action-wrapper">
-          <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-uWaterloo">
+              <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
+            </div>
           </div>
-        </div>
         </a>
       </div>
     </div>
@@ -567,12 +566,12 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][0]) . '">' ?>
-        <div class="call-to-action-wrapper">
-          <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
+        <?php print  '<a id="comp3-text1" href="' . genLink($comp3["RESULT"][0]) . '">' ?>
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-uWaterloo">
+              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
+            </div>
           </div>
-        </div>
         </a>
       </div>
     </div>
@@ -591,12 +590,12 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][1]) . '">' ?>
-        <div class="call-to-action-wrapper">
-          <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
+        <?php print  '<a id="comp3-text2" href="' . genLink($comp3["RESULT"][1]) . '">' ?>
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-uWaterloo">
+              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
+            </div>
           </div>
-        </div>
         </a>
       </div>
     </div>
@@ -615,12 +614,12 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a class="comp-text" href="' . genLink($comp3["RESULT"][2]) . '">' ?>
-        <div class="call-to-action-wrapper">
-          <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
+        <?php print  '<a id="comp3-text3" href="' . genLink($comp3["RESULT"][2]) . '">' ?>
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-uWaterloo">
+              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
+            </div>
           </div>
-        </div>
         </a>
       </div>
     </div>
@@ -653,11 +652,11 @@
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php print  '<a href="' . genLink($comp4[0]) . '">' ?>
-        <div class="call-to-action-wrapper">
-          <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>
+          <div class="call-to-action-wrapper">
+            <div class="call-to-action-theme-uWaterloo">
+              <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>
+            </div>
           </div>
-        </div>
         </a>
       </div>
     </div>

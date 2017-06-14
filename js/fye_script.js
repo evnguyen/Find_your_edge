@@ -45,18 +45,30 @@
         var len = string.length;
         var retval = false;
         for(var i = 0; i < len; i++){
-          if(text[i] != string[i]){
+          if(text[i] !== string[i]){
             return retval;
           }
         }
         retval = true;
         return retval;
+
       }
 
-      var text = $(".comp-text").text();
-      if(isWithin("Noexperiences", text)){
-        $(".comp-text").removeAttr("href");
+      var text1 = $("#comp3-text1").text();
+      var text2 = $("#comp3-text2").text();
+      var text3 = $("#comp3-text3").text();
+
+      if(isWithin("Noexperiences", text1)){
+        $("#comp3-text1").removeAttr("href");
       }
+      if(isWithin("Noexperiences", text2)){
+        $("#comp3-text2").removeAttr("href");
+      }
+      if(isWithin("Noexperiences", text3)){
+        $("#comp3-text3").removeAttr("href");
+      }
+
+
 
     }//End attach
   };
