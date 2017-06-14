@@ -25,6 +25,7 @@
 
   global $comp3_ahs_health_courses;
   global $comp3_ahs_kin_courses;
+  global $comp3_ahs_therap_courses;
   global $comp3_ahs_rec_courses;
   global $comp3_arts_drama_courses;
   global $comp3_arts_fine_courses;
@@ -112,10 +113,14 @@
     "KIN 492A", //KIN 492A includes 492B
     "KIN 493",
   );
-  $comp3_ahs_rec_courses = array(
+
+  $comp3_ahs_therap_courses = array(
     "REC 253",
-    "REC 312",
     "REC 450",
+  );
+
+  $comp3_ahs_rec_courses = array(
+    "REC 312",
   );
   $comp3_arts_drama_courses = array(
     "DRAMA 206",

@@ -182,6 +182,7 @@
     global $submission;
     global $comp3_ahs_health_courses;
     global $comp3_ahs_kin_courses;
+    global $comp3_ahs_therap_courses;
     global $comp3_ahs_rec_courses;
     global $comp3_arts_drama_courses;
     global $comp3_arts_fine_courses;
@@ -221,7 +222,14 @@
           case "KIN":
             $results_list = array_merge($results_list, $comp3_ahs_kin_courses);
             break;
-          case "REC":
+          case "RECBUS":
+            $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
+            break;
+          case "THERAP":
+            $results_list = array_merge($results_list, $comp3_ahs_therap_courses);
+            $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
+            break;
+          case "TOUR":
             $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
             break;
           default:
@@ -477,11 +485,12 @@
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Change call to action hover effect based on faculty -->
-<!--TODO: Split REC major up-->
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
+<!--TODO: REQUIRED: adjust links (confirmation url redirect, footer buttons) to match site hierarchy of production site -->
+<!--TODO: REQUIRED: adjust nid for production site -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
