@@ -50,7 +50,7 @@
  * @return string
  * Helper function for getting a random element in an array
  */
-  function getRandomElement($list){
+  function get_random_element($list) {
     $min = 0;
     $max = count($list) - 1;
     $index = rand($min, $max);
@@ -62,25 +62,25 @@
  * @return string
  * Helper function to return the major selected
  */
-  function getMajor(){
+  function get_major() {
     global $submission;
     $faculty = $submission->data[2][0];
-    if($faculty == "AHS"){
+    if ($faculty == "AHS") {
       $major = $submission->data[3][0];
     }
-    elseif($faculty == "ART"){
+    elseif ($faculty == "ART") {
       $major = $submission->data[4][0];
     }
-    elseif($faculty == "ENV"){
+    elseif ($faculty == "ENV") {
       $major = $submission->data[5][0];
     }
-    elseif($faculty == "MATH"){
+    elseif ($faculty == "MATH") {
       $major = $submission->data[6][0];
     }
-    elseif($faculty == "SCI"){
+    elseif ($faculty == "SCI") {
       $major = $submission->data[7][0];
     }
-    elseif($faculty == "NOFAC"){
+    elseif ($faculty == "NOFAC") {
       $major = "NOMAJOR";
     }
     else{
@@ -94,14 +94,14 @@
  * Helper function to check if string is a course code
  * This assumes all course code will always start with a letter and end with a number
  */
-  function isCourse($string){
+  function is_course($string) {
     $first = $string[0];
     $last = $string[strlen($string) - 1];
 
-    if(ctype_alpha($first) && (ctype_digit($last) || $last == "A")){
+    if (ctype_alpha($first) && (ctype_digit($last) || $last == "A")) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
@@ -111,7 +111,7 @@
  * Generate the results for Component 1: Skills identification
  */
   //TODO: Change if conditions to switch statements if required
-  function getComp1(){
+  function get_comp1() {
     global $submission;
     global $comp1_all_courses;
     global $comp1_ahs_courses;
@@ -119,27 +119,27 @@
     global $comp1_math_courses;
     global $comp1_descr;
 
-    if($submission->data[2][0] == "AHS"){
-      $retval[] = getRandomElement($comp1_ahs_courses);
+    if ($submission->data[2][0] == "AHS") {
+      $retval[] = get_random_element($comp1_ahs_courses);
 
     }
-    elseif ($submission->data[2][0] == "ENV"){
-      $retval[] = getRandomElement($comp1_env_courses);
+    elseif ($submission->data[2][0] == "ENV") {
+      $retval[] = get_random_element($comp1_env_courses);
 
     }
-    elseif ($submission->data[2][0] == "MATH"){
-      $retval[] = getRandomElement($comp1_math_courses);
+    elseif ($submission->data[2][0] == "MATH") {
+      $retval[] = get_random_element($comp1_math_courses);
 
     }
-    else{
-      $retval[] = getRandomElement($comp1_all_courses);
+    else {
+      $retval[] = get_random_element($comp1_all_courses);
 
     }
 
-    if(isCourse($retval[0])){
+    if (is_course($retval[0])) {
       $retval[] = $retval[0] . $comp1_descr["COURSE"];
     }
-    else{
+    else {
       $retval[] = $comp1_descr[$retval[0]];
     }
     return $retval;
@@ -149,22 +149,22 @@
  * @return array
  * Generate the results for Component 2: Career Development Course
  */
-  function getComp2(){
+  function get_comp2() {
     global $submission;
     global $comp2_all_courses;
     global $comp2_arts_all_courses;
     global $comp2_arts_psci_courses;
     global $comp2_descr;
 
-    $major = getMajor();
-    if($submission->data[2][0] == "ART" && $major == "PSCI"){
-      $retval[] = getRandomElement($comp2_arts_psci_courses);
+    $major = get_major();
+    if ($submission->data[2][0] == "ART" && $major == "PSCI") {
+      $retval[] = get_random_element($comp2_arts_psci_courses);
     }
-    elseif($submission->data[2][0] == "ART"){
-      $retval[] = getRandomElement($comp2_arts_all_courses);
+    elseif ($submission->data[2][0] == "ART") {
+      $retval[] = get_random_element($comp2_arts_all_courses);
     }
-    else{
-      $retval[] = getRandomElement($comp2_all_courses);
+    else {
+      $retval[] = get_random_element($comp2_all_courses);
     }
 
     $retval[] = $retval[0] . $comp2_descr["COURSE"];
@@ -178,7 +178,7 @@
  * Generate the results for Component 3: Work/Community Experiences
  * TODO: Refactor code to use a class instead of listing global variables?
  */
-  function getComp3(){
+  function get_comp3() {
     global $submission;
     global $comp3_ahs_health_courses;
     global $comp3_ahs_kin_courses;
@@ -211,11 +211,11 @@
     global $comp3_descr;
 
     $results_list = array();
-    if(in_array("ACA", $submission->data[8])){
+    if (in_array("ACA", $submission->data[8])) {
       $faculty = $submission->data[2][0];
-      $major = getMajor();
-      if($faculty == "AHS"){
-        switch($major){
+      $major = get_major();
+      if ($faculty == "AHS") {
+        switch ($major) {
           case "HLTH":
             $results_list = array_merge($results_list, $comp3_ahs_health_courses);
             break;
@@ -236,8 +236,8 @@
             break;
         }
       }
-      elseif($faculty == "ART"){
-        switch($major){
+      elseif ($faculty == "ART") {
+        switch ($major) {
           case "THEAT":
             $results_list = array_merge($results_list, $comp3_arts_drama_courses);
             break;
@@ -275,8 +275,8 @@
             break;
         }
       }
-      elseif($faculty == "ENV"){
-        switch($major){
+      elseif ($faculty == "ENV") {
+        switch ($major) {
           case "ENBUS":
             $results_list = array_merge($results_list, $comp3_env_enbus_courses);
             break;
@@ -293,8 +293,8 @@
             break;
         }
       }
-      elseif($faculty == "SCI"){
-        switch($major){
+      elseif ($faculty == "SCI") {
+        switch ($major) {
           case "SCBUS":
             $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
             break;
@@ -305,49 +305,49 @@
       }
     }//End outer if (type==aca)
 
-    if(in_array("ON", $submission->data[8])){
+    if (in_array("ON", $submission->data[8])) {
       $exp = $submission->data[9];
-      if(in_array("FAC", $exp)){
+      if (in_array("FAC", $exp)) {
         $results_list = array_merge($results_list, $comp3_faculties);
       }
-      if(in_array("UC", $exp)){
+      if (in_array("UC", $exp)) {
         $results_list = array_merge($results_list, $comp3_uni_college);
       }
-      if(in_array("SSOC", $exp)){
+      if (in_array("SSOC", $exp)) {
         $results_list = array_merge($results_list, $comp3_student_soc);
       }
-      if(in_array("OAS", $exp)){
+      if (in_array("OAS", $exp)) {
         $results_list = array_merge($results_list, $comp3_offices_services);
       }
     }
-    if(in_array("OFF", $submission->data[8])){
+    if (in_array("OFF", $submission->data[8])) {
       $exp = $submission->data[10];
       //Full time and Part time can only available to Non-international students
-      if(in_array("FULL", $exp) && $submission->data[1][0] == 2){
+      if (in_array("FULL", $exp) && $submission->data[1][0] == 2) {
         $results_list = array_merge($results_list, $comp3_full_time);
       }
-      if(in_array("PART", $exp) && $submission->data[1][0] == 2){
+      if (in_array("PART", $exp) && $submission->data[1][0] == 2) {
         $results_list = array_merge($results_list, $comp3_part_time);
       }
-      if(in_array("VOL", $exp)){
+      if (in_array("VOL", $exp)) {
         $results_list = array_merge($results_list, $comp3_volunteering);
       }
-      if(in_array("SERVICE", $exp)){
+      if (in_array("SERVICE", $exp)) {
         $results_list = array_merge($results_list, $comp3_service_learning);
       }
     }
 
     $results = array();
     $descr = array();
-    if(count($results_list) < 3){
-      while(count($results_list) < 3){
+    if (count($results_list) < 3) {
+      while (count($results_list) < 3) {
         $results_list[] = "No experiences";
       }
       $results = $results_list;
     }
-    else{
-      for($i = 0; $i < 3; $i++){
-        $results[$i] = getRandomElement($results_list);
+    else {
+      for ($i = 0; $i < 3; $i++) {
+        $results[$i] = get_random_element($results_list);
         //Delete from array to avoid duplicates
         $element = array_search($results[$i], $results_list);
         unset($results_list[$element]);
@@ -356,11 +356,11 @@
       }
     }
 
-    for($i = 0; $i < 3; $i++){
-      if(isCourse($results[$i])){
+    for ($i = 0; $i < 3; $i++) {
+      if (is_course($results[$i])) {
         $descr[] = $results[$i] . $comp3_descr["COURSE"];
       }  
-      else{
+      else {
         $descr[] = $comp3_descr[$results[$i]];
       }
     }
@@ -376,7 +376,7 @@
 /**
  * Generate result for Component 4: Capstone Workshop
  */
-  function getComp4(){
+  function get_comp4() {
     global $submission;
     global $comp4_capstone_work;
     global $comp4_capstone_grad;
@@ -388,24 +388,24 @@
 
     $plans = $submission->data[11][0];
     $retval = array();
-    switch($plans){
+    switch ($plans) {
       case "WORK":
-        $retval[] = getRandomElement($comp4_capstone_work);
+        $retval[] = get_random_element($comp4_capstone_work);
         break;
       case "GRAD":
-        $retval[] = getRandomElement($comp4_capstone_grad);
+        $retval[] = get_random_element($comp4_capstone_grad);
         break;
       case "PROF":
-        $retval[] = getRandomElement($comp4_capstone_prof);
+        $retval[] = get_random_element($comp4_capstone_prof);
         break;
       case "TIMEOFF":
-        $retval[] = getRandomElement($comp4_capstone_timeoff);
+        $retval[] = get_random_element($comp4_capstone_timeoff);
         break;
       case "NOPLAN":
-        $retval[] = getRandomElement($comp4_capstone_noplan);
+        $retval[] = get_random_element($comp4_capstone_noplan);
         break;
       case "OTHER":
-        $retval[] = getRandomElement($comp4_capstone_other);
+        $retval[] = get_random_element($comp4_capstone_other);
         break;
       default:
         break;
@@ -422,41 +422,41 @@
  * https://ugradcalendar.uwaterloo.ca/courses/$string[0-i]/$string[i-j]
  * The purpose of this function is to generate the href for the course code.
  */
-  function genLink($string){
+  function gen_link($string) {
     //TODO: replace placeholder link for CCA/EDGE Workshop
-    if($string == "CCA/EDGE Workshop"){
+    if ($string == "CCA/EDGE Workshop") {
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
     //TODO: replace placeholder link
     //TODO: code refactor on this?
-    elseif($string == "Full Time" || $string == "Part Time" ||
+    elseif ($string == "Full Time" || $string == "Part Time" ||
       $string == "University colleges" || $string == "Student societies" ||
       $string == "Offices and services" || $string == "Volunteering" ||
-      $string == "Service learning" || $string == "Faculties"){
+      $string == "Service learning" || $string == "Faculties") {
       return "https://uwaterloo.ca/edge/students/edge-experiences";
     }
-    elseif($string == "Working full-time" ||
+    elseif ($string == "Working full-time" ||
       $string == "Graduate school" || $string == "Professional school"
-      || $string == "Time off" || $string == "No plans" || $string == "Other"){
+      || $string == "Time off" || $string == "No plans" || $string == "Other") {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    elseif($string == "No experiences"){
+    elseif ($string == "No experiences") {
       //This is used in case javascript is disabled
       return "#";
     }
-    else{
+    else {
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
       $course_alpha = "";
       $course_num = "";
       $len = strlen($string);
       $string = str_replace(' ', '', $string);
-      for ($i = 0; $i < strlen($string); $i++){
+      for ($i = 0; $i < strlen($string); $i++) {
         $char = $string[$i];
-        if(!ctype_alpha($char)){
+        if (!ctype_alpha($char)) {
           $course_num = substr($string, $i, $len);
           break;
         }
-        else{
+        else {
           $course_alpha .= $char;
         }
       }
@@ -465,22 +465,22 @@
     }
   }
 
-  function link_to_edge_courses(){
+  function link_to_edge_courses() {
     print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses.') . '</a>';
   }
 
 
 
-  $comp1 = getComp1();
-  $comp2 = getComp2();
-  $comp3 = getComp3();
-  $comp4 = getComp4();
+  $comp1 = get_comp1();
+  $comp2 = get_comp2();
+  $comp3 = get_comp3();
+  $comp4 = get_comp4();
 
 ?>
 
 <!--HTML section -->
 <!--TODO: Make the text translatable through php AND check accessibility levels-->
-<!--TODO: Stop webpage refresh from re-running the function calls -->
+<!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
 <!--TODO: Make the width of the confirmation page wider -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
@@ -506,7 +506,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-      <?php print  '<a href="' . genLink($comp1[0]) . '">' ?>
+      <?php print  '<a href="' . gen_link($comp1[0]) . '">' ?>
         <div class="call-to-action-wrapper">
           <div class="call-to-action-theme-uWaterloo">
             <div class="call-to-action-big-text"> <?php print $comp1[0] ?> </div>
@@ -522,7 +522,7 @@
     <div>
       <?php
         print "<p>" . t($comp1[1]);
-        if(isCourse($comp1[0])) link_to_edge_courses();
+        if(is_course($comp1[0])) link_to_edge_courses();
         print "</p>";
       ?>
     </div>
@@ -536,7 +536,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a href="' . genLink($comp2[0]) . '">' ?>
+        <?php print  '<a href="' . gen_link($comp2[0]) . '">' ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
@@ -551,7 +551,7 @@
     <div>
       <?php
         print "<p>" . t($comp2[1]);
-        if(isCourse($comp2[0])) link_to_edge_courses();
+        if(is_course($comp2[0])) link_to_edge_courses();
         print "</p>";
       ?>
     </div>
@@ -566,7 +566,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text1" href="' . genLink($comp3["RESULT"][0]) . '">' ?>
+        <?php print  '<a id="comp3-text1" href="' . gen_link($comp3["RESULT"][0]) . '">' ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
@@ -581,7 +581,7 @@
     <div>
       <?php
         print "<p>" . t($comp3["DESCR"][0]);
-        if(isCourse($comp3["RESULT"][0])) link_to_edge_courses();
+        if(is_course($comp3["RESULT"][0])) link_to_edge_courses();
         print "</p>";
       ?>
     </div>
@@ -590,7 +590,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text2" href="' . genLink($comp3["RESULT"][1]) . '">' ?>
+        <?php print  '<a id="comp3-text2" href="' . gen_link($comp3["RESULT"][1]) . '">' ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
@@ -605,7 +605,7 @@
     <div>
       <?php
         print "<p>" . t($comp3["DESCR"][1]);
-        if(isCourse($comp3["RESULT"][1])) link_to_edge_courses();
+        if(is_course($comp3["RESULT"][1])) link_to_edge_courses();
         print "</p>";
       ?>
     </div>
@@ -614,7 +614,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text3" href="' . genLink($comp3["RESULT"][2]) . '">' ?>
+        <?php print  '<a id="comp3-text3" href="' . gen_link($comp3["RESULT"][2]) . '">' ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
@@ -629,7 +629,7 @@
     <div>
       <?php
         print '<p>' . t($comp3["DESCR"][2]);
-        if(isCourse($comp3["RESULT"][2])) link_to_edge_courses();
+        if(is_course($comp3["RESULT"][2])) link_to_edge_courses();
         print '</p>';
       ?>
     </div>
@@ -651,7 +651,7 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a href="' . genLink($comp4[0]) . '">' ?>
+        <?php print  '<a href="' . gen_link($comp4[0]) . '">' ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>

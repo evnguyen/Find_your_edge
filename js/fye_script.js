@@ -1,5 +1,7 @@
 /**
  * Created by evnguyen on 5/9/2017.
+ * @file
+ * Extra enhancements to the Find your edge quiz tool
  */
 (function ($){
   Drupal.behaviors.convertBehavior = {
@@ -39,7 +41,7 @@
        * @param string
        * @param text
        */
-      function isWithin(string, text){
+      function is_within(string, text){
         //Remove whitespaces
         text = text.replace(/\s/g,'');
         var len = string.length;
@@ -58,13 +60,13 @@
       var text2 = $("#comp3-text2").text();
       var text3 = $("#comp3-text3").text();
 
-      if(isWithin("Noexperiences", text1)){
+      if(is_within("Noexperiences", text1)){
         $("#comp3-text1").removeAttr("href");
       }
-      if(isWithin("Noexperiences", text2)){
+      if(is_within("Noexperiences", text2)){
         $("#comp3-text2").removeAttr("href");
       }
-      if(isWithin("Noexperiences", text3)){
+      if(is_within("Noexperiences", text3)){
         $("#comp3-text3").removeAttr("href");
       }
 

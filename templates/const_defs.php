@@ -4,6 +4,8 @@
  * User: evnguyen
  * Date: 5/31/2017
  * Time: 1:51 PM
+ * @file
+ * Definitions for all constants used for the quiz
  */
 
 /**
@@ -256,7 +258,7 @@
 
   $comp1_descr = array(
     "No experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting 
+     That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
     "CCA/EDGE Workshop" => "You can earn this credit by completing a workshop with
@@ -272,7 +274,7 @@
 
   $comp2_descr = array(
     "No experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting 
+     That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
     "PD1" => "You can earn this credit by completing PD1: Career Fundamentals
@@ -286,7 +288,7 @@
 
   $comp3_descr = array(
     "No experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting 
+     That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
     //On-campus experiences
@@ -295,64 +297,64 @@
     "COURSE" => " counts as an equivalency for a work/community experience.
       For a full list of equivalences, visit our list of ",
 
-    "Faculties" => "You can earn EDGE credit by being active within your 
+    "Faculties" => "You can earn EDGE credit by being active within your
       faculty and completing a PD course. Click the box to visit our 
       list of EDGE experiences.",
 
-    "University colleges" => "You can earn EDGE credit by being active within a 
-      university college and completing a PD course. Click the box to visit 
+    "University colleges" => "You can earn EDGE credit by being active within a
+      university college and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
-    "Student societies" => "You can earn EDGE credit by being active within 
-      a student society and completing a PD course. Click the box to visit 
+    "Student societies" => "You can earn EDGE credit by being active within
+      a student society and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
-    "Offices and services" => "You can earn EDGE credit by giving your time to a club, 
-      office, or service on campus and completing a PD course. Click the 
+    "Offices and services" => "You can earn EDGE credit by giving your time to a club,
+      office, or service on campus and completing a PD course. Click the
       box for more details regarding off-campus experiences.",
 
     //Off-Campus experiences
-    "Full Time" => "You can earn EDGE credit by working full-time during any term 
-      and completing a PD course. Click the box for more details regarding 
+    "Full Time" => "You can earn EDGE credit by working full-time during any term
+      and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Part Time" => "You can earn EDGE credit by working part-time during any term 
-      and completing a PD course. Click the box for more details regarding 
+    "Part Time" => "You can earn EDGE credit by working part-time during any term
+      and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Volunteering" => "You can earn EDGE credit by volunteering off-campus 
-      and completing a PD course. Click the box for more details regarding 
+    "Volunteering" => "You can earn EDGE credit by volunteering off-campus
+      and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Service learning" => "You can earn EDGE credit by engaging in service 
-      learning (e.g. a Habitat for Humanity trip) and completing a PD courses. 
+    "Service learning" => "You can earn EDGE credit by engaging in service
+      learning (e.g. a Habitat for Humanity trip) and completing a PD courses.
       Click the box for more details regarding off-campus experiences.
 "
   );
 
   $comp4_descr = array(
-    "Working full-time" => "You’ll use the capstone workshop to make a plan of 
-      action for the beginning of your professional life. Click the box for 
+    "Working full-time" => "You’ll use the capstone workshop to make a plan of
+      action for the beginning of your professional life. Click the box for
       more details regarding the capstone workshop.",
 
-    "Graduate school" => "You’ll use the capstone workshop to make a 
-      plan of action for your transition into graduate school. Click the box 
+    "Graduate school" => "You’ll use the capstone workshop to make a
+      plan of action for your transition into graduate school. Click the box
       for more details regarding the capstone workshop.",
 
-    "Professional school" => "You’ll use the capstone workshop to make a 
-      plan of action for your transition into professional school. Click the 
+    "Professional school" => "You’ll use the capstone workshop to make a
+      plan of action for your transition into professional school. Click the
       box for more details regarding the capstone workshop.",
 
-    "Time off" => "You’ll use the capstone workshop to make a plan of action 
-      for your hard-earned time off post-graduation. Click the box for more 
+    "Time off" => "You’ll use the capstone workshop to make a plan of action
+      for your hard-earned time off post-graduation. Click the box for more
       details regarding the capstone workshop.",
 
-    "No plans" => "You’ll use the capstone workshop to make a plan of action for 
-      your life post-graduation, whatever it entails. Click the box for more 
+    "No plans" => "You’ll use the capstone workshop to make a plan of action for
+      your life post-graduation, whatever it entails. Click the box for more
       details regarding the capstone workshop.",
 
-    "Other" => "You’ll use the capstone workshop to make a plan of action for 
-      your life post-graduation, whatever it entails. Click the box for more 
+    "Other" => "You’ll use the capstone workshop to make a plan of action for
+      your life post-graduation, whatever it entails. Click the box for more
       details regarding the capstone workshop.",
   );
 
