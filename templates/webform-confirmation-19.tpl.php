@@ -490,6 +490,14 @@
       t('EDGE courses.') . '</a>';
   }
 
+  function gen_descr($key, $descr){
+    print "<p>" . $descr;
+    if(is_course($key)) {
+      link_to_edge_courses();
+    }
+    print "</p>";
+  }
+
 
 
   $comp1 = get_comp1();
@@ -542,13 +550,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php
-        print "<p>" . t($comp1[1]);
-        if(is_course($comp1[0])) {
-          link_to_edge_courses();
-        }
-        print "</p>";
-      ?>
+      <?php gen_descr($comp1[0], $comp1[1]); ?>
     </div>
   </div>
 
@@ -573,13 +575,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php
-        print "<p>" . t($comp2[1]);
-        if(is_course($comp2[0])) {
-          link_to_edge_courses();
-        }
-        print "</p>";
-      ?>
+      <?php gen_descr($comp2[0], $comp2[1]); ?>
     </div>
   </div>
 
@@ -605,13 +601,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php
-        print "<p>" . t($comp3["DESCR"][0]);
-        if(is_course($comp3["RESULT"][0])) {
-          link_to_edge_courses();
-        }
-        print "</p>";
-      ?>
+      <?php gen_descr($comp3["RESULT"][0], $comp3["DESCR"][0]); ?>
     </div>
   </div>
 
@@ -631,13 +621,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php
-        print "<p>" . t($comp3["DESCR"][1]);
-        if (is_course($comp3["RESULT"][1])) {
-          link_to_edge_courses();
-        }
-        print "</p>";
-      ?>
+      <?php gen_descr($comp3["RESULT"][1], $comp3["DESCR"][1]); ?>
     </div>
   </div>
 
@@ -657,13 +641,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php
-        print '<p>' . t($comp3["DESCR"][2]);
-        if(is_course($comp3["RESULT"][2])) {
-          link_to_edge_courses();
-        }
-        print '</p>';
-      ?>
+      <?php gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]); ?>
     </div>
   </div>
   <div>
@@ -696,7 +674,7 @@
 
   <div class="flex-comp-descr">
     <div>
-      <?php print "<p>" . t($comp4[1]) . "</p>" ?>
+      <?php gen_descr($comp4[0], $comp4[1]); ?>
     </div>
   </div>
 
