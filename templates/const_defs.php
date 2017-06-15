@@ -298,7 +298,7 @@
       For a full list of equivalences, visit our list of ",
 
     "Faculties" => "You can earn EDGE credit by being active within your
-      faculty and completing a PD course. Click the box to visit our 
+      faculty and completing a PD course. Click the box to visit our
       list of EDGE experiences.",
 
     "University colleges" => "You can earn EDGE credit by being active within a

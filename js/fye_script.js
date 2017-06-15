@@ -56,19 +56,6 @@
 
       }
 
-      var text1 = $("#comp3-text1").text();
-      var text2 = $("#comp3-text2").text();
-      var text3 = $("#comp3-text3").text();
-
-      if(is_within("Noexperiences", text1)){
-        $("#comp3-text1").removeAttr("href");
-      }
-      if(is_within("Noexperiences", text2)){
-        $("#comp3-text2").removeAttr("href");
-      }
-      if(is_within("Noexperiences", text3)){
-        $("#comp3-text3").removeAttr("href");
-      }
 
 
 

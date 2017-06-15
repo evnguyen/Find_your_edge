@@ -440,10 +440,6 @@
       || $string == "Time off" || $string == "No plans" || $string == "Other") {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    elseif ($string == "No experiences") {
-      //This is used in case javascript is disabled
-      return "#";
-    }
     else {
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
       $course_alpha = "";
@@ -465,8 +461,33 @@
     }
   }
 
+/**
+ * @param $string
+ * @param $link
+ * Provides the start <a> tag if $string is not "No experiences"
+ */
+  function gen_href_start($string, $link){
+    if ($string != "No experiences") {
+      print  t('<a href="') . $link . t('" target="_blank">');
+    }
+  }
+
+/**
+ * @param $string
+ * Provides the end <a> tag if $string is not "No experiences"
+ */
+  function gen_href_end($string){
+    if ($string != "No experiences") {
+      print  t('</a>');
+    }
+  }
+
+/**
+ * Provides the start and end of <a> tag for edge courses
+ */
   function link_to_edge_courses() {
-    print '<a href="https://uwaterloo.ca/edge/edge-courses">' . t('EDGE courses.') . '</a>';
+    print '<a href="https://uwaterloo.ca/edge/edge-courses" target="_blank">' .
+      t('EDGE courses.') . '</a>';
   }
 
 
@@ -489,7 +510,8 @@
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: BUG: Double click on submit button -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
-<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file) -->
+<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
+<!--TODO: On focus, footer buttons don't fully align with focus box -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
@@ -506,13 +528,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-      <?php print  '<a href="' . gen_link($comp1[0]) . '">' ?>
+      <?php gen_href_start($comp1[0], gen_link($comp1[0])); ?>
         <div class="call-to-action-wrapper">
           <div class="call-to-action-theme-uWaterloo">
             <div class="call-to-action-big-text"> <?php print $comp1[0] ?> </div>
           </div>
         </div>
-      </a>
+      <?php gen_href_end($comp1[0]) ?>
       </div>
     </div>
   </div>
@@ -522,7 +544,9 @@
     <div>
       <?php
         print "<p>" . t($comp1[1]);
-        if(is_course($comp1[0])) link_to_edge_courses();
+        if(is_course($comp1[0])) {
+          link_to_edge_courses();
+        }
         print "</p>";
       ?>
     </div>
@@ -536,13 +560,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a href="' . gen_link($comp2[0]) . '">' ?>
+        <?php gen_href_start($comp2[0], gen_link($comp2[0])); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
             </div>
           </div>
-        </a>
+        <?php gen_href_end($comp2[0]); ?>
       </div>
     </div>
   </div>
@@ -551,7 +575,9 @@
     <div>
       <?php
         print "<p>" . t($comp2[1]);
-        if(is_course($comp2[0])) link_to_edge_courses();
+        if(is_course($comp2[0])) {
+          link_to_edge_courses();
+        }
         print "</p>";
       ?>
     </div>
@@ -566,13 +592,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text1" href="' . gen_link($comp3["RESULT"][0]) . '">' ?>
+        <?php gen_href_start($comp3["RESULT"][0] , gen_link($comp3["RESULT"][0])); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
             </div>
           </div>
-        </a>
+        <?php gen_href_end($comp3["RESULT"][0]); ?>
       </div>
     </div>
   </div>
@@ -581,7 +607,9 @@
     <div>
       <?php
         print "<p>" . t($comp3["DESCR"][0]);
-        if(is_course($comp3["RESULT"][0])) link_to_edge_courses();
+        if(is_course($comp3["RESULT"][0])) {
+          link_to_edge_courses();
+        }
         print "</p>";
       ?>
     </div>
@@ -590,13 +618,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text2" href="' . gen_link($comp3["RESULT"][1]) . '">' ?>
+        <?php gen_href_start($comp3["RESULT"][1] , gen_link($comp3["RESULT"][1])); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
             </div>
           </div>
-        </a>
+        <?php gen_href_end($comp3["RESULT"][1]); ?>
       </div>
     </div>
   </div>
@@ -605,7 +633,9 @@
     <div>
       <?php
         print "<p>" . t($comp3["DESCR"][1]);
-        if(is_course($comp3["RESULT"][1])) link_to_edge_courses();
+        if (is_course($comp3["RESULT"][1])) {
+          link_to_edge_courses();
+        }
         print "</p>";
       ?>
     </div>
@@ -614,13 +644,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a id="comp3-text3" href="' . gen_link($comp3["RESULT"][2]) . '">' ?>
+        <?php gen_href_start($comp3["RESULT"][2] , gen_link($comp3["RESULT"][2])); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
             </div>
           </div>
-        </a>
+        <?php gen_href_end($comp3["RESULT"][2]); ?>
       </div>
     </div>
   </div>
@@ -629,7 +659,9 @@
     <div>
       <?php
         print '<p>' . t($comp3["DESCR"][2]);
-        if(is_course($comp3["RESULT"][2])) link_to_edge_courses();
+        if(is_course($comp3["RESULT"][2])) {
+          link_to_edge_courses();
+        }
         print '</p>';
       ?>
     </div>
@@ -651,13 +683,13 @@
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php print  '<a href="' . gen_link($comp4[0]) . '">' ?>
+        <?php gen_href_start($comp4[0], gen_link($comp4[0])); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>
             </div>
           </div>
-        </a>
+        <?php gen_href_end($comp4[0]); ?>
       </div>
     </div>
   </div>
