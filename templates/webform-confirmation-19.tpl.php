@@ -468,8 +468,13 @@
  */
   function gen_href_start($string, $link){
     if ($string != "No experiences") {
-      print  t('<a href="') . $link . t('" target="_blank">');
+      print  '<a href="' . $link . '" target="_blank">';
     }
+    else {
+      print '<div>';
+    }
+
+
   }
 
 /**
@@ -478,7 +483,10 @@
  */
   function gen_href_end($string){
     if ($string != "No experiences") {
-      print  t('</a>');
+      print '</a>';
+    }
+    else{
+      print '</div>';
     }
   }
 
@@ -491,7 +499,7 @@
   }
 
   function gen_descr($key, $descr){
-    print "<p>" . $descr;
+    print "<p>" . t('@descr', array('@descr' => $descr));
     if(is_course($key)) {
       link_to_edge_courses();
     }
@@ -507,8 +515,8 @@
 
 ?>
 
-<!--HTML section -->
-<!--TODO: Make the text translatable through php AND check accessibility levels-->
+
+<!--TODO: Check accessibility levels-->
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
 <!--TODO: Make the width of the confirmation page wider -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
@@ -520,7 +528,6 @@
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
 <!--TODO: On focus, footer buttons don't fully align with focus box -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.js"></script>
 
 <div class="flex-container">
   <div class="flex-message">
@@ -680,10 +687,10 @@
 
 
   <div class="flex-back-btn-wrapper margin_top">
-    <div class="footer_actions_wrapper">
+    <div class="footer_actions_wrapper ">
       <div class="call-to-action-top-wrapper">
-        <a href="/edge/find-your-edge">
-          <div class="adjust-height call-to-action-wrapper">
+        <a href="/edge/find-your-edge" class="adjust-height">
+          <div class="call-to-action-wrapper">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Start over") ?>

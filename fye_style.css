@@ -23,11 +23,13 @@
 .flex-comp-block{
   flex-basis: 35%;
   -webkit-flex-basis: 35%;
+  margin-bottom: 1.5rem;
 }
 
 .flex-comp-descr{
   flex-basis: 65%;
   -webkit-flex-basis: 65%;
+  margin-bottom: 1.5rem;
 }
 
 .flex-back-btn-wrapper{
@@ -51,13 +53,12 @@ background-color: blue;
 }
 
 .margin_top{
-  margin-top: 50px;
+  margin-top: 3rem;
 }
 
 
 .component_square{
   width: 90%;
-  margin-bottom: 1rem;
 }
 
 .component_square:link{
@@ -83,6 +84,7 @@ background-color: blue;
 
 .footer_actions_wrapper{
   width:80%;
+  height: 70%;
 }
 
 .alignment{
