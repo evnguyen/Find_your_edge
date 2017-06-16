@@ -211,10 +211,10 @@
     "Faculties",
   );
   $comp3_full_time = array(
-    "Full Time",
+    "Full-time",
   );
   $comp3_part_time = array(
-    "Part Time",
+    "Part-time",
   );
   $comp3_volunteering = array(
     "Volunteering",
@@ -267,7 +267,7 @@
     //Note: this description is to be appended to the course code
     //      This is also to be appended with the return value of link_to_edge_courses()
     "COURSE" => " counts as an equivalency for the skills identification
-      and articulation workshop. For a full list of equivalences, visit our list
+      and articulation workshop. For a full list of equivalencies, visit our list
       of ",
   );
 
@@ -283,7 +283,7 @@
     //Note: This description is to be appended to the appropriate course code
     //      This is also to be appended with the return value of link_to_edge_courses()
     "COURSE" => " counts as an equivalency for the career development
-      course. For a full list of equivalences, visit our list of ",
+      course. For a full list of equivalencies, visit our list of ",
   );
 
   $comp3_descr = array(
@@ -295,7 +295,7 @@
     //Note: This description is to be appended to the appropriate course code.
     //      This is also to be appended with the return value of link_to_edge_courses()
     "COURSE" => " counts as an equivalency for a work/community experience.
-      For a full list of equivalences, visit our list of ",
+      For a full list of equivalencies, visit our list of ",
 
     "Faculties" => "You can earn EDGE credit by being active within your
       faculty and completing a PD course. Click the box to visit our
@@ -314,11 +314,11 @@
       box for more details regarding off-campus experiences.",
 
     //Off-Campus experiences
-    "Full Time" => "You can earn EDGE credit by working full-time during any term
+    "Full-time" => "You can earn EDGE credit by working full-time during any term
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Part Time" => "You can earn EDGE credit by working part-time during any term
+    "Part-time" => "You can earn EDGE credit by working part-time during any term
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 

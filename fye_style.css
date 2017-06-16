@@ -2,17 +2,113 @@
   width: 100%;
 }
 
-.flex-container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+@media only screen and (max-width: 999px){
+  .flex-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 
-  flex-flow: row;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-}
+    flex-flow: row;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .flex-comp-block{
+    flex-basis: 100%;
+    -webkit-flex-basis: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .flex-comp-descr{
+    flex-basis: 100%;
+    -webkit-flex-basis: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .flex-back-btn-wrapper{
+    flex-basis: 100%;
+    -webkit-flex-basis: 100%;
+  }
+
+  .flex-redo-btn-wrapper{
+    flex-basis: 100%;
+    -webkit-flex-basis: 100%;
+  }
+  input[type=submit]{
+    width: 100%;
+  }
+  .footer_actions_wrapper{
+    width:90%;
+  }
+
+  .alignment{
+    float: left;
+  }
+
+  #back-btn{
+    margin-top: 3rem;
+  }
+  #redo-btn{
+    margin-top: 0rem;
+  }
+} /**End @media**/
+
+@media only screen and (min-width: 1000px) {
+  .flex-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    flex-flow: row;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+  }
+
+  .flex-comp-block {
+    flex-basis: 20%;
+    -webkit-flex-basis: 20%;
+    margin-bottom: 1.5rem;
+  }
+
+  .flex-comp-descr {
+    flex-basis: 70%;
+    -webkit-flex-basis: 70%;
+    margin-bottom: 1.5rem;
+  }
+
+  .flex-back-btn-wrapper{
+    flex-basis: 50%;
+    -webkit-flex-basis: 50%;
+  }
+
+  .flex-redo-btn-wrapper{
+    flex-basis: 50%;
+    -webkit-flex-basis: 50%;
+  }
+  input[type=submit]{
+    margin-top: 5%;
+    width: 30%;
+  }
+  .footer_actions_wrapper{
+    width:65%;
+  }
+
+  .alignment{
+    float: right;
+  }
+
+  #back-btn{
+    margin-top: 3rem;
+  }
+  #redo-btn{
+    margin-top: 3rem;
+  }
+} /**End @media**/
 
 .flex-comp-title{
   flex-basis:100%;
@@ -24,27 +120,7 @@
   -webkit-flex-basis: 100%;
 }
 
-.flex-comp-block{
-  flex-basis: 20%;
-  -webkit-flex-basis: 20%;
-  margin-bottom: 1.5rem;
-}
 
-.flex-comp-descr{
-  flex-basis: 70%;
-  -webkit-flex-basis: 70%;
-  margin-bottom: 1.5rem;
-}
-
-.flex-back-btn-wrapper{
-  flex-basis: 50%;
-  -webkit-flex-basis: 50%;
-}
-
-.flex-redo-btn-wrapper{
-  flex-basis: 50%;
-  -webkit-flex-basis: 50%;
-}
 
 .debug{
 background-color: blue;
@@ -86,24 +162,12 @@ background-color: blue;
   color: #757575;
 }
 
-.footer_actions_wrapper{
-  width:65%;
-}
-
-.alignment{
-  float: right;
-}
 
 .form-actions{
   text-align: left;
   float:none;
 }
 
-
-input[type=submit]{
-  margin-top: 5%;
-  width: 30%;
-}
 .adjust-height{
   height:3.75rem;
 }

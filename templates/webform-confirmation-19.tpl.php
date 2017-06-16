@@ -339,6 +339,7 @@
 
     $results = array();
     $descr = array();
+    //Must check if there is not enough experiences
     if (count($results_list) < 3) {
       while (count($results_list) < 3) {
         $results_list[] = "No experiences";
@@ -471,7 +472,7 @@
       print  '<a href="' . $link . '" target="_blank">';
     }
     else {
-      print '<div>';
+      //print '<div>';
     }
 
 
@@ -486,7 +487,7 @@
       print '</a>';
     }
     else{
-      print '</div>';
+      //print '</div>';
     }
   }
 
@@ -527,7 +528,11 @@
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
 <!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: BUG: No exp comp boxes do no scale properly -->
+<!--TODO: BUG: Mobile resolution breaks -->
+<!--TODO: Center Next/Prev buttons on mobile -->
+<!--TODO: Move international question to before exp question -->
+<!--TODO: Remove Time off option -->
+<!--TODO: Off campus exp should link to type of exp-->
 
 <div class="flex-container">
   <div class="flex-message">
@@ -686,7 +691,7 @@
   </div>
 
 
-  <div class="flex-back-btn-wrapper margin_top">
+  <div id ="back-btn" class="flex-back-btn-wrapper">
     <div class="footer_actions_wrapper">
       <div class="call-to-action-wrapper">
         <a href="/edge/find-your-edge">
@@ -702,7 +707,7 @@
     </div>
   </div>
 
-  <div class="flex-redo-btn-wrapper margin_top">
+  <div id="redo-btn" class="flex-redo-btn-wrapper">
     <div class="footer_actions_wrapper alignment">
       <div class="call-to-action-wrapper">
         <a href="">
