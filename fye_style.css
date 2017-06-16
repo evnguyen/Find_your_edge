@@ -1,3 +1,7 @@
+.uw-site-content{
+  width: 100%;
+}
+
 .flex-container{
   display: -webkit-box;
   display: -moz-box;
@@ -21,14 +25,14 @@
 }
 
 .flex-comp-block{
-  flex-basis: 35%;
-  -webkit-flex-basis: 35%;
+  flex-basis: 20%;
+  -webkit-flex-basis: 20%;
   margin-bottom: 1.5rem;
 }
 
 .flex-comp-descr{
-  flex-basis: 65%;
-  -webkit-flex-basis: 65%;
+  flex-basis: 70%;
+  -webkit-flex-basis: 70%;
   margin-bottom: 1.5rem;
 }
 
@@ -83,8 +87,7 @@ background-color: blue;
 }
 
 .footer_actions_wrapper{
-  width:80%;
-  height: 70%;
+  width:65%;
 }
 
 .alignment{
@@ -96,15 +99,12 @@ background-color: blue;
   float:none;
 }
 
-.call-to-action-small-text{
-  color: inherit;
-}
 
 input[type=submit]{
   margin-top: 5%;
   width: 30%;
 }
 .adjust-height{
-  height: 70%;
+  height:3.75rem;
 }
 

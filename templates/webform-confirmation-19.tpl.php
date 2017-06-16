@@ -518,7 +518,6 @@
 
 <!--TODO: Check accessibility levels-->
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
-<!--TODO: Make the width of the confirmation page wider -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Change call to action hover effect based on faculty -->
@@ -527,7 +526,8 @@
 <!--TODO: BUG: Double click on submit button -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
-<!--TODO: On focus, footer buttons don't fully align with focus box -->
+<!--TODO: REQUIRED: remove todos in production -->
+<!--TODO: BUG: No exp comp boxes do no scale properly -->
 
 <div class="flex-container">
   <div class="flex-message">
@@ -687,10 +687,10 @@
 
 
   <div class="flex-back-btn-wrapper margin_top">
-    <div class="footer_actions_wrapper ">
-      <div class="call-to-action-top-wrapper">
-        <a href="/edge/find-your-edge" class="adjust-height">
-          <div class="call-to-action-wrapper">
+    <div class="footer_actions_wrapper">
+      <div class="call-to-action-wrapper">
+        <a href="/edge/find-your-edge">
+          <div class="call-to-action-wrapper adjust-height">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Start over") ?>
@@ -704,7 +704,7 @@
 
   <div class="flex-redo-btn-wrapper margin_top">
     <div class="footer_actions_wrapper alignment">
-      <div class="call-to-action-top-wrapper">
+      <div class="call-to-action-wrapper">
         <a href="">
           <div class="adjust-height call-to-action-wrapper">
             <div class="fye_action_btn">

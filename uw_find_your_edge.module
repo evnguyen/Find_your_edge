@@ -54,12 +54,6 @@ function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
   );
 }
 
-/**
- * @param $form
- * @param $form_state
- * Implements Hook form alter
- */
-
 
 
 /**
