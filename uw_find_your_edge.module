@@ -17,8 +17,7 @@
  * Implements Hook_init().
  */
 function uw_find_your_edge_init() {
-  drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') .
-    '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
+
 
 }
 
@@ -38,13 +37,11 @@ function uw_find_your_edge_page_build() {
 }
 
 
-
 /**
  * @param $theme_registry
  * Changes the confirmation page's theme
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
-  //dsm($theme_registry);
   //WMS-DEV nid = 36
   $theme_registry['webform_confirmation_19'] = array(
     'template' => 'webform-confirmation-19',
@@ -54,6 +51,13 @@ function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
   );
 }
 
+function uw_find_your_edge_node_load($nodes, $types) {
+  dsm($nodes);
+  if (isset($nodes[19]->title) && $nodes[19]->title == 'Find Your EDGE') {
+    drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') .
+      '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
+  }
+}
 
 
 /**
