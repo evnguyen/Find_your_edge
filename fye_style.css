@@ -13,7 +13,7 @@
     flex-flow: row;
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
-    justify-content: center;
+
   }
 
   .flex-comp-block{
@@ -37,23 +37,29 @@
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
   }
+
+  .component_square{
+    width: 100%;
+  }
+
   input[type=submit]{
     margin-top: 5%;
     width: 100%;
   }
-  .footer_actions_wrapper{
-    width:90%;
-  }
 
-  .alignment{
-    float: left;
+  .footer_actions_wrapper{
+    width:100%;
   }
 
   #back-btn{
     margin-top: 3rem;
+    float: left;
+
   }
   #redo-btn{
-    margin-top: 0rem;
+    margin-top: 1rem;
+    float: left;
+
   }
 } /**End @media**/
 
@@ -71,14 +77,14 @@
   }
 
   .flex-comp-block {
-    flex-basis: 20%;
-    -webkit-flex-basis: 20%;
+    flex-basis: 25%;
+    -webkit-flex-basis: 25%;
     margin-bottom: 1.5rem;
   }
 
   .flex-comp-descr {
-    flex-basis: 70%;
-    -webkit-flex-basis: 70%;
+    flex-basis: 65%;
+    -webkit-flex-basis: 65%;
     margin-bottom: 1.5rem;
   }
 
@@ -91,23 +97,28 @@
     flex-basis: 50%;
     -webkit-flex-basis: 50%;
   }
+
+  .component_square{
+    width: 90%;
+  }
+
   input[type=submit]{
     margin-top: 5%;
     width: 30%;
   }
+
   .footer_actions_wrapper{
     width:65%;
   }
 
-  .alignment{
-    float: right;
-  }
-
   #back-btn{
     margin-top: 3rem;
+    float: left;
   }
   #redo-btn{
     margin-top: 3rem;
+    float: right;
+
   }
 } /**End @media**/
 
@@ -120,7 +131,6 @@
   flex-basis:100%;
   -webkit-flex-basis: 100%;
 }
-
 
 
 .debug{
@@ -137,10 +147,6 @@ background-color: blue;
   margin-top: 3rem;
 }
 
-
-.component_square{
-  width: 90%;
-}
 
 .component_square:link{
   text-decoration: none;

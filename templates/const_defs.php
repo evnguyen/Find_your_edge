@@ -57,7 +57,6 @@
   global $comp4_capstone_work;
   global $comp4_capstone_grad;
   global $comp4_capstone_prof;
-  global $comp4_capstone_timeoff;
   global $comp4_capstone_noplan;
   global $comp4_capstone_other;
 
@@ -239,10 +238,6 @@
     "Professional school",
   );
 
-  $comp4_capstone_timeoff = array(
-    "Time off",
-  );
-
   $comp4_capstone_noplan = array(
     "No plans",
   );
@@ -344,10 +339,6 @@
     "Professional school" => "You’ll use the capstone workshop to make a
       plan of action for your transition into professional school. Click the
       box for more details regarding the capstone workshop.",
-
-    "Time off" => "You’ll use the capstone workshop to make a plan of action
-      for your hard-earned time off post-graduation. Click the box for more
-      details regarding the capstone workshop.",
 
     "No plans" => "You’ll use the capstone workshop to make a plan of action for
       your life post-graduation, whatever it entails. Click the box for more

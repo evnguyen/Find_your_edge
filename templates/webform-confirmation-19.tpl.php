@@ -382,7 +382,6 @@
     global $comp4_capstone_work;
     global $comp4_capstone_grad;
     global $comp4_capstone_prof;
-    global $comp4_capstone_timeoff;
     global $comp4_capstone_noplan;
     global $comp4_capstone_other;
     global $comp4_descr;
@@ -398,9 +397,6 @@
         break;
       case "PROF":
         $retval[] = get_random_element($comp4_capstone_prof);
-        break;
-      case "TIMEOFF":
-        $retval[] = get_random_element($comp4_capstone_timeoff);
         break;
       case "NOPLAN":
         $retval[] = get_random_element($comp4_capstone_noplan);
@@ -430,15 +426,17 @@
     }
     //TODO: replace placeholder link
     //TODO: code refactor on this?
-    elseif ($string == "Full Time" || $string == "Part Time" ||
-      $string == "University colleges" || $string == "Student societies" ||
-      $string == "Offices and services" || $string == "Volunteering" ||
-      $string == "Service learning" || $string == "Faculties") {
+    elseif ($string == "University colleges" || $string == "Student societies" ||
+      $string == "Offices and services" || $string == "Faculties") {
       return "https://uwaterloo.ca/edge/students/edge-experiences";
+    }
+    elseif ($string == "Full-time" || $string == "Part-time" ||
+      $string == "Volunteering" || $string == "Service learning") {
+      return "https://uwaterloo.ca/edge/students/types-edge-experiences";
     }
     elseif ($string == "Working full-time" ||
       $string == "Graduate school" || $string == "Professional school"
-      || $string == "Time off" || $string == "No plans" || $string == "Other") {
+      || $string == "No plans" || $string == "Other") {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
     else {
@@ -528,9 +526,6 @@
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
 <!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: Mobile: center comp box -->
-<!--TODO: Center Next/Prev buttons on mobile -->
-<!--TODO: Move international question to before exp question -->
 <!--TODO: Remove Time off option -->
 <!--TODO: Off campus exp should link to type of exp-->
 
@@ -700,8 +695,8 @@
   </div>
 
 
-  <div id ="back-btn" class="flex-back-btn-wrapper">
-    <div class="footer_actions_wrapper">
+  <div class="flex-back-btn-wrapper">
+    <div id ="back-btn" class="footer_actions_wrapper adjust-height">
       <div class="call-to-action-wrapper">
         <a href="/edge/find-your-edge">
           <div class="call-to-action-wrapper adjust-height">
@@ -716,11 +711,11 @@
     </div>
   </div>
 
-  <div id="redo-btn" class="flex-redo-btn-wrapper">
-    <div class="footer_actions_wrapper alignment">
+  <div class="flex-redo-btn-wrapper">
+    <div id="redo-btn" class="footer_actions_wrapper alignment adjust-height">
       <div class="call-to-action-wrapper">
         <a href="">
-          <div class="adjust-height call-to-action-wrapper">
+          <div class="call-to-action-wrapper adjust-height">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Generate new EDGE path") ?>
