@@ -528,7 +528,7 @@
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
 <!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: BUG: Mobile resolution breaks -->
+<!--TODO: Mobile: center comp box -->
 <!--TODO: Center Next/Prev buttons on mobile -->
 <!--TODO: Move international question to before exp question -->
 <!--TODO: Remove Time off option -->
@@ -537,7 +537,13 @@
 <div class="flex-container">
   <div class="flex-message">
     <p>Based on your program of study and interests, here are some courses and
-      experiences you can take to fulfill the components of the EDGE program</p>
+      experiences you can take to fulfill the components of the EDGE program.
+      You don't have to complete these courses and experience in the order in
+      which they're displayed. Make sure to check out the prerequisites and
+      scheduling governing your results before planning your journey through EDGE.
+      If you need help making a plan, contact Ben McDonald at
+    <a href="mailto:ben.mcdonald@uwaterloo.ca">ben.mcdonald@uwaterloo.ca.</a>
+    </p>
   </div>
 
   <div class="flex-comp-title margin_top">
@@ -659,8 +665,11 @@
   <div>
     <?php
         if($submission->data[1][0] == 1){
-          print '<p><i>' . t("Note:") . '</i>' .
-            t(" International students will be excluded from Full/Part time work in their EDGE path.").
+          print '<p>'.
+            t('If you\'re an international student and you\'ve expressed 
+              an interest in full- or part-time work off-campus, contact the 
+              EDGE team at <a href="@mail">edge@uwaterloo.ca.</a>',
+              array('@mail' => 'mailto:edge@uwaterloo.ca')).
             '</p>';
         };
       ?>
