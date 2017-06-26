@@ -27,23 +27,14 @@
  */
   include 'const_defs.php';
 
-
-
 /**
- * Variable definitions.
- * This section defines the values associated with each variable.
- * In order to access submission values, syntax is as follows:
- * $submission->data[i][j] where i is the question number and j is the answer #
- * Note that j begins at 0
+ * Obtain the values of the current submission
  */
   $sid = $_GET['sid'];
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
   //Debug
   //dsm($submission);
-
-
-
 
 /**
  * @param $list -> an array which holds the list of elements to be chosen from
@@ -91,12 +82,14 @@
   }
 
 /**
+ * @param $string
+ * @return bool
  * Helper function to check if string is a course code
  * This assumes all course code will always start with a letter and end with a number
  */
   function is_course($string) {
     $first = $string[0];
-    $last = $string[strlen($string) - 1];
+    $last = $string[drupal_strlen($string) - 1];
 
     if (ctype_alpha($first) && (ctype_digit($last) || $last == "A")) {
       return true;
@@ -121,19 +114,15 @@
 
     if ($submission->data[2][0] == "AHS") {
       $retval[] = get_random_element($comp1_ahs_courses);
-
     }
     elseif ($submission->data[2][0] == "ENV") {
       $retval[] = get_random_element($comp1_env_courses);
-
     }
     elseif ($submission->data[2][0] == "MATH") {
       $retval[] = get_random_element($comp1_math_courses);
-
     }
     else {
       $retval[] = get_random_element($comp1_all_courses);
-
     }
 
     if (is_course($retval[0])) {
@@ -166,12 +155,9 @@
     else {
       $retval[] = get_random_element($comp2_all_courses);
     }
-
     $retval[] = $retval[0] . $comp2_descr["COURSE"];
     return $retval;
-
   }
-
 
 /**
  * @return array
@@ -320,6 +306,7 @@
         $results_list = array_merge($results_list, $comp3_offices_services);
       }
     }
+
     if (in_array("OFF", $submission->data[8])) {
       $exp = $submission->data[10];
       //Full time and Part time can only available to Non-international students
@@ -357,6 +344,7 @@
       }
     }
 
+    //Now obtain the corresponding description for each result
     for ($i = 0; $i < 3; $i++) {
       if (is_course($results[$i])) {
         $descr[] = $results[$i] . $comp3_descr["COURSE"];
@@ -370,11 +358,10 @@
       "DESCR" => $descr,
     );
     return $retval;
-
   }//End function
 
-
 /**
+ * @return array
  * Generate result for Component 4: Capstone Workshop
  */
   function get_comp4() {
@@ -411,8 +398,6 @@
     return $retval;
   }
 
-
-
 /**
  * @param $string -> the string of the course code
  * @return string -> The return value will have the form
@@ -420,11 +405,10 @@
  * The purpose of this function is to generate the href for the course code.
  */
   function gen_link($string) {
-    //TODO: replace placeholder link for CCA/EDGE Workshop
+    //TODO: replace placeholder links
     if ($string == "CCA/EDGE Workshop") {
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
-    //TODO: replace placeholder link
     //TODO: code refactor on this?
     elseif ($string == "University colleges" || $string == "Student societies" ||
       $string == "Offices and services" || $string == "Faculties") {
@@ -469,11 +453,6 @@
     if ($string != "No experiences") {
       print  '<a href="' . $link . '" target="_blank">';
     }
-    else {
-      //print '<div>';
-    }
-
-
   }
 
 /**
@@ -483,9 +462,6 @@
   function gen_href_end($string){
     if ($string != "No experiences") {
       print '</a>';
-    }
-    else{
-      //print '</div>';
     }
   }
 
@@ -505,15 +481,12 @@
     print "</p>";
   }
 
-
-
   $comp1 = get_comp1();
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
 
 ?>
-
 
 <!--TODO: Check accessibility levels-->
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
@@ -522,15 +495,16 @@
 <!--TODO: Change call to action hover effect based on faculty -->
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
-<!--TODO: BUG: Double click on submit button -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
 <!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: Remove Time off option -->
-<!--TODO: Off campus exp should link to type of exp -->
-<!--TODO: BUG: CSS must only be called on the webform -->
+<!--TODO: Check if JS is getting used on other nodes -->
+<!--TODO: Make a new module which applies css to next/prev buttons-->
+<!--TODO: purge submissions -->
+<!--TODO: Idea: make a student class -->
 
 <div class="flex-container">
+
   <div class="flex-message">
     <p>Based on your program of study and interests, here are some courses and
       experiences you can take to fulfill the components of the EDGE program.
@@ -546,7 +520,6 @@
     <h5>Component 1: Skills Identification and Articulation Workshop</h5>
   </div>
 
-
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
@@ -561,7 +534,6 @@
     </div>
   </div>
 
-
   <div class="flex-comp-descr">
     <div>
       <?php gen_descr($comp1[0], $comp1[1]); ?>
@@ -571,7 +543,6 @@
   <div class="flex-comp-title margin_top">
     <h5>Component 2: Career Development Course</h5>
   </div>
-
 
   <div class="flex-comp-block">
     <div class="component_square">
@@ -593,11 +564,9 @@
     </div>
   </div>
 
-
    <div class="flex-comp-title margin_top">
     <h5>Component 3: Work/Community Experiences</h5>
   </div>
-
 
   <div class="flex-comp-block">
     <div class="component_square">
@@ -658,6 +627,7 @@
       <?php gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]); ?>
     </div>
   </div>
+
   <div>
     <?php
         if($submission->data[1][0] == 1){
@@ -695,9 +665,8 @@
     </div>
   </div>
 
-
-  <div class="flex-back-btn-wrapper">
-    <div id ="back-btn" class="footer_actions_wrapper adjust-height">
+  <div class="flex-back-button-wrapper">
+    <div id ="back-button" class="footer_actions_wrapper adjust-height">
       <div class="call-to-action-wrapper">
         <a href="/edge/find-your-edge">
           <div class="call-to-action-wrapper adjust-height">

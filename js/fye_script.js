@@ -3,62 +3,54 @@
  * @file
  * Extra enhancements to the Find your edge quiz tool
  */
-(function ($){
+(function ($) {
   Drupal.behaviors.convertBehavior = {
-    attach: function (context){
+    attach: function (context) {
       var width = $(window).width();
-      if(width < 900){
-        $('input[type=submit]').css("width", "100%");
-        $('.webform-next').css("float","");
-        $('.webform-previous').css("float","");
-        $('.button-primary').css("float","");
+      if (width < 1000) {
+        $('.webform-next, .webform-previous, .button-primary').css({
+          'float':'',
+          'width':'100%'
+        });
       }
-      else{
-        $('input[type=submit]').css("width", "30%");
-        $('.webform-next').css("float","right");
-        $('.webform-previous').css("float","none");
-        $('.button-primary').css("float","right");
+      else {
+        $('.webform-next, .button-primary').css({
+          'float':'right',
+          'width':'30%'
+        });
+        $('.webform-previous').css({
+          'float':'none',
+          'width':'30%'
+        });
+        $('.webform-next').css({
+          'float':'right',
+          'width':'30%'
+        });
       }
 
       $(window).resize(function() {
         var width = $(window).width();
-        if(width < 900){
-          $('input[type=submit]').css("width", "100%");
-          $('.webform-next').css("float","");
-          $('.webform-previous').css("float","");
-          $('.button-primary').css("float","");
+        if (width < 1000) {
+          $('.webform-next, .webform-previous, .button-primary').css({
+            'float':'',
+            'width':'100%'
+          });
         }
-        else{
-          $('input[type=submit]').css("width", "30%");
-          $('.webform-next').css("float","right");
-          $('.webform-previous').css("float","none");
-          $('.button-primary').css("float","right");
+        else {
+          $('.webform-next, .button-primary').css({
+            'float':'right',
+            'width':'30%'
+          });
+          $('.webform-previous').css({
+            'float':'none',
+            'width':'30%'
+          });
+          $('.webform-next').css({
+            'float':'right',
+            'width':'30%'
+          });
         }
       });
-
-      /**
-       * Determines if string is a substring of text
-       * @param string
-       * @param text
-       */
-      function is_within(string, text){
-        //Remove whitespaces
-        text = text.replace(/\s/g,'');
-        var len = string.length;
-        var retval = false;
-        for(var i = 0; i < len; i++){
-          if(text[i] !== string[i]){
-            return retval;
-          }
-        }
-        retval = true;
-        return retval;
-
-      }
-
-
-
-
     }//End attach
   };
 }(jQuery));

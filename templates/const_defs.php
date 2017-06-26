@@ -14,7 +14,6 @@
  * In order to access submission values, syntax is as follows:
  * $submission->data[i][j] where i is the question number and j is 0
  * TODO: Change variable names for compX_all_courses
- * TODO: Remove keys in arrays if required
  */
   global $comp1_all_courses;
   global $comp1_ahs_courses;

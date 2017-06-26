@@ -28,7 +28,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .flex-back-btn-wrapper{
+  .flex-back-button-wrapper{
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
   }
@@ -51,11 +51,12 @@
     width:100%;
   }
 
-  #back-btn{
+  #back-button{
     margin-top: 3rem;
     float: left;
 
   }
+
   #redo-btn{
     margin-top: 1rem;
     float: left;
@@ -88,7 +89,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .flex-back-btn-wrapper{
+  .flex-back-button-wrapper{
     flex-basis: 50%;
     -webkit-flex-basis: 50%;
   }
@@ -111,7 +112,7 @@
     width:65%;
   }
 
-  #back-btn{
+  #back-button{
     margin-top: 3rem;
     float: left;
   }
@@ -132,7 +133,6 @@
   -webkit-flex-basis: 100%;
 }
 
-
 .debug{
 background-color: blue;
 }
@@ -146,7 +146,6 @@ background-color: blue;
 .margin_top{
   margin-top: 3rem;
 }
-
 
 .component_square:link{
   text-decoration: none;
@@ -168,7 +167,6 @@ background-color: blue;
   background-color: #eee;
   color: #757575;
 }
-
 
 .form-actions{
   text-align: left;
