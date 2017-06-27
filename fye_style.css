@@ -33,7 +33,7 @@
     -webkit-flex-basis: 100%;
   }
 
-  .flex-redo_button-wrapper{
+  .flex-redo-button-wrapper{
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
   }
@@ -57,7 +57,7 @@
 
   }
 
-  #redo_button{
+  #redo-button{
     margin-top: 1rem;
     float:left;
   }
@@ -110,7 +110,7 @@
     margin-top: 3rem;
   }
 
-  .flex-redo_button-wrapper{
+  .flex-redo-button-wrapper{
     flex-basis: 50%;
     -webkit-flex-basis: 50%;
     margin-top: 3rem;
@@ -133,7 +133,7 @@
     float: left;
 
   }
-  #redo_button{
+  #redo-button{
     float: right;
   }
 

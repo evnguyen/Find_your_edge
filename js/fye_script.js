@@ -7,7 +7,7 @@
   Drupal.behaviors.convertBehavior = {
     attach: function (context) {
       $('.top-hover-wrapper').hide();
-      $('#redo_button').hover(
+      $('#redo-hover-area').hover(
         function(){
           $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
         },

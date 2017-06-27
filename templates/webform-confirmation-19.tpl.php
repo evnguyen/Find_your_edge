@@ -684,11 +684,11 @@
     </div>
   </div>
 
-  <div class="flex-redo_button-wrapper">
-    <div id="redo_button" class="footer_actions_wrapper alignment adjust-height">
+  <div class="flex-redo-button-wrapper">
+    <div id="redo-button" class="footer_actions_wrapper alignment adjust-height">
       <div class="call-to-action-wrapper">
         <a href="">
-          <div class="call-to-action-wrapper adjust-height">
+          <div id="redo-hover-area" class="call-to-action-wrapper adjust-height">
             <div class="fye_action_btn">
               <div class="call-to-action-big-text">
                 <?php print t("Generate new EDGE path") ?>
