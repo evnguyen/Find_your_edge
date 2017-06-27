@@ -64,8 +64,6 @@
   global $comp3_descr;
   global $comp4_descr;
 
-
-
 /**
  * Arrays specific to COMPONENT 1
  */
@@ -101,11 +99,9 @@
     "PD1",
     );
 
-
 /**
  * Arrays specific to COMPONENT 3
  */
-
   $comp3_ahs_health_courses = array(
     "HLTH 481",
   );
@@ -221,7 +217,6 @@
     "Service learning",
   );
 
-
 /**
  * Arrays specific to COMPONENT 3
  */
@@ -264,7 +259,6 @@
       and articulation workshop. For a full list of equivalencies, visit our list
       of ",
   );
-
 
   $comp2_descr = array(
     "No experiences" => "We’re having trouble finding experiences for your EDGE.

@@ -85,13 +85,15 @@
  * @param $string
  * @return bool
  * Helper function to check if string is a course code
- * This assumes all course code will always start with a letter and end with a number
+ * This assumes all course code will always start with a letter and end with either
+ * a number or an uppercase letter. Every non-course string should end with a
+ * lowercase letter.
  */
   function is_course($string) {
     $first = $string[0];
     $last = $string[drupal_strlen($string) - 1];
 
-    if (ctype_alpha($first) && (ctype_digit($last) || $last == "A")) {
+    if (ctype_alpha($first) && (ctype_digit($last) || ctype_upper($last))) {
       return true;
     }
     else {
@@ -496,8 +498,9 @@
 <!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
-<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registary) -->
+<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registry) -->
 <!--TODO: REQUIRED: remove todos in production -->
+<!--TODO: REQUIRED: adjust URLS to match production () -->
 <!--TODO: Check if JS is getting used on other nodes -->
 <!--TODO: Make a new module which applies css to next/prev buttons-->
 <!--TODO: purge submissions -->
@@ -518,7 +521,7 @@
 
   <div class="flex-comp-title margin_top">
     <h5>Component 1: Skills Identification and Articulation Workshop</h5>
-  </div>
+</div>
 
   <div class="flex-comp-block">
     <div class="component_square">
@@ -681,8 +684,8 @@
     </div>
   </div>
 
-  <div class="flex-redo-btn-wrapper">
-    <div id="redo-btn" class="footer_actions_wrapper alignment adjust-height">
+  <div class="flex-redo_button-wrapper">
+    <div id="redo_button" class="footer_actions_wrapper alignment adjust-height">
       <div class="call-to-action-wrapper">
         <a href="">
           <div class="call-to-action-wrapper adjust-height">

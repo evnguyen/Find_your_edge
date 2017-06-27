@@ -6,6 +6,16 @@
 (function ($) {
   Drupal.behaviors.convertBehavior = {
     attach: function (context) {
+      $('.top-hover-wrapper').hide();
+      $('#redo_button').hover(
+        function(){
+          $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
+        },
+        function(){
+          $('.top-hover-wrapper').fadeOut('300');
+        }
+      );
+
       var width = $(window).width();
       if (width < 1000) {
         $('.webform-next, .webform-previous, .button-primary').css({
@@ -27,7 +37,6 @@
           'width':'30%'
         });
       }
-
       $(window).resize(function() {
         var width = $(window).width();
         if (width < 1000) {

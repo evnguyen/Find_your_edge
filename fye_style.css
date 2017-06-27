@@ -33,7 +33,7 @@
     -webkit-flex-basis: 100%;
   }
 
-  .flex-redo-btn-wrapper{
+  .flex-redo_button-wrapper{
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
   }
@@ -57,10 +57,9 @@
 
   }
 
-  #redo-btn{
+  #redo_button{
     margin-top: 1rem;
     float: left;
-
   }
 } /**End @media**/
 
@@ -92,11 +91,13 @@
   .flex-back-button-wrapper{
     flex-basis: 50%;
     -webkit-flex-basis: 50%;
+    margin-top: 3rem;
   }
 
-  .flex-redo-btn-wrapper{
+  .flex-redo_button-wrapper{
     flex-basis: 50%;
     -webkit-flex-basis: 50%;
+    margin-top: 3rem;
   }
 
   .component_square{
@@ -113,13 +114,11 @@
   }
 
   #back-button{
-    margin-top: 3rem;
     float: left;
-  }
-  #redo-btn{
-    margin-top: 3rem;
-    float: right;
 
+  }
+  #redo_button{
+    float: right;
   }
 } /**End @media**/
 
@@ -134,7 +133,7 @@
 }
 
 .debug{
-background-color: blue;
+  background-color: blue;
 }
 
 .font_default{
@@ -176,4 +175,5 @@ background-color: blue;
 .adjust-height{
   height:3.75rem;
 }
+
 
