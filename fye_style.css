@@ -59,7 +59,23 @@
 
   #redo_button{
     margin-top: 1rem;
-    float: left;
+    float:left;
+  }
+
+  .top-hover-wrapper{
+    background-color: #fffaaa;
+    padding: 0.5rem;
+    float:left;
+    margin-top: 0.5rem;
+    border-style: solid;
+    border-color:#000;
+    border-width: 1px;
+  }
+
+  .top-hover{
+    font-size:0.7rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
   }
 } /**End @media**/
 
@@ -120,6 +136,24 @@
   #redo_button{
     float: right;
   }
+
+  .top-hover-wrapper{
+    background-color: #fffaaa;
+    width: 65%;
+    float: right;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-style: solid;
+    border-color:#000;
+    border-width: 1px;
+
+  }
+
+  .top-hover{
+    font-size:0.7rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
 } /**End @media**/
 
 .flex-comp-title{
@@ -134,12 +168,6 @@
 
 .debug{
   background-color: blue;
-}
-
-.font_default{
-  font-family: "BureauGrotCond Book",impact,"avenir next condensed heavy","Droid Sans",sans-serif;
-  font-size: 1.42383rem;
-
 }
 
 .margin_top{
@@ -161,7 +189,6 @@
   -o-transition: .3s linear;
   transition: .3s linear;
 }
-
 .fye_action_btn:hover{
   background-color: #eee;
   color: #757575;

@@ -698,6 +698,11 @@
         </a>
       </div>
     </div>
+    <div class="top-hover-wrapper">
+      <p class="top-hover">Please note that your path through EDGE is randomly generated.
+        You may need to refresh several times to receive different results depending on your responses.
+      </p>
+    </div>
   </div>
 
 </div>
