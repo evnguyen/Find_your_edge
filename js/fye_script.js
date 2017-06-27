@@ -6,18 +6,9 @@
 (function ($) {
   Drupal.behaviors.convertBehavior = {
     attach: function (context) {
-      $('.top-hover-wrapper').hide();
-      $('#redo-hover-area').hover(
-        function(){
-          $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
-        },
-        function(){
-          $('.top-hover-wrapper').fadeOut('300');
-        }
-      );
 
       var width = $(window).width();
-      if (width < 1000) {
+      if (width < 983) {
         $('.webform-next, .webform-previous, .button-primary').css({
           'float':'',
           'width':'100%'
@@ -36,14 +27,25 @@
           'float':'right',
           'width':'30%'
         });
+        $('.top-hover-wrapper').hide();
+        $('#redo-hover-area').hover(
+          function(){
+            $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
+          },
+          function(){
+            $('.top-hover-wrapper').fadeOut('300');
+          }
+        );
       }
       $(window).resize(function() {
         var width = $(window).width();
-        if (width < 1000) {
+        if (width < 983) {
           $('.webform-next, .webform-previous, .button-primary').css({
             'float':'',
             'width':'100%'
           });
+          $('.top-hover-wrapper').show();
+          $('#redo-hover-area').off('hover')
         }
         else {
           $('.webform-next, .button-primary').css({
@@ -58,6 +60,15 @@
             'float':'right',
             'width':'30%'
           });
+          $('.top-hover-wrapper').hide();
+          $('#redo-hover-area').hover(
+            function(){
+              $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
+            },
+            function(){
+              $('.top-hover-wrapper').fadeOut('300');
+            }
+          );
         }
       });
     }//End attach
