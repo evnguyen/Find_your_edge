@@ -34,7 +34,7 @@
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
   //Debug
-  //dsm($submission);
+  dsm($submission);
 
 /**
  * @param $list -> an array which holds the list of elements to be chosen from
@@ -83,22 +83,290 @@
 
 /**
  * @param $string
+ *
+ * @return bool
+ * Helper function that checks if a string contains a number. Returns false
+ * otherwise.
+ */
+  function has_number($string) {
+    $len = drupal_strlen($string);
+    for ($i = 0; $i < $len; $i++) {
+      if(ctype_digit($string[$i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+/**
+ * @param $string
  * @return bool
  * Helper function to check if string is a course code
  * This assumes all course code will always start with a letter and end with either
- * a number or an uppercase letter. Every non-course string should end with a
- * lowercase letter.
+ * a number or an uppercase letter. Furthermore, every course code will have at
+ * least one number
  */
   function is_course($string) {
     $first = $string[0];
     $last = $string[drupal_strlen($string) - 1];
 
-    if (ctype_alpha($first) && (ctype_digit($last) || ctype_upper($last))) {
+    if (has_number($string) && ctype_alpha($first) && (ctype_digit($last) || ctype_upper($last))) {
       return true;
     }
     else {
       return false;
     }
+  }
+
+
+/**
+ * @param $faculty
+ * @param $major
+ *
+ * @return array
+ * Helper function to get Faculty type experiences
+ */
+  function get_faculty_positions($faculty, $major) {
+    global $comp3_faculties;
+    global $comp3_ahs_ambassador;
+    global $comp3_kin_trainer;
+    global $comp3_earth_museum;
+    global $comp3_sci_outreach;
+    $results = array();
+
+    if ($faculty == "AHS") {
+      if ($major == "KIN") {
+        $results = array_merge($results, $comp3_kin_trainer);
+      }
+      $results = array_merge($results, $comp3_ahs_ambassador);
+    }
+    elseif ($faculty == "SCI") {
+      if ($major == "EARTH") {
+        $results = array_merge($results, $comp3_earth_museum);
+      }
+      $results = array_merge($results, $comp3_sci_outreach);
+    }
+    else {
+      $results = array_merge($results, $comp3_faculties);
+    }
+
+    return $results;
+  }
+
+
+/**
+ * @param $string
+ *
+ * @return bool
+ * Helper function that checks if key is a student society position
+ */
+  function is_student_society_position($string) {
+    $positions = array(
+      "GBDA Society",
+      "HIST Society",
+      "PSYCH Society",
+      "MathSoc",
+      "Bioinformatics Club",
+      "FARMSA",
+    );
+    return in_array($string, $positions);
+  }
+
+
+/**
+ * @param $faculty
+ * @param $major
+ *
+ * @return array
+ * Helper function to return Student Society positions
+ */
+  function get_student_society_positions($faculty, $major) {
+    global $comp3_student_soc;
+    global $comp3_gbda_soc;
+    global $comp3_hist_soc;
+    global $comp3_psych_soc ;
+    global $comp3_soc_soc;
+    global $comp3_mathsoc;
+    global $comp3_bioinformatics_club ;
+    global $compr3_farmsa ;
+    $results = array();
+
+    if ($faculty == "ART") {
+      if ($major == "GBDA") {
+        $results = array_merge($results, $comp3_gbda_soc);
+      }
+      if ($major == "HIST") {
+        $results = array_merge($results, $comp3_hist_soc);
+      }
+      if ($major == "PSYCH") {
+        $results = array_merge($results, $comp3_psych_soc);
+      }
+      if ($major == "SOC") {
+        $results = array_merge($results, $comp3_soc_soc);
+      }
+    }
+    elseif ($faculty == "MATH") {
+      if ($major == "CS") {
+        $results = array_merge($results, $comp3_bioinformatics_club);
+      }
+      elseif ($major == "ACTSC" || $major == "STAT") {
+        $results = array_merge($results, $compr3_farmsa);
+      }
+      $results = array_merge($results, $comp3_mathsoc);
+    }
+    elseif ($faculty == "SCI") {
+      if ($major == "BIO") {
+        $results = array_merge($results, $comp3_bioinformatics_club);
+      }
+    }
+    else{
+      $results = array_merge($results, $comp3_student_soc);
+    }
+
+    return $results;
+  }
+
+/**
+ * @param $faculty
+ * @param $skills
+ *
+ * @return array
+ * Helper function to get University college positions
+ */
+  function get_university_colleges_positions($faculty, $skills) {
+    global $comp3_uni_college;
+    global $comp3_renison_don;
+    global $comp3_renison_base;
+    global $comp3_renison_eli;
+    global $comp3_stpaul_don;
+    global $comp3_stpaul_leader;
+    $results = array();
+
+    if($faculty == "ENV") {
+      if(in_array("COMM", $skills) || in_array("LEAD", $skills) || in_array("TEAM", $skills)){
+        $results = array_merge($results, $comp3_stpaul_leader);
+      }
+    }
+    if (in_array("COMM", $skills)) {
+      $results = array_merge($results, $comp3_renison_don);
+      $results = array_merge($results, $comp3_renison_base);
+      $results = array_merge($results, $comp3_renison_eli);
+      $results = array_merge($results, $comp3_stpaul_don);
+    }
+    if (in_array("CULT", $skills)) {
+      $results = array_merge($results, $comp3_renison_base);
+      $results = array_merge($results, $comp3_renison_eli);
+    }
+    if (in_array("LEAD", $skills)) {
+      $results = array_merge($results, $comp3_renison_don);
+      $results = array_merge($results, $comp3_stpaul_don);
+    }
+    if (in_array("TEAM", $skills)) {
+      $results = array_merge($results, $comp3_renison_don);
+      $results = array_merge($results, $comp3_stpaul_don);
+    }
+    if (empty($results)) {
+      $results = array_merge($results, $comp3_uni_college);
+    }
+    return array_unique($results);
+  }
+
+/**
+ * @param $faculty
+ * @param $skills
+ *
+ * @return array
+ * Helper function to get Offices and Services positions
+ */
+  function get_offices_servies_positions($faculty, $major ,$skills) {
+    global $comp3_offices_services;
+    global $comp3_first_aid;
+    global $comp3_intramural_referee;
+    global $comp3_lifeguard;
+    global $comp3_bike_centre;
+    global $comp3_response_team;
+    global $comp3_coop_connection;
+    global $comp3_fed_clubs;
+    global $comp3_food_bank;
+    global $comp3_glow;
+    global $comp3_student_network;
+    global $comp3_mates;
+    global $comp3_community_don;
+    global $comp3_sustainable_campus;
+    global $comp3_volunteer_centre;
+    global $comp3_warrior_tribe;
+    global $comp3_womens_centre;
+    global $comp3_leave_the_pack;
+    global $comp3_health_educator;
+    global $comp3_single_sexy_performer;
+    global $comp3_residence_don;
+    global $comp3_library_associate;
+    global $comp3_food_services;
+    global $comp3_computing_consultant;
+    global $comp3_student_ambassador;
+    $results = array();
+    if($faculty == "MATH" && $major == "CS"){
+      $results = array_merge($results, $comp3_computing_consultant);
+    }
+
+    if (in_array("COMM", $skills)) {
+      $results = array_merge($results, $comp3_response_team);
+      $results = array_merge($results, $comp3_mates);
+      $results = array_merge($results, $comp3_community_don);
+      $results = array_merge($results, $comp3_warrior_tribe);
+      $results = array_merge($results, $comp3_leave_the_pack);
+      $results = array_merge($results, $comp3_health_educator);
+      $results = array_merge($results, $comp3_single_sexy_performer);
+      $results = array_merge($results, $comp3_residence_don);
+      $results = array_merge($results, $comp3_library_associate);
+      $results = array_merge($results, $comp3_student_ambassador);
+    }
+    if (in_array("CULT", $skills)) {
+      $results = array_merge($results, $comp3_food_bank);
+      $results = array_merge($results, $comp3_glow);
+      $results = array_merge($results, $comp3_student_network);
+      $results = array_merge($results, $comp3_sustainable_campus);
+      $results = array_merge($results, $comp3_womens_centre);
+      $results = array_merge($results, $comp3_single_sexy_performer);
+    }
+    if (in_array("LEAD", $skills)) {
+      $results = array_merge($results, $comp3_first_aid);
+      $results = array_merge($results, $comp3_intramural_referee);
+      $results = array_merge($results, $comp3_lifeguard);
+      $results = array_merge($results, $comp3_response_team);
+      $results = array_merge($results, $comp3_coop_connection);
+      $results = array_merge($results, $comp3_fed_clubs);
+      $results = array_merge($results, $comp3_mates);
+      $results = array_merge($results, $comp3_community_don);
+      $results = array_merge($results, $comp3_residence_don);
+    }
+    if (in_array("TEAM", $skills)) {
+      $results = array_merge($results, $comp3_first_aid);
+      $results = array_merge($results, $comp3_intramural_referee);
+      $results = array_merge($results, $comp3_lifeguard);
+      $results = array_merge($results, $comp3_bike_centre);
+      $results = array_merge($results, $comp3_response_team);
+      $results = array_merge($results, $comp3_coop_connection);
+      $results = array_merge($results, $comp3_fed_clubs);
+      $results = array_merge($results, $comp3_food_bank);
+      $results = array_merge($results, $comp3_student_network);
+      $results = array_merge($results, $comp3_mates);
+      $results = array_merge($results, $comp3_community_don);
+      $results = array_merge($results, $comp3_sustainable_campus);
+      $results = array_merge($results, $comp3_volunteer_centre);
+      $results = array_merge($results, $comp3_warrior_tribe);
+      $results = array_merge($results, $comp3_womens_centre);
+      $results = array_merge($results, $comp3_leave_the_pack);
+      $results = array_merge($results, $comp3_health_educator);
+      $results = array_merge($results, $comp3_single_sexy_performer);
+      $results = array_merge($results, $comp3_residence_don);
+      $results = array_merge($results, $comp3_food_services);
+      $results = array_merge($results, $comp3_student_ambassador);
+    }
+    if (empty($results)) {
+      $results = array_merge($results, $comp3_offices_services);
+    }
+    return array_unique($results);
   }
 
 /**
@@ -188,10 +456,6 @@
     global $comp3_env_indev_courses;
     global $comp3_env_integ_courses;
     global $comp3_sci_scbus_courses;
-    global $comp3_uni_college;
-    global $comp3_student_soc;
-    global $comp3_offices_services;
-    global $comp3_faculties;
     global $comp3_full_time;
     global $comp3_part_time;
     global $comp3_volunteering;
@@ -199,9 +463,10 @@
     global $comp3_descr;
 
     $results_list = array();
+    $faculty = $submission->data[2][0];
+    $major = get_major();
+    $skills = $submission->data[14];
     if (in_array("ACA", $submission->data[8])) {
-      $faculty = $submission->data[2][0];
-      $major = get_major();
       if ($faculty == "AHS") {
         switch ($major) {
           case "HLTH":
@@ -296,16 +561,16 @@
     if (in_array("ON", $submission->data[8])) {
       $exp = $submission->data[9];
       if (in_array("FAC", $exp)) {
-        $results_list = array_merge($results_list, $comp3_faculties);
+        $results_list = get_faculty_positions($faculty, $major);
       }
       if (in_array("UC", $exp)) {
-        $results_list = array_merge($results_list, $comp3_uni_college);
+        $results_list = get_university_colleges_positions($faculty, $skills);
       }
       if (in_array("SSOC", $exp)) {
-        $results_list = array_merge($results_list, $comp3_student_soc);
+        $results_list = get_student_society_positions($faculty, $major);
       }
       if (in_array("OAS", $exp)) {
-        $results_list = array_merge($results_list, $comp3_offices_services);
+        $results_list = get_offices_servies_positions($faculty, $major, $skills);
       }
     }
 
@@ -350,7 +615,10 @@
     for ($i = 0; $i < 3; $i++) {
       if (is_course($results[$i])) {
         $descr[] = $results[$i] . $comp3_descr["COURSE"];
-      }  
+      }
+      elseif (is_student_society_position($results[$i])) {
+        $descr[] = $comp3_descr["SSOC_POSITIONS"];
+      }
       else {
         $descr[] = $comp3_descr[$results[$i]];
       }
@@ -407,25 +675,43 @@
  * The purpose of this function is to generate the href for the course code.
  */
   function gen_link($string) {
-    //TODO: replace placeholder links
+    global $comp3_urls;
+    //TODO: Decide whether to put these into const_defs.php and combine in comp3_urls
+    $on_campus_general = array(
+      "University colleges",
+      "Student societies",
+      "Offices and services",
+      "Faculties",
+    );
+
+    $off_campus_general = array(
+      "Full-time",
+      "Part-time",
+      "Volunteering",
+      "Service learning",
+    );
+
+    $capstone = array(
+      "Working full-time",
+      "Graduate school",
+      "Professional school",
+      "No plans",
+      "Other",
+    );
+
     if ($string == "CCA/EDGE Workshop") {
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
-    //TODO: code refactor on this?
-    elseif ($string == "University colleges" || $string == "Student societies" ||
-      $string == "Offices and services" || $string == "Faculties") {
+    elseif (in_array($string, $on_campus_general)) {
       return "https://uwaterloo.ca/edge/students/edge-experiences";
     }
-    elseif ($string == "Full-time" || $string == "Part-time" ||
-      $string == "Volunteering" || $string == "Service learning") {
+    elseif (in_array($string, $off_campus_general)) {
       return "https://uwaterloo.ca/edge/students/types-edge-experiences";
     }
-    elseif ($string == "Working full-time" ||
-      $string == "Graduate school" || $string == "Professional school"
-      || $string == "No plans" || $string == "Other") {
+    elseif (in_array($string, $capstone)) {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    else {
+    elseif (is_course($string)) {
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
       $course_alpha = "";
       $course_num = "";
@@ -443,6 +729,9 @@
       }
       $link .= $course_alpha . "/" . $course_num;
       return $link;
+    }
+    else{
+      return $comp3_urls[$string];
     }
   }
 
@@ -487,24 +776,22 @@
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
-
 ?>
 
-<!--TODO: Check accessibility levels-->
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
-<!--TODO: Find a clean way to incorporate course descriptions -->
-<!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
-<!--TODO: Change call to action hover effect based on faculty -->
-<!--TODO: Add a print option/button -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
-<!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registry) -->
 <!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: REQUIRED: adjust URLS to match production () -->
+<!--TODO: REQUIRED: adjust URLS to match production (back-button, breadcrumbs) -->
+<!--TODO: Find a clean way to incorporate course descriptions -->
+<!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
+<!--TODO: Add a print option/button -->
 <!--TODO: Check if JS is getting used on other nodes -->
 <!--TODO: Make a new module which applies css to next/prev buttons-->
 <!--TODO: purge submissions -->
-<!--TODO: Idea: make a student class -->
+<!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
+<!--TODO: Use const in const_defs -->
+<!--TODO: Only need to check $major, since there are no overlapping majors -->
 
 <div class="flex-container">
 
@@ -519,7 +806,7 @@
     </p>
   </div>
 
-  <div class="flex-comp-title margin_top">
+  <div class="flex-comp-title margin-top">
     <h5>Component 1: Skills Identification and Articulation Workshop</h5>
 </div>
 
@@ -543,7 +830,7 @@
     </div>
   </div>
 
-  <div class="flex-comp-title margin_top">
+  <div class="flex-comp-title margin-top">
     <h5>Component 2: Career Development Course</h5>
   </div>
 
@@ -567,7 +854,7 @@
     </div>
   </div>
 
-   <div class="flex-comp-title margin_top">
+   <div class="flex-comp-title margin-top">
     <h5>Component 3: Work/Community Experiences</h5>
   </div>
 
@@ -644,7 +931,7 @@
       ?>
   </div>
 
-  <div class="flex-comp-title margin_top">
+  <div class="flex-comp-title margin-top">
     <h5>Component 4: Capstone Workshop</h5>
   </div>
 
@@ -669,11 +956,11 @@
   </div>
 
   <div class="flex-back-button-wrapper">
-    <div id ="back-button" class="footer_actions_wrapper adjust-height">
+    <div id ="back-button" class="edge-action-button-wrapper adjust-height">
       <div class="call-to-action-wrapper">
         <a href="/edge/find-your-edge">
           <div class="call-to-action-wrapper adjust-height">
-            <div class="fye_action_btn">
+            <div class="edge-action-button-gray"> 
               <div class="call-to-action-big-text">
                 <?php print t("Start over") ?>
               </div>
@@ -685,11 +972,11 @@
   </div>
 
   <div class="flex-redo-button-wrapper">
-    <div id="redo-button" class="footer_actions_wrapper alignment adjust-height">
+    <div id="redo-button" class="edge-action-button-wrapper alignment adjust-height">
       <div class="call-to-action-wrapper">
         <a href="">
           <div id="redo-hover-area" class="call-to-action-wrapper adjust-height">
-            <div class="fye_action_btn">
+            <div class="edge-action-button-gray">
               <div class="call-to-action-big-text">
                 <?php print t("Generate new EDGE path") ?>
               </div>

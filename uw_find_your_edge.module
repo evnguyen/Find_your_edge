@@ -28,18 +28,19 @@ function uw_find_your_edge_page_build() {
   }
 }
 
-
 /**
  * @param $theme_registry
  * Changes the confirmation page's theme.
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
+  $value = 'test_value_test';
   //WMS-DEV nid = 36
   $theme_registry['webform_confirmation_19'] = array(
     'template' => 'webform-confirmation-19',
     'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',
     'theme path' => drupal_get_path('module', 'uw_find_your_edge'),
     'type' => 'theme',
+    'variables' => array('test' => $value),
   );
 }
 
@@ -55,7 +56,6 @@ function uw_find_your_edge_node_load($nodes, $types) {
       '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
   }
 }
-
 
 /**
  * Defines a new field type for the webform.
@@ -81,4 +81,34 @@ function uw_find_your_edge_webform_component_info() {
     'file' => 'btn_test.inc',
   );
   return $components;
+}
+
+
+function uw_find_your_edge_webform_submission_presave($node, $submission) {
+  if (isset($node) && $node->nid == 19) {
+    //TODO: Need to be able to check if user has gone back to previous question. Check if index 11 is NULL
+    if(count($submission->data) == 12){
+      //dsm($submission);
+      //dsm($submission->data[11][0]);
+    }
+  }
+}
+
+function uw_find_your_edge_menu() {
+  $items = array();
+  $items['node/%webform_menu/webform/ruleset'] = array(
+    'title' => 'Ruleset',
+    'page callback' => 'webform_ruleset_get_form',  //The function that gets called when page loads
+    'page arguments' => array(1),
+    'access callback' => 'webform_node_update_access',
+    'access arguments' => array(1),
+    'file' => 'webform_ruleset.inc',
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+function uw_find_your_edge_form_submit($form, &$form_state) {
+  dsm("uw_find_your_edge_form_submit called");
 }
