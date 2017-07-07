@@ -235,7 +235,7 @@
     "SCBUS 223",
   );
   $comp3_uni_college = array(
-    "University colleges",
+    "University Colleges",
   );
   $comp3_renison_don = array(
     "Renison Don",
@@ -253,7 +253,7 @@
     "St. Paul's Peer Leader",
   );
   $comp3_student_soc = array(
-    "Student societies",
+    "Student Societies",
   );
   $comp3_gbda_soc = array(
     "GBDA Society",
@@ -277,7 +277,7 @@
     "FARMSA",
   );
   $comp3_offices_services = array(
-    "Offices and services",
+    "Offices and Services",
   );
   $comp3_first_aid = array(
     "First Aid Trainer",
@@ -376,26 +376,26 @@
     "Volunteering",
   );
   $comp3_service_learning = array(
-    "Service learning",
+    "Service Learning",
   );
 
 /**
  * Arrays specific to COMPONENT 3
  */
   $comp4_capstone_work = array(
-    "Working full-time",
+    "Working Full-time",
   );
 
   $comp4_capstone_grad = array(
-    "Graduate school",
+    "Graduate School",
   );
 
   $comp4_capstone_prof = array(
-    "Professional school",
+    "Professional School",
   );
 
   $comp4_capstone_noplan = array(
-    "No plans",
+    "No Plans",
   );
 
   $comp4_capstone_other = array(
@@ -408,7 +408,7 @@
    */
 
   $comp1_descr = array(
-    "No experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
@@ -423,7 +423,7 @@
   );
 
   $comp2_descr = array(
-    "No experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
@@ -437,7 +437,7 @@
   );
 
   $comp3_descr = array(
-    "No experiences" => "We’re having trouble finding experiences for your EDGE.
+    "No Experiences" => "We’re having trouble finding experiences for your EDGE.
      That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
@@ -467,7 +467,7 @@
       faculty as an outreach volunteer and completing a PD course. Click the box
       to learn more about the position.",
 
-    "University colleges" => "You can earn EDGE credit by being active within a
+    "University Colleges" => "You can earn EDGE credit by being active within a
       university college and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
@@ -489,7 +489,7 @@
       working as a living-learning peer leader in St. Paul’s and completing a
       PD course. Click the box to learn more about this experience.",
 
-    "Student societies" => "You can earn EDGE credit by being active within
+    "Student Societies" => "You can earn EDGE credit by being active within
       a student society and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
@@ -497,7 +497,7 @@
       in your student society and completing a PD course. Click the box to learn
       more about your society.",
 
-    "Offices and services" => "You can earn EDGE credit by giving your time to
+    "Offices and Services" => "You can earn EDGE credit by giving your time to
       a club, office, or service on campus and completing a PD course. Click the
       box for more details regarding on-campus experiences.",
 
@@ -593,7 +593,7 @@
       about this experience.",
 
     //Off-Campus experiences
-    "Full-time" => "You can earn EDGE credit by working full-time during any term
+    "Full-time" => "You can earn EDGE credit by Working Full-time during any term
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
@@ -605,7 +605,7 @@
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Service learning" => "You can earn EDGE credit by engaging in service
+    "Service Learning" => "You can earn EDGE credit by engaging in service
       learning (e.g. a Habitat for Humanity trip) and completing a PD courses.
       Click the box for more details regarding off-campus experiences.",
   );
@@ -693,19 +693,19 @@
   );
 
   $comp4_descr = array(
-    "Working full-time" => "You’ll use the capstone workshop to make a plan of
+    "Working Full-time" => "You’ll use the capstone workshop to make a plan of
       action for the beginning of your professional life. Click the box for
       more details regarding the capstone workshop.",
 
-    "Graduate school" => "You’ll use the capstone workshop to make a
-      plan of action for your transition into graduate school. Click the box
+    "Graduate School" => "You’ll use the capstone workshop to make a
+      plan of action for your transition into Graduate School. Click the box
       for more details regarding the capstone workshop.",
 
-    "Professional school" => "You’ll use the capstone workshop to make a
-      plan of action for your transition into professional school. Click the
+    "Professional School" => "You’ll use the capstone workshop to make a
+      plan of action for your transition into Professional School. Click the
       box for more details regarding the capstone workshop.",
 
-    "No plans" => "You’ll use the capstone workshop to make a plan of action for
+    "No Plans" => "You’ll use the capstone workshop to make a plan of action for
       your life post-graduation, whatever it entails. Click the box for more
       details regarding the capstone workshop.",
 

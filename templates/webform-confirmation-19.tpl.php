@@ -599,7 +599,7 @@
     //Must check if there is not enough experiences
     if (count($results_list) < 3) {
       while (count($results_list) < 3) {
-        $results_list[] = "No experiences";
+        $results_list[] = "No Experiences";
       }
       $results = $results_list;
     }
@@ -681,9 +681,9 @@
     global $comp3_urls;
     //TODO: Decide whether to put these into const_defs.php and combine in comp3_urls
     $on_campus_general = array(
-      "University colleges",
-      "Student societies",
-      "Offices and services",
+      "University Colleges",
+      "Student Societies",
+      "Offices and Services",
       "Faculties",
     );
 
@@ -691,18 +691,18 @@
       "Full-time",
       "Part-time",
       "Volunteering",
-      "Service learning",
+      "Service Learning",
     );
 
     $capstone = array(
-      "Working full-time",
-      "Graduate school",
-      "Professional school",
-      "No plans",
+      "Working Full-time",
+      "Graduate School",
+      "Professional School",
+      "No Plans",
       "Other",
     );
 
-    if ($string == "No experiences") {
+    if ($string == "No Experiences") {
       return "";
     }
     elseif ($string == "CCA/EDGE Workshop") {
@@ -744,20 +744,20 @@
 /**
  * @param $string
  * @param $link
- * Provides the start <a> tag if $string is not "No experiences"
+ * Provides the start <a> tag if $string is not "No Experiences"
  */
   function gen_href_start($string, $link){
-    if ($string != "No experiences") {
+    if ($string != "No Experiences") {
       print  '<a href="' . $link . '" target="_blank">';
     }
   }
 
 /**
  * @param $string
- * Provides the end <a> tag if $string is not "No experiences"
+ * Provides the end <a> tag if $string is not "No Experiences"
  */
   function gen_href_end($string){
-    if ($string != "No experiences") {
+    if ($string != "No Experiences") {
       print '</a>';
     }
   }
