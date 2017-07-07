@@ -427,9 +427,6 @@
      That doesn't mean they don't exist. Consider retaking the quiz or contacting
      the EDGE team for assistance.",
 
-    "PD1" => "You can earn this credit by completing PD1: Career Fundamentals
-      online.",
-
     //Note: This description is to be appended to the appropriate course code
     //      This is also to be appended with the return value of link_to_edge_courses()
     "COURSE" => " counts as an equivalency for the career development
@@ -452,26 +449,26 @@
       list of EDGE experiences.",
 
     "AHS Ambassador" => "You can earn EDGE credit by promoting your faculty as
-      a student ambassador and completing a PD course. Click the box to learn
+      a Student Ambassador and completing a PD course. Click the box to learn
       more about the position.",
 
     "KIN Student Trainer" => "You can earn EDGE credit by working with varsity
-      athletes as a student trainer and completing a PD course.
-      Click the box to learn more about the position.",
+      athletes as a Student Trainer and completing a PD course. Click the box
+      to learn more about the position.",
 
     "EARTH Museum Volunteer" => "You can earn EDGE credit by volunteering
       with an on-campus museum and completing a PD course. Click the box
       to learn more about the position.",
 
     "SCI Outreach Volunteer" => "You can earn EDGE credit by promoting your
-      faculty as an outreach volunteer and completing a PD course. Click the box
-      to learn more about the position.",
+      faculty as an Outreach Volunteer and completing a PD course. Click the
+      box to learn more about the position.",
 
     "University Colleges" => "You can earn EDGE credit by being active within a
       university college and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
-    "Renison Don" => "You can earn EDGE credit by working as a Renison don and
+    "Renison Don" => "You can earn EDGE credit by working as a Renison Don and
       completing a PD course. Click the box to learn more about this experience.",
 
     "Renison BASE" => "You can earn EDGE credit by working with Renison’s BASE
@@ -482,7 +479,7 @@
       Language Institute (ELI) and completing a PD course. Click the box to
       learn more about this program.",
 
-    "St. Paul's Don" => "You can earn EDGE credit by working as a St. Paul’s don
+    "St. Paul's Don" => "You can earn EDGE credit by working as a St. Paul’s Don
       and completing a PD course. Click the box to learn more about this experience.",
 
     "St. Paul's Peer Leader" => "You can earn EDGE credit by
@@ -502,19 +499,20 @@
       box for more details regarding on-campus experiences.",
 
     "First Aid Trainer" => "You can earn EDGE credit by working with Athletics
-      as a first aid trainer and completing a PD course. Click the box to learn
+      as a First Aid Trainer and completing a PD course. Click the box to learn
       more about this experience.",
 
     "Intramural Referee" => "You can earn EDGE credit by working with Athletics
-      as an intramural referee and completing a PD course. Click the box to
+      as an Intramural Referee and completing a PD course. Click the box to
       learn more about this experience.",
 
-    "Lifeguard/Instructor" => "You can earn EDGE credit by working with Athletics
-      as a lifeguard or instructor and completing a PD course. Click the box to
-      learn more about this experience.",
+    "Lifeguard/Instructor" => "You can earn EDGE credit by working with
+      Athletics as a Lifeguard or Instructor and completing a PD course. Click
+      the box to learn more about this experience.",
 
     "Bike Centre" => "You can earn EDGE credit by working with the Feds Bike
-      Centre and completing a PD course. Click the box to learn more about this experience.",
+      Centre and completing a PD course. Click the box to learn more about this
+      experience.",
 
     "Campus Response Team" => "You can earn EDGE credit by working with the Feds
       Campus Response Team and completing a PD course. Click the box to learn
@@ -542,7 +540,7 @@
       PD course. Click the box to learn more about this experience.",
 
     "Off Campus Community Don" => "You can earn EDGE credit by working as an Off
-      Campus Community don and completing a PD course. Click the box to learn
+      Campus Community Don and completing a PD course. Click the box to learn
       more about this experience.",
 
     "Sustainable Campus Initiative" => "You can earn EDGE credit by working with
@@ -566,34 +564,34 @@
       the box to learn more about this experience.",
 
     "Peer Health Educator" => "You can earn EDGE credit by working with Campus
-      Wellness as a peer health educator and completing a PD course. Click the
+      Wellness as a Peer Health Educator and completing a PD course. Click the
       box to learn more about this experience.",
 
     "Single & Sexy Performer" => "You can earn EDGE credit by performing in
       Single & Sexy and completing a PD course. Click the box to learn more
       about this experience.",
 
-    "Residence Don" => "You can earn EDGE credit by working as a don in Waterloo
+    "Residence Don" => "You can earn EDGE credit by working as a Don in Waterloo
       residences and completing a PD course. Click the box to learn more about
       this experience.",
 
-    "Library Associate" => "You can earn EDGE credit by working as a library
-      associate and completing a PD course. Click the box to learn more about
+    "Library Associate" => "You can earn EDGE credit by working as a Library
+      Associate and completing a PD course. Click the box to learn more about
       these experiences.",
 
     "Food Services" => "You can earn EDGE credit by working with Food Services
       and completing a PD course. Click the box to learn more about this experience.",
 
     "Student Computing Consultant" => "You can earn EDGE credit by working as a
-      student computing consultant and completing a PD course. Click the box to
+      Student Computing Consultant and completing a PD course. Click the box to
       learn more about this experience.",
 
-    "Student Ambassador" => "You can earn EDGE credit by promoting Waterloo as a
-      student ambassador and completing a PD course. Click the box to learn more
-      about this experience.",
+    "Student Ambassador" => "You can earn EDGE credit by promoting Waterloo as
+      a Student Ambassador and completing a PD course. Click the box to learn
+      more about this experience.",
 
     //Off-Campus experiences
-    "Full-time" => "You can earn EDGE credit by Working Full-time during any term
+    "Full-time" => "You can earn EDGE credit by working full-time during any term
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
