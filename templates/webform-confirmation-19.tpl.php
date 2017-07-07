@@ -591,6 +591,9 @@
       }
     }
 
+    //Debug
+    dsm($results_list);
+    
     $results = array();
     $descr = array();
     //Must check if there is not enough experiences
@@ -776,6 +779,7 @@
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
+
 ?>
 
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
@@ -792,6 +796,7 @@
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
+<!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
 
 <div class="flex-container">
 
