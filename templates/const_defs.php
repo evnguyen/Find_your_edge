@@ -286,7 +286,7 @@
     "Intramural Referee",
   );
   $comp3_lifeguard = array(
-    "Lifeguard/Instructor",
+    "Lifeguard/ Instructor",
   );
   $comp3_bike_centre = array(
     "Bike Centre",
@@ -506,7 +506,7 @@
       as an Intramural Referee and completing a PD course. Click the box to
       learn more about this experience.",
 
-    "Lifeguard/Instructor" => "You can earn EDGE credit by working with
+    "Lifeguard/ Instructor" => "You can earn EDGE credit by working with
       Athletics as a Lifeguard or Instructor and completing a PD course. Click
       the box to learn more about this experience.",
 
@@ -645,7 +645,7 @@
 
     "Intramural Referee" => "http://www.imleagues.com/spa/intramural/a39a992404294091840d34c3d29a54ef/home",
 
-    "Lifeguard/Instructor" => "http://www.athletics.uwaterloo.ca/sports/2010/7/22/Lifeguard_Instructor.aspx",
+    "Lifeguard/ Instructor" => "http://www.athletics.uwaterloo.ca/sports/2010/7/22/Lifeguard_Instructor.aspx",
 
     "Bike Centre" => "http://www.feds.ca/slc/bike-centre/",
 
