@@ -593,7 +593,7 @@
 
     //Debug
     dsm($results_list);
-    
+
     $results = array();
     $descr = array();
     //Must check if there is not enough experiences
@@ -702,7 +702,10 @@
       "Other",
     );
 
-    if ($string == "CCA/EDGE Workshop") {
+    if ($string == "No experiences") {
+      return "";
+    }
+    elseif ($string == "CCA/EDGE Workshop") {
       return "https://uwaterloo.ca/career-action/appointments-workshops";
     }
     elseif (in_array($string, $on_campus_general)) {
