@@ -380,7 +380,7 @@
   );
 
 /**
- * Arrays specific to COMPONENT 3
+ * Arrays specific to COMPONENT 4
  */
   $comp4_capstone_work = array(
     "Working Full-time",

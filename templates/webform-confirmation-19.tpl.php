@@ -800,6 +800,7 @@
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
+<!--TODO: Hover text may need to change to interrupted hover -->
 
 <div class="flex-container">
 
