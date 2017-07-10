@@ -561,16 +561,16 @@
     if (in_array("ON", $submission->data[8])) {
       $exp = $submission->data[9];
       if (in_array("FAC", $exp)) {
-        $results_list = get_faculty_positions($faculty, $major);
+        $results_list = array_merge($results_list, get_faculty_positions($faculty, $major));
       }
       if (in_array("UC", $exp)) {
-        $results_list = get_university_colleges_positions($faculty, $skills);
+        $results_list = array_merge($results_list, get_university_colleges_positions($faculty, $skills));
       }
       if (in_array("SSOC", $exp)) {
-        $results_list = get_student_society_positions($faculty, $major);
+        $results_list = array_merge($results_list, get_student_society_positions($faculty, $major));
       }
       if (in_array("OAS", $exp)) {
-        $results_list = get_offices_servies_positions($faculty, $major, $skills);
+        $results_list = array_merge($results_list, get_offices_servies_positions($faculty, $major, $skills));
       }
     }
 
@@ -800,7 +800,6 @@
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
-<!--TODO: Hover text may need to change to interrupted hover -->
 
 <div class="flex-container">
 

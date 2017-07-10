@@ -7,21 +7,27 @@
  */
 
 /**
+ * TODO: Need a way to save ruleset_count
+ * TODO: Need a way to delete a ruleset
+ *
  * Implements hook_form()
- * TODO: Loop through form_state[num_rulesets] and push a new textfield entry to $form. (No need to specify key)
- * TODO:: On submit handler for add_new_rule, increment form_state[num_rulesets] and rebuild form on reload
  * @param $form
  * @param $form_state
  *
  * @return mixed
  */
 function webform_ruleset_form($form, &$form_state) {
-  $form['rule'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Rule'),
-    '#size' => 5,
-    '#description' => t('Set the rule'),
-  );
+
+  if(!isset($form_state['ruleset_count'])){
+    $form_state['ruleset_count'] = 0;
+  }
+  for ($i = 0; $i < $form_state['ruleset_count']; $i++){
+    $form['ruleset' . $i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Rule'),
+      '#description' => t('Set the rule'),
+    );
+  }
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
@@ -41,11 +47,12 @@ function webform_ruleset_get_form($node) {
 
 function webform_ruleset_form_submit($form, &$form_state) {
   dsm("Saved");
+  dsm($form_state);
   uw_find_your_edge_form_submit($form, $form_state);
 }
 
 function webform_ruleset_form_add_ruleset($form, &$form_state) {
-  $form_state['rule']++;
+  $form_state['ruleset_count']++;
   $form_state['rebuild'] = TRUE;
 }
 
