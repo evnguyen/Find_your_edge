@@ -165,6 +165,7 @@
       "GBDA Society",
       "HIST Society",
       "PSYCH Society",
+      "SOC Society",
       "MathSoc",
       "Bioinformatics Club",
       "FARMSA",
@@ -195,10 +196,10 @@
       if ($major == "GBDA") {
         $results = array_merge($results, $comp3_gbda_soc);
       }
-      if ($major == "HIST") {
+      if ($major == "HIS") {
         $results = array_merge($results, $comp3_hist_soc);
       }
-      if ($major == "PSYCH") {
+      if ($major == "PSYC") {
         $results = array_merge($results, $comp3_psych_soc);
       }
       if ($major == "SOC") {
