@@ -153,27 +153,6 @@
     return $results;
   }
 
-
-/**
- * @param $string
- *
- * @return bool
- * Helper function that checks if key is a student society position
- */
-  function is_student_society_position($string) {
-    $positions = array(
-      "GBDA Society",
-      "HIST Society",
-      "PSYCH Society",
-      "SOC Society",
-      "MathSoc",
-      "Bioinformatics Club",
-      "FARMSA",
-    );
-    return in_array($string, $positions);
-  }
-
-
 /**
  * @param $faculty
  * @param $major
@@ -619,9 +598,6 @@
     for ($i = 0; $i < 3; $i++) {
       if (is_course($results[$i])) {
         $descr[] = $results[$i] . $comp3_descr["COURSE"];
-      }
-      elseif (is_student_society_position($results[$i])) {
-        $descr[] = $comp3_descr["SSOC_POSITIONS"];
       }
       else {
         $descr[] = $comp3_descr[$results[$i]];

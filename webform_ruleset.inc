@@ -7,8 +7,10 @@
  */
 
 /**
- * TODO: Need a way to save ruleset_count
- * TODO: Need a way to delete a ruleset
+ * TODO: Need a way to save rulesets -> To save ruleset, use drupal_write_record where $record is an entry to $table
+ * TODO: Need a way to load rulesets -> Get the number of records on table, and set default values for existing rulesets
+ * TODO: Need a way to save mutliple rulesets -> Use ruleset_count
+ * TODO: Need a way to get all records of table ->
  *
  * Implements hook_form()
  * @param $form
@@ -21,6 +23,15 @@ function webform_ruleset_form($form, &$form_state) {
   if(!isset($form_state['ruleset_count'])){
     $form_state['ruleset_count'] = 0;
   }
+
+  //Load existing rulesets
+  $query = db_select('find_your_edge_rulesets', 'fyer')
+    ->fields('fyer')
+    ->execute()
+    ->fetchObject();
+
+  dsm($query);
+
   for ($i = 0; $i < $form_state['ruleset_count']; $i++){
     $form['ruleset' . $i] = array(
       '#type' => 'textfield',
@@ -48,6 +59,10 @@ function webform_ruleset_get_form($node) {
 function webform_ruleset_form_submit($form, &$form_state) {
   dsm("Saved");
   dsm($form_state);
+  $ruleset = new stdClass();
+  $num = $form_state['ruleset_count'];
+  $ruleset->rule = $form_state['values']['ruleset0'];
+  drupal_write_record('find_your_edge_rulesets', $ruleset);
   uw_find_your_edge_form_submit($form, $form_state);
 }
 

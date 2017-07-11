@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * uw_find_your_edge module install/schema hooks
+ */
+
+function uw_find_your_edge_schema() {
+  $schema = array();
+
+  $schema['find_your_edge_rulesets'] = array(
+    'description' => 'Table for storing information for results',
+    'fields' => array(
+      'rule' => array(
+        'description' => 'The rule for the result',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      //TODO: Add in fields for url, descr and result
+    ),
+  );
+  return $schema;
+
+}

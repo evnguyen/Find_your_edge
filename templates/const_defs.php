@@ -490,9 +490,33 @@
       a student society and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
-    "SSOC_POSITIONS" => "You can earn EDGE credit by taking on an executive role
-      in your student society and completing a PD course. Click the box to learn
+    "GBDA Society" => "You can earn EDGE credit by taking on an executive role
+      in the Global Business and Digital Arts (GBDA) Society and completing a PD
+      course. Click the box to learn more about your society.",
+
+    "HIST Society" => "You can earn EDGE credit by taking on an executive role
+      in the History Society and completing a PD course. Click the box to learn
       more about your society.",
+
+    "PSYCH Society" => "You can earn EDGE credit by taking on an executive role
+      in the Psychology Society and completing a PD course. Click the box to
+      learn more about your society.",
+
+    "SOC Society" => "You can earn EDGE credit by taking on an executive role in
+      the Sociology Society and completing a PD course. Click the box to learn
+      more about your society.",
+
+    "MathSoc" => "You can earn EDGE credit by taking on an executive role in
+      MathSoc and completing a PD course. Click the box to learn more about your
+      society.",
+
+    "Bioinformatics Club" => "You can earn EDGE credit by taking on an executive
+      role in the Bioinformatics Club and completing a PD course. Click the box
+      to learn more about your society.",
+
+    "FARMSA" => "You can earn EDGE credit by taking on an executive role in the
+      Financial Analysis and Risk Management Student Association (FARMSA) and
+      completing a PD course. Click the box to learn more about your society.",
 
     "Offices and Services" => "You can earn EDGE credit by giving your time to
       a club, office, or service on campus and completing a PD course. Click the
