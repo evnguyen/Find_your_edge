@@ -560,8 +560,9 @@
       Canadian Student Network (ICSN) and completing a PD course. Click the box
       to learn more about this experience.",
 
-    "MATES" => "You can earn EDGE credit by working with MATES and completing a
-      PD course. Click the box to learn more about this experience.",
+    "MATES" => "You can earn EDGE credit by working with Mentor Assistance
+      Through Education and Support (MATES) and completing a PD course. Click
+      the box to learn more about this experience.",
 
     "Off Campus Community Don" => "You can earn EDGE credit by working as an Off
       Campus Community Don and completing a PD course. Click the box to learn
