@@ -12,7 +12,6 @@
  * quiz tool
  */
 
-
 /**
  * Implements hook_page_build().
  * Builds the breadcrumbs for the confirmation page.
@@ -83,13 +82,13 @@ function uw_find_your_edge_webform_component_info() {
   return $components;
 }
 
-
 function uw_find_your_edge_webform_submission_presave($node, $submission) {
   if (isset($node) && $node->nid == 19) {
     //TODO: Need to be able to check if user has gone back to previous question. Check if index 11 is NULL
     if(count($submission->data) == 12){
       //dsm($submission);
       //dsm($submission->data[11][0]);
+      //TODO: Decide whether or not to do processing here or inside the template file
     }
   }
 }
@@ -109,6 +108,33 @@ function uw_find_your_edge_menu() {
   return $items;
 }
 
-function uw_find_your_edge_form_submit($form, &$form_state) {
-  dsm("uw_find_your_edge_form_submit called");
+function uw_find_your_edge_token_info() {
+  $info['types']['custom'] = array(
+    'name' => t('Custom'),
+    'description' => t('Custom tokens.'),
+  );
+  $info['tokens']['custom']['fname'] = array(
+    'name' => t('First name'),
+    'description' => t('First name re placer for fname '),
+  );
+  $info['tokens']['custom']['lname'] = array(
+    'name' => t('Last name'),
+    'description' => t('Last name re placer for lname '),
+  );
+  return $info;
+}
+
+function uw_find_your_edge_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  $sanitize = !empty($options['sanitize']);
+  if($type == 'custom'){
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'fname':
+          $replacements[$original] = "TESTNAME";
+          break;
+      }
+    }
+  }
+  return $replacements;
 }

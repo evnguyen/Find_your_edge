@@ -759,6 +759,7 @@
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
+  echo l("PDF", fillpdf_pdf_link($form_id = 3, null, $webform = array('nid'=>3,'sid'=>$sid)));
 
 ?>
 

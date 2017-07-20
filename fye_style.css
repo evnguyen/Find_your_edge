@@ -40,10 +40,10 @@
     width: 100%;
   }
 
-  input[type=submit]{
+  /*input[type=submit]{
     margin-top: 5%;
     width: 100%;
-  }
+  }*/
 
   .edge-action-button-wrapper{
     width:100%;
@@ -106,10 +106,10 @@
     width: 90%;
   }
 
-  input[type=submit]{
+  /*input[type=submit]{
     margin-top: 5%;
     width: 30%;
-  }
+  }*/
 
   .edge-action-button-wrapper{
     width:65%;
