@@ -24,6 +24,76 @@ function uw_find_your_edge_schema() {
       //TODO: Add in fields for url, descr and result
     ),
   );
+  $schema['find_your_edge_results'] = array(
+    'description' => 'Table for storing the results text',
+    'fields' => array(
+      'sid' => array(
+        'description' => 'The unique identifier for the submission',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'component1' => array(
+        'description' => 'The result text for Component 1',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component1_descr' => array(
+        'description' => 'The description text for Component 1',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component2' => array(
+        'description' => 'The result text for Component 2',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component2_descr' => array(
+        'description' => 'The description text for Component 2',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3a' => array(
+        'description' => 'The result text for Component 3a',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3a_descr' => array(
+        'description' => 'The description text for Component 3a',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3b' => array(
+        'description' => 'The result text for Component 3b',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3b_descr' => array(
+        'description' => 'The description text for Component 3b',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3c' => array(
+        'description' => 'The result text for Component 3c',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3c_descr' => array(
+        'description' => 'The description text for Component 3c',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component4' => array(
+        'description' => 'The result text for Component 4',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component4_descr' => array(
+        'description' => 'The description text for Component 4',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+    ),
+  );
   return $schema;
 
 }

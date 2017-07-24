@@ -60,6 +60,8 @@
   global $comp3_bioinformatics_club ;
   global $compr3_farmsa ;
   global $comp3_offices_services;
+  global $comp3_student_services;
+  global $comp3_feds_services;
   global $comp3_first_aid;
   global $comp3_intramural_referee;
   global $comp3_lifeguard;
@@ -278,6 +280,12 @@
   );
   $comp3_offices_services = array(
     "Offices and Services",
+  );
+  $comp3_student_services = array(
+    "Student services",
+  );
+  $comp3_feds_services = array(
+    "Feds services",
   );
   $comp3_first_aid = array(
     "First Aid Trainer",
@@ -522,6 +530,14 @@
       a club, office, or service on campus and completing a PD course. Click the
       box for more details regarding on-campus experiences.",
 
+    "Feds services" => "It’s possible to earn EDGE credit by working or
+      volunteering with Feds and related services. Click the box to learn more
+      about the criteria governing EDGE experiences.",
+
+    "Student services" => "It’s possible to earn EDGE credit by working or
+      volunteering with student services like Housing and Athletics. Click the
+      box to learn more about the criteria governing EDGE experiences.",
+
     "First Aid Trainer" => "You can earn EDGE credit by working with Athletics
       as a First Aid Trainer and completing a PD course. Click the box to learn
       more about this experience.",
@@ -631,6 +647,38 @@
     "Service Learning" => "You can earn EDGE credit by engaging in service
       learning (e.g. a Habitat for Humanity trip) and completing a PD courses.
       Click the box for more details regarding off-campus experiences.",
+
+    //PD Courses
+    "PD3" => "You can develop your communication skills by completing PD3 in
+      tandem with an on- or off-campus experience. Click the box to learn more
+      about PD3.",
+
+    "PD4" => "You can develop your teamwork skills by completing PD4 in tandem
+      with an on- or off-campus experience. Click the box to learn more about PD4.",
+
+    "PD5" => "You can develop your project management skills by completing PD5
+      in tandem with an on- or off-campus experience. Click the box to learn more
+      about PD5.",
+
+    "PD6" => "You can develop your problem solving skills by completing PD6 in
+      tandem with anon- or off-campus experience. Click the box to learn more
+      about PD6.",
+
+    "PD7" => "You can develop your conflict resolution skills by completing PD7
+      in tandem with an on- or off-campus experience. Click the box to learn more
+      about PD7.",
+
+    "PD8" => "You can develop your intercultural skills by completing PD8 in
+      tandem with an on- or off-campus experience. Click the box to learn more
+      about PD8.",
+
+    "PD9" => "You can develop your ethical decision making skills by completing
+      PD9 in tandem with an on- or off-campus experience. Click the box to learn
+      more about PD9.",
+
+    "PD10" => "You can learn more about professional responsibility in computing
+      by completing PD10 in tandem with an on- or off-campus experience. Click
+      the box to learn more about PD10.",
   );
 
   $comp3_urls = array(
@@ -713,6 +761,22 @@
     "Student Computing Consultant" => "https://uwaterloo.ca/housing/technology/support/scc",
 
     "Student Ambassador" => "https://uwaterloo.ca/find-out-more/visit-waterloo/visitors-centre/jobs",
+
+    "PD3" => "https://uwaterloo.ca/professional-development-program/courses/pd3-communication",
+
+    "PD4" => "https://uwaterloo.ca/professional-development-program/courses/pd4-teamwork",
+
+    "PD5" => "https://uwaterloo.ca/professional-development-program/courses/pd5-project-management",
+
+    "PD6" => "https://uwaterloo.ca/professional-development-program/courses/pd6-problem-solving",
+
+    "PD7" => "https://uwaterloo.ca/professional-development-program/courses/pd7-conflict-resolution",
+
+    "PD8" => "https://uwaterloo.ca/professional-development-program/courses/pd8-intercultural-skills",
+
+    "PD9" => "https://uwaterloo.ca/professional-development-program/courses/pd9-ethical-decision-making",
+
+    "PD10" => "https://uwaterloo.ca/professional-development-program/courses/pd10-professional-responsibility-computing",
   );
 
   $comp4_descr = array(

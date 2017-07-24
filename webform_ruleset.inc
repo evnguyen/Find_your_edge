@@ -13,9 +13,12 @@
  * TODO: Need a way to delete a ruleset -> rule_id will be appended to name, rule_id will only increment
  * TODO: Need a way to specify which component in EDGE -> Can create another textfield for additional info???????
  * TODO: Need a way to delete empty/unsaved rulesets -> Create an array which holds all the ruleset_ids that need to be saved
+ * TODO: Need a way to overwrite an existing ruleset ->
  * TODO: Need a way to prompt user there is unsaved work ->
  * TODO: Need a way to check for empty textfield ->
  * TODO: Add a method to import CSV file
+ * TODO: Sanitize input?
+ * TODO: Add some cool CSS
  *
  *
  * Implements hook_form()
@@ -83,6 +86,24 @@ function webform_ruleset_form($form, &$form_state) {
       '#description' => t('Set the rule'),
       '#default_value' => FALSE,
     );
+    $form['ruleset' . $ruleset_id]['result_text' . $ruleset_id] = array(
+      '#type' => 'textfield',
+      '#title' => t('Result'),
+      '#description' => t('Set the result text'),
+      '#default_value' => FALSE,
+    );
+    $form['ruleset' . $ruleset_id]['description_text' . $ruleset_id] = array(
+      '#type' => 'textfield',
+      '#title' => t('Description'),
+      '#description' => t('Set the description text for the result'),
+      '#default_value' => FALSE,
+    );
+    $form['ruleset' . $ruleset_id]['url' . $ruleset_id] = array(
+      '#type' => 'textfield',
+      '#title' => t('URL'),
+      '#description' => t('Set the url for the result'),
+      '#default_value' => FALSE,
+    );
     $form['ruleset' . $ruleset_id]['delete_ruleset' . $ruleset_id] = array(
       '#type' => 'submit',
       '#value' => t('Delete ruleset'),
@@ -113,7 +134,14 @@ function webform_ruleset_get_form($node) {
 
 function webform_ruleset_form_submit($form, &$form_state) {
   $ruleset = new stdClass();
-  //dsm($form_state);
+  dsm($form_state);
+  //TODO: See above
+  for ($i = 0; $i < $form_state['existing_rules_count']; $i++) {
+    $j = $i;
+    while (!isset($form_state['complete form']['ruleset' . $j])) {
+      $j++;
+    }
+  }
   for ($i = 0; $i < $form_state['ruleset_add_count']; $i++) {
     $ruleset_id = $form_state['ruleset_ids_to_save'][$i];
     $ruleset->rule = $form_state['values']['rule' . $ruleset_id];
