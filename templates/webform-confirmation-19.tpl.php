@@ -223,13 +223,13 @@
       if ($major == "GBDA") {
         $results = array_merge($results, $comp3_gbda_soc);
       }
-      if ($major == "HIS") {
+      elseif ($major == "HIS") {
         $results = array_merge($results, $comp3_hist_soc);
       }
-      if ($major == "PSYC") {
+      elseif ($major == "PSYC") {
         $results = array_merge($results, $comp3_psych_soc);
       }
-      if ($major == "SOC") {
+      elseif ($major == "SOC") {
         $results = array_merge($results, $comp3_soc_soc);
       }
     }
@@ -247,7 +247,8 @@
         $results = array_merge($results, $comp3_bioinformatics_club);
       }
     }
-    else{
+
+    if (empty($results)) {
       $results = array_merge($results, $comp3_student_soc);
     }
 
@@ -1065,7 +1066,7 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-block">
+  <div id="pd-block" class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($comp3["RESULT"][3] , gen_link($comp3["RESULT"][3])); ?>
