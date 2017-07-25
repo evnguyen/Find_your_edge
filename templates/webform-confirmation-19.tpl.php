@@ -298,103 +298,6 @@
 
 /**
  * @param $faculty
- * @param $skills
- *
- * @return array
- * Helper function to get Offices and Services positions
- */
-  /*function get_offices_servies_positions($faculty, $major ,$skills) {
-    global $comp3_offices_services;
-    global $comp3_first_aid;
-    global $comp3_intramural_referee;
-    global $comp3_lifeguard;
-    global $comp3_bike_centre;
-    global $comp3_response_team;
-    global $comp3_coop_connection;
-    global $comp3_food_bank;
-    global $comp3_glow;
-    global $comp3_student_network;
-    global $comp3_mates;
-    global $comp3_community_don;
-    global $comp3_sustainable_campus;
-    global $comp3_volunteer_centre;
-    global $comp3_warrior_tribe;
-    global $comp3_womens_centre;
-    global $comp3_leave_the_pack;
-    global $comp3_health_educator;
-    global $comp3_single_sexy_performer;
-    global $comp3_residence_don;
-    global $comp3_library_associate;
-    global $comp3_food_services;
-    global $comp3_computing_consultant;
-    global $comp3_student_ambassador;
-    $results = array();
-    if($faculty == "MATH" && $major == "CS"){
-      $results = array_merge($results, $comp3_computing_consultant);
-    }
-
-    if (in_array("COMM", $skills)) {
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_warrior_tribe);
-      $results = array_merge($results, $comp3_leave_the_pack);
-      $results = array_merge($results, $comp3_health_educator);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-      $results = array_merge($results, $comp3_residence_don);
-      $results = array_merge($results, $comp3_library_associate);
-      $results = array_merge($results, $comp3_student_ambassador);
-    }
-    if (in_array("CULT", $skills)) {
-      $results = array_merge($results, $comp3_food_bank);
-      $results = array_merge($results, $comp3_glow);
-      $results = array_merge($results, $comp3_student_network);
-      $results = array_merge($results, $comp3_sustainable_campus);
-      $results = array_merge($results, $comp3_womens_centre);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-    }
-    if (in_array("LEAD", $skills)) {
-      $results = array_merge($results, $comp3_first_aid);
-      $results = array_merge($results, $comp3_intramural_referee);
-      $results = array_merge($results, $comp3_lifeguard);
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_coop_connection);
-      $results = array_merge($results, $comp3_fed_clubs);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_residence_don);
-    }
-    if (in_array("TEAM", $skills)) {
-      $results = array_merge($results, $comp3_first_aid);
-      $results = array_merge($results, $comp3_intramural_referee);
-      $results = array_merge($results, $comp3_lifeguard);
-      $results = array_merge($results, $comp3_bike_centre);
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_coop_connection);
-      $results = array_merge($results, $comp3_fed_clubs);
-      $results = array_merge($results, $comp3_food_bank);
-      $results = array_merge($results, $comp3_student_network);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_sustainable_campus);
-      $results = array_merge($results, $comp3_volunteer_centre);
-      $results = array_merge($results, $comp3_warrior_tribe);
-      $results = array_merge($results, $comp3_womens_centre);
-      $results = array_merge($results, $comp3_leave_the_pack);
-      $results = array_merge($results, $comp3_health_educator);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-      $results = array_merge($results, $comp3_residence_don);
-      $results = array_merge($results, $comp3_food_services);
-      $results = array_merge($results, $comp3_student_ambassador);
-    }
-    if (empty($results)) {
-      $results = array_merge($results, $comp3_offices_services);
-    }
-    return array_unique($results);
-  }*/
-
-/**
- * @param $faculty
  * @param $major
  * @param $tasks
  *
@@ -735,7 +638,7 @@ function get_feds_positions($tasks) {
       if (in_array("CLUBS", $exp)) {
         $results_list = array_merge($results_list, $comp3_fed_clubs);
       }
-      if (in_array("HOUSEHLTH", $exp)) {
+      if (in_array("HOUSEATHL", $exp)) {
         $results_list = array_merge($results_list, get_housing_athletics_positions($faculty, $major, $tasks));
       }
       if (in_array("FEDS", $exp)) {
@@ -885,9 +788,8 @@ function get_feds_positions($tasks) {
     global $comp3_urls;
     //TODO: Decide whether to put these into const_defs.php and combine in comp3_urls
     $on_campus_general = array(
-      "University Colleges",
-      "Student Societies",
-      "Offices and Services",
+      "University colleges",
+      "Student societies",
       "Faculties",
       "Feds services",
       "Student services",
@@ -897,7 +799,7 @@ function get_feds_positions($tasks) {
       "Full-time",
       "Part-time",
       "Volunteering",
-      "Service Learning",
+      "Service learning",
     );
 
     $capstone = array(
