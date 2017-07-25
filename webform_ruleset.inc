@@ -16,6 +16,7 @@
  * TODO: Need a way to overwrite an existing ruleset ->
  * TODO: Need a way to prompt user there is unsaved work ->
  * TODO: Need a way to check for empty textfield ->
+ * TODO: Need a way to organize all the rulesets into on/off camps, courses, etc
  * TODO: Add a method to import CSV file
  * TODO: Sanitize input?
  * TODO: Add some cool CSS

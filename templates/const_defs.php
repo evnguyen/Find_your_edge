@@ -754,6 +754,8 @@
 
     "Student Ambassador" => "https://uwaterloo.ca/find-out-more/visit-waterloo/visitors-centre/jobs",
 
+    "PD1" => "https://uwaterloo.ca/professional-development-program/courses/pd1-career-fundamentals",
+
     "PD3" => "https://uwaterloo.ca/professional-development-program/courses/pd3-communication",
 
     "PD4" => "https://uwaterloo.ca/professional-development-program/courses/pd4-teamwork",

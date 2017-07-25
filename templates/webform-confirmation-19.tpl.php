@@ -826,8 +826,7 @@ function get_feds_positions($tasks) {
     elseif (in_array($string, $capstone)) {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    //PD1 is the only exception since it cannot be used as a comp3
-    elseif ($string == "PD1" || (!is_pd_course($string) && is_course($string))) {
+    elseif (!is_pd_course($string) && is_course($string)) {
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
       $course_alpha = "";
       $course_num = "";
@@ -882,7 +881,7 @@ function get_feds_positions($tasks) {
 
   function gen_descr($key, $descr){
     print "<p>" . t('@descr', array('@descr' => $descr));
-    if(!is_pd_course($key) && is_course($key)) {
+    if($key == "PD1" || (!is_pd_course($key) && is_course($key))) {
       link_to_edge_courses();
     }
     print "</p>";
@@ -940,6 +939,7 @@ function get_feds_positions($tasks) {
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
 <!--TODO: Check edge case for Don positions -->
 <!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
+<!--TODO: Fix margin issue for flex boxes -->
 
 <div class="flex-container">
 
@@ -1080,7 +1080,7 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div id="pd-descr" class="flex-comp-descr pd-block">
     <div>
       <?php gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]); ?>
     </div>
