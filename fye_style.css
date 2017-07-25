@@ -99,8 +99,8 @@
   }
 
   .flex-comp-descr {
-    flex-basis: 65%;
-    -webkit-flex-basis: 65%;
+    flex-basis: 75%;
+    -webkit-flex-basis: 75%;
     margin-bottom: 1.5rem;
   }
 
