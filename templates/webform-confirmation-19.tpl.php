@@ -1079,7 +1079,15 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div id="pd-descr" class="flex-comp-descr pd-block">
+
+  <?php
+    if ($submission->data[1][0] == 1) {
+      print '<div id="pd-descr-international" class="flex-comp-descr pd-block">';
+    }
+    else {
+      print '<div id="pd-descr" class="flex-comp-descr pd-block">';
+    }
+  ?>
     <div>
       <?php gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]); ?>
     </div>

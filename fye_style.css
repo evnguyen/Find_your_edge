@@ -83,7 +83,7 @@
     border-top-width: 1px;
   }
 
-  #pd-descr{
+  #pd-descr-international{
     padding-bottom: 1.5rem;
     border-bottom-style: solid;
     border-bottom-color: #757575;
@@ -164,6 +164,13 @@
   }
 
   #pd-descr{
+    padding-top: 1.5rem;
+    border-top-style: solid;
+    border-top-color: #757575;
+    border-top-width: 1px;
+  }
+
+  #pd-descr-international{
     padding-top: 1.5rem;
     border-top-style: solid;
     border-top-color: #757575;
