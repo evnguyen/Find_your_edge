@@ -63,10 +63,10 @@
           $('.top-hover-wrapper').hide();
           $('#redo-hover-area').hover(
             function(){
-              $('.top-hover-wrapper').filter(':not(:animated)').fadeIn('300');
+              $('.top-hover-wrapper').show();
             },
             function(){
-              $('.top-hover-wrapper').fadeOut('300');
+              $('.top-hover-wrapper').hide();
             }
           );
         }
