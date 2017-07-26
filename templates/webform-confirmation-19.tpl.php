@@ -939,7 +939,6 @@ function get_feds_positions($tasks) {
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
 <!--TODO: Check edge case for Don positions -->
 <!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
-<!--TODO: Fix margin issue for flex boxes -->
 
 <div class="flex-container">
 
