@@ -1156,7 +1156,7 @@ function get_feds_positions($tasks) {
           print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
         }
         ?>
-        to generate a print-friendly version of your EDGE path.
+        to generate a PDF version of your EDGE path.
     </p>
   </div>
 
