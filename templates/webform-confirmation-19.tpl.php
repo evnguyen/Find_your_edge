@@ -895,17 +895,18 @@ function get_feds_positions($tasks) {
  */
   function pdf_process($key, $string) {
     $value = preg_replace('/  +/', ' ' , preg_replace(array('/  +/', '/\n/', '/\r/'), ' ', $string));
-    return is_course($key) ? $value . 'EDGE courses.' : $value;
+    if((is_course($key) && !is_pd_course($key)) || $key == "PD1") {
+      $value .= 'EDGE courses.';
+    }
+    return $value;
   }
-
 
   $comp1 = get_comp1();
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
 
-  //Test code for custom token
-  //Attempt to write to database
+  //Attempt to write to database for pdf use
   $result_db = new stdClass();
   $result_db->sid = $sid;
   $result_db->component1 = $comp1[0];
@@ -928,7 +929,6 @@ function get_feds_positions($tasks) {
     ->execute()
     ->fetchAll();
 
-  //dsm(preg_replace('/  +/', '', $comp1[1]));
   if(count($query) == 0) {
     drupal_write_record('find_your_edge_results', $result_db);
   }
