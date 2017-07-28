@@ -36,7 +36,6 @@ function uw_find_your_edge_schema() {
         'type' => 'text',
         'not null' => TRUE,
       ),
-      //TODO: Add in fields for url, descr and result
     ),
   );
   $schema['find_your_edge_results'] = array(
@@ -94,6 +93,16 @@ function uw_find_your_edge_schema() {
       ),
       'component3c_descr' => array(
         'description' => 'The description text for Component 3c',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3_pd' => array(
+        'description' => 'The resulting PD course',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3_pd_descr' => array(
+        'description' => 'The description for the PD course',
         'type' => 'text',
         'not null' => TRUE,
       ),

@@ -887,6 +887,18 @@ function get_feds_positions($tasks) {
     print "</p>";
   }
 
+/**
+ * @param $string
+ *
+ * @return mixed
+ * Process the string so that it can properly added to a pdf template
+ */
+  function pdf_process($key, $string) {
+    $value = preg_replace('/  +/', ' ' , preg_replace(array('/  +/', '/\n/', '/\r/'), ' ', $string));
+    return is_course($key) ? $value . 'EDGE courses.' : $value;
+  }
+
+
   $comp1 = get_comp1();
   $comp2 = get_comp2();
   $comp3 = get_comp3();
@@ -894,31 +906,35 @@ function get_feds_positions($tasks) {
 
   //Test code for custom token
   //Attempt to write to database
-  /*$result_db = new stdClass();
+  $result_db = new stdClass();
   $result_db->sid = $sid;
   $result_db->component1 = $comp1[0];
-  $result_db->component1_descr = $comp1[1];
+  $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
   $result_db->component2 = $comp2[0];
-  $result_db->component2_descr = $comp2[1];
+  $result_db->component2_descr = pdf_process($comp2[0], $comp2[1]);
   $result_db->component3a = $comp3['RESULT'][0];
-  $result_db->component3a_descr = $comp3['DESCR'][0];
+  $result_db->component3a_descr = pdf_process($comp3['RESULT'][0], $comp3['DESCR'][0]);
   $result_db->component3b = $comp3['RESULT'][1];
-  $result_db->component3b_descr = $comp3['DESCR'][1];
+  $result_db->component3b_descr = pdf_process($comp3['RESULT'][1], $comp3['DESCR'][1]);
   $result_db->component3c = $comp3['RESULT'][2];
-  $result_db->component3c_descr = $comp3['DESCR'][2];
+  $result_db->component3c_descr = pdf_process($comp3['RESULT'][2], $comp3['DESCR'][2]);
+  $result_db->component3_pd = $comp3['RESULT'][3];
+  $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
   $result_db->component4 = $comp4[0];
-  $result_db->component4_descr = $comp4[0];
+  $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);
   $query = db_select('find_your_edge_results', 'fyer')
     ->fields('fyer')
     ->condition('sid', $sid)
     ->execute()
     ->fetchAll();
+
+  //dsm(preg_replace('/  +/', '', $comp1[1]));
   if(count($query) == 0) {
     drupal_write_record('find_your_edge_results', $result_db);
   }
-  echo l("PDF", fillpdf_pdf_link($form_id = 3, null, $webform = array('nid'=>3,'sid'=>$sid)));*/
-
-
+  else{
+    drupal_write_record('find_your_edge_results', $result_db, 'sid');
+  }
 
 
 ?>
@@ -932,7 +948,7 @@ function get_feds_positions($tasks) {
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: Add a print option/button -->
 <!--TODO: Check if JS is getting used on other nodes -->
-<!--TODO: purge submissions -->
+<!--TODO: purge submissions and results table-->
 <!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
@@ -1128,6 +1144,14 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
+  <div class="flex-message margin-top">
+    <p> Click
+      <?php //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[nid]=19&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>'; ?>
+      <?php print '<a href="/fillpdf?fid=3&webform[nid]=19&webform[sid]=' . $sid . '&sid=' . $sid . '">PDF</a>';?>
+        to generate a print-friendly version of your EDGE path.
+    </p>
+  </div>
+
   <div class="flex-back-button-wrapper">
     <div id ="back-button" class="edge-action-button-wrapper adjust-height">
       <div class="call-to-action-wrapper">
@@ -1158,8 +1182,8 @@ function get_feds_positions($tasks) {
         </a>
       </div>
     </div>
-    <div class="top-hover-wrapper">
-      <p class="top-hover">Please note that your path through EDGE is randomly generated.
+    <div class="text-box-hover-wrapper">
+      <p class="text-box-hover">Please note that your path through EDGE is randomly generated.
         You may need to randomize several times to receive different results depending on your responses.
       </p>
     </div>

@@ -43,7 +43,7 @@ function webform_ruleset_form($form, &$form_state) {
   }
 
   //First make existing forms
-  for ($i = 0; $i <= $form_state['largest_ruleset_id']; $i++) {
+  for ($i = 0; $i < $form_state['existing_rules_count']; $i++) {
     if(isset($query[$i])){
       $form['ruleset' . $query[$i]->ruleset_id] = array(
         '#type' => 'fieldset',

@@ -408,16 +408,15 @@
 
   /**
    * Array for descriptions. Each key represents their own description
-   * TODO: Fix line breaks for consistency
    */
 
   $comp1_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
-    "CCA/EDGE Workshop" => "You can earn this credit by completing a workshop with
-      the Centre for Career Action (CCA).",
+    "CCA/EDGE Workshop" => "You can earn this credit by completing a workshop 
+      with the Centre for Career Action (CCA).",
 
     //Note: this description is to be appended to the course code
     //      This is also to be appended with the return value of link_to_edge_courses()
@@ -428,8 +427,8 @@
 
   $comp2_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
     //Note: This description is to be appended to the appropriate course code
     //      This is also to be appended with the return value of link_to_edge_courses()
@@ -439,8 +438,8 @@
 
   $comp3_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
     //On-campus experiences
     //Note: This description is to be appended to the appropriate course code.

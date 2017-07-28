@@ -27,13 +27,13 @@
           'float':'right',
           'width':'30%'
         });
-        $('.top-hover-wrapper').hide();
+        $('.text-box-hover-wrapper').hide();
         $('#redo-hover-area').hover(
           function(){
-            $('.top-hover-wrapper').show();
+            $('.text-box-hover-wrapper').show();
           },
           function(){
-            $('.top-hover-wrapper').hide();
+            $('.text-box-hover-wrapper').hide();
           }
         );
       }
@@ -44,7 +44,7 @@
             'float':'',
             'width':'100%'
           });
-          $('.top-hover-wrapper').show();
+          $('.text-box-hover-wrapper').show();
           $('#redo-hover-area').off('hover')
         }
         else {
@@ -60,13 +60,13 @@
             'float':'right',
             'width':'30%'
           });
-          $('.top-hover-wrapper').hide();
+          $('.text-box-hover-wrapper').hide();
           $('#redo-hover-area').hover(
             function(){
-              $('.top-hover-wrapper').show();
+              $('.text-box-hover-wrapper').show();
             },
             function(){
-              $('.top-hover-wrapper').hide();
+              $('.text-box-hover-wrapper').hide();
             }
           );
         }
