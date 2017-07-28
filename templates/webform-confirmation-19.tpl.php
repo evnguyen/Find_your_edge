@@ -1147,7 +1147,7 @@ function get_feds_positions($tasks) {
   <div class="flex-message margin-top">
     <p> Click
       <?php //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[nid]=19&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>'; ?>
-      <?php print '<a href="/fillpdf?fid=3&webform[nid]=19&webform[sid]=' . $sid . '&sid=' . $sid . '">PDF</a>';?>
+      <?php print '<a href="/edge/fillpdf?fid=3&webform[nid]=19&webform[sid]=' . $sid . '&sid=' . $sid . '">PDF</a>';?>
         to generate a print-friendly version of your EDGE path.
     </p>
   </div>
