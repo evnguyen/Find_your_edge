@@ -32,7 +32,8 @@ function uw_find_your_edge_page_build() {
  * Changes the confirmation page's theme.
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
-  $value = &drupal_static('current_sid');
+  //dsm('inside theme_registry_alter');
+  $value = "testvalue";
   //WMS-DEV nid = 36
   $theme_registry['webform_confirmation_19'] = array(
     'template' => 'webform-confirmation-19',
@@ -56,9 +57,11 @@ function uw_find_your_edge_node_load($nodes, $types) {
   }
 }
 
+
 /**
  * Defines a new field type for the webform.
  */
+/*
 function uw_find_your_edge_webform_component_info() {
   $components = array();
   $components['btn'] = array(
@@ -81,26 +84,23 @@ function uw_find_your_edge_webform_component_info() {
   );
   return $components;
 }
-
+*/
 function uw_find_your_edge_webform_submission_presave($node, $submission) {
-  $sid = &drupal_static('current_sid');
-  //global $sid;
-  $sid = $submission->sid;
-  dsm("Inside hook_presave");
+  //dsm("Inside hook_presave");
   if (isset($node) && $node->nid == 19) {
-    //TODO: Need to be able to check if user has gone back to previous question. Check if index 11 is NULL
+    //TODO: Need to be able to check if user has gone back to previous question. Check if index 15 is NULL
     if(count($submission->data) == 12){
       //dsm($submission);
       //dsm($submission->data[11][0]);
-      //TODO: Decide whether or not to do processing here or inside the template file
     }
   }
 }
 
 function uw_find_your_edge_menu() {
+  //TODO: Check for nid, then create the new link
   $items = array();
   $items['node/%webform_menu/webform/ruleset'] = array(
-    'title' => 'Ruleset',
+    'title' => 'Rulesets',
     'page callback' => 'webform_ruleset_get_form',  //The function that gets called when page loads
     'page arguments' => array(1),
     'access callback' => 'webform_node_update_access',
@@ -112,34 +112,142 @@ function uw_find_your_edge_menu() {
   return $items;
 }
 
+/**
+ * @return mixed
+ * Implements hook_token_info()
+ */
 function uw_find_your_edge_token_info() {
-  $info['types']['custom'] = array(
+  $info['types']['find_your_edge'] = array(
     'name' => t('Custom'),
-    'description' => t('Custom tokens.'),
+    'description' => t('Tokens for the Find Your EDGE tool.'),
   );
-  $info['tokens']['custom']['fname'] = array(
-    'name' => t('First name'),
-    'description' => t('First name re placer for fname '),
+  $info['tokens']['find_your_edge']['component1'] = array(
+    'name' => t('Component 1 result'),
+    'description' => t('The results for component 1.'),
   );
-  $info['tokens']['custom']['lname'] = array(
-    'name' => t('Last name'),
-    'description' => t('Last name re placer for lname '),
+  $info['tokens']['find_your_edge']['component1_description'] = array(
+    'name' => t('Component 1 description'),
+    'description' => t('The description text for the results of component 1.'),
+  );
+  $info['tokens']['find_your_edge']['component2'] = array(
+    'name' => t('Component 2 result'),
+    'description' => t('The results for component 2.'),
+  );
+  $info['tokens']['find_your_edge']['component2_description'] = array(
+    'name' => t('Component 2 description'),
+    'description' => t('The description text for the results of component 2.'),
+  );
+  $info['tokens']['find_your_edge']['component3a'] = array(
+    'name' => t('Component 3a result'),
+    'description' => t('The results for component 3a.'),
+  );
+  $info['tokens']['find_your_edge']['component3a_description'] = array(
+    'name' => t('Component 3a description'),
+    'description' => t('The description text for the results of component 3a.'),
+  );
+  $info['tokens']['find_your_edge']['component3b'] = array(
+    'name' => t('Component 3b result'),
+    'description' => t('The results for component 3b.'),
+  );
+  $info['tokens']['find_your_edge']['component3b_description'] = array(
+    'name' => t('Component 3b description'),
+    'description' => t('The description text for the results of component 3b.'),
+  );
+  $info['tokens']['find_your_edge']['component3c'] = array(
+    'name' => t('Component 3c result'),
+    'description' => t('The results for component 3c.'),
+  );
+  $info['tokens']['find_your_edge']['component3c_description'] = array(
+    'name' => t('Component 3c description'),
+    'description' => t('The description text for the results of component 3c.'),
+  );
+  $info['tokens']['find_your_edge']['component3_pd'] = array(
+    'name' => t('Component 3 PD result'),
+    'description' => t('The results for component 3 PD.'),
+  );
+  $info['tokens']['find_your_edge']['component3_pd_description'] = array(
+    'name' => t('Component 3 PD description'),
+    'description' => t('The description text for the results of component 3 PD.'),
+  );
+  $info['tokens']['find_your_edge']['component4'] = array(
+    'name' => t('Component 4 result'),
+    'description' => t('The results for component 4.'),
+  );
+  $info['tokens']['find_your_edge']['component4_description'] = array(
+    'name' => t('Component 4 description'),
+    'description' => t('The description text for the results of component 4.'),
   );
   return $info;
 }
 
+/**
+ * @param $type
+ * @param $tokens
+ * @param array $data
+ * @param array $options
+ *
+ * @return array
+ * Implements hook_tokens()
+ */
 function uw_find_your_edge_tokens($type, $tokens, array $data = array(), array $options = array()) {
-  //global $sid;
   $replacements = array();
-  //dsm($tokens);
   $sanitize = !empty($options['sanitize']);
+
+  if(isset($_GET['sid'])) {
+    $sid = $_GET['sid'];
+    $query = db_select('find_your_edge_results', 'fyer')
+      ->fields('fyer')
+      ->condition('sid', $sid)
+      ->execute()
+      ->fetchAll();
+  }
+
   foreach ($tokens as $name => $original) {
-    switch ($name) {
-      case 'fname':
-        //dsm($data);
-        //$sid = &drupal_static('current_sid');
-        $replacements[$original] = "TESTNAME";
-        break;
+    if(isset($query) && count($query) > 0) {
+      switch ($name) {
+        case 'component1':
+          $replacements[$original] = $query[0]->component1;
+          break;
+        case 'component1_description':
+          $replacements[$original] = $query[0]->component1_descr;
+          break;
+        case 'component2':
+          $replacements[$original] = $query[0]->component2;
+          break;
+        case 'component2_description':
+          $replacements[$original] = $query[0]->component2_descr;
+          break;
+        case 'component3a':
+          $replacements[$original] = $query[0]->component3a;
+          break;
+        case 'component3a_description':
+          $replacements[$original] = $query[0]->component3a_descr;
+          break;
+        case 'component3b':
+          $replacements[$original] = $query[0]->component3b;
+          break;
+        case 'component3b_description':
+          $replacements[$original] = $query[0]->component3b_descr;
+          break;
+        case 'component3c':
+          $replacements[$original] = $query[0]->component3c;
+          break;
+        case 'component3c_description':
+          $replacements[$original] = $query[0]->component3c_descr;
+          break;
+        case 'component3_pd':
+          $replacements[$original] = $query[0]->component3_pd;
+          break;
+        case 'component3_pd_description':
+          $replacements[$original] = $query[0]->component3_pd_descr;
+          break;
+        case 'component4':
+          $replacements[$original] = $query[0]->component4;
+          break;
+        case 'component4_description':
+          $replacements[$original] = $query[0]->component4_descr;
+          break;
+      }
     }
   }
   return $replacements;

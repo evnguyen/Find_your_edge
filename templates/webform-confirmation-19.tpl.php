@@ -34,7 +34,7 @@
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
   //Debug
-  dsm($submission);
+  //dsm($submission);
 
 /**
  * @param $list -> an array which holds the list of elements to be chosen from
@@ -223,13 +223,13 @@
       if ($major == "GBDA") {
         $results = array_merge($results, $comp3_gbda_soc);
       }
-      if ($major == "HIS") {
+      elseif ($major == "HIS") {
         $results = array_merge($results, $comp3_hist_soc);
       }
-      if ($major == "PSYC") {
+      elseif ($major == "PSYC") {
         $results = array_merge($results, $comp3_psych_soc);
       }
-      if ($major == "SOC") {
+      elseif ($major == "SOC") {
         $results = array_merge($results, $comp3_soc_soc);
       }
     }
@@ -247,7 +247,8 @@
         $results = array_merge($results, $comp3_bioinformatics_club);
       }
     }
-    else{
+
+    if (empty($results)) {
       $results = array_merge($results, $comp3_student_soc);
     }
 
@@ -295,103 +296,6 @@
     }
     return array_unique($results);
   }
-
-/**
- * @param $faculty
- * @param $skills
- *
- * @return array
- * Helper function to get Offices and Services positions
- */
-  /*function get_offices_servies_positions($faculty, $major ,$skills) {
-    global $comp3_offices_services;
-    global $comp3_first_aid;
-    global $comp3_intramural_referee;
-    global $comp3_lifeguard;
-    global $comp3_bike_centre;
-    global $comp3_response_team;
-    global $comp3_coop_connection;
-    global $comp3_food_bank;
-    global $comp3_glow;
-    global $comp3_student_network;
-    global $comp3_mates;
-    global $comp3_community_don;
-    global $comp3_sustainable_campus;
-    global $comp3_volunteer_centre;
-    global $comp3_warrior_tribe;
-    global $comp3_womens_centre;
-    global $comp3_leave_the_pack;
-    global $comp3_health_educator;
-    global $comp3_single_sexy_performer;
-    global $comp3_residence_don;
-    global $comp3_library_associate;
-    global $comp3_food_services;
-    global $comp3_computing_consultant;
-    global $comp3_student_ambassador;
-    $results = array();
-    if($faculty == "MATH" && $major == "CS"){
-      $results = array_merge($results, $comp3_computing_consultant);
-    }
-
-    if (in_array("COMM", $skills)) {
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_warrior_tribe);
-      $results = array_merge($results, $comp3_leave_the_pack);
-      $results = array_merge($results, $comp3_health_educator);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-      $results = array_merge($results, $comp3_residence_don);
-      $results = array_merge($results, $comp3_library_associate);
-      $results = array_merge($results, $comp3_student_ambassador);
-    }
-    if (in_array("CULT", $skills)) {
-      $results = array_merge($results, $comp3_food_bank);
-      $results = array_merge($results, $comp3_glow);
-      $results = array_merge($results, $comp3_student_network);
-      $results = array_merge($results, $comp3_sustainable_campus);
-      $results = array_merge($results, $comp3_womens_centre);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-    }
-    if (in_array("LEAD", $skills)) {
-      $results = array_merge($results, $comp3_first_aid);
-      $results = array_merge($results, $comp3_intramural_referee);
-      $results = array_merge($results, $comp3_lifeguard);
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_coop_connection);
-      $results = array_merge($results, $comp3_fed_clubs);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_residence_don);
-    }
-    if (in_array("TEAM", $skills)) {
-      $results = array_merge($results, $comp3_first_aid);
-      $results = array_merge($results, $comp3_intramural_referee);
-      $results = array_merge($results, $comp3_lifeguard);
-      $results = array_merge($results, $comp3_bike_centre);
-      $results = array_merge($results, $comp3_response_team);
-      $results = array_merge($results, $comp3_coop_connection);
-      $results = array_merge($results, $comp3_fed_clubs);
-      $results = array_merge($results, $comp3_food_bank);
-      $results = array_merge($results, $comp3_student_network);
-      $results = array_merge($results, $comp3_mates);
-      $results = array_merge($results, $comp3_community_don);
-      $results = array_merge($results, $comp3_sustainable_campus);
-      $results = array_merge($results, $comp3_volunteer_centre);
-      $results = array_merge($results, $comp3_warrior_tribe);
-      $results = array_merge($results, $comp3_womens_centre);
-      $results = array_merge($results, $comp3_leave_the_pack);
-      $results = array_merge($results, $comp3_health_educator);
-      $results = array_merge($results, $comp3_single_sexy_performer);
-      $results = array_merge($results, $comp3_residence_don);
-      $results = array_merge($results, $comp3_food_services);
-      $results = array_merge($results, $comp3_student_ambassador);
-    }
-    if (empty($results)) {
-      $results = array_merge($results, $comp3_offices_services);
-    }
-    return array_unique($results);
-  }*/
 
 /**
  * @param $faculty
@@ -568,6 +472,61 @@ function get_feds_positions($tasks) {
   }
 
 /**
+ * @param $data
+ * @param $rule
+ *
+ * @return bool
+ * Cross checks submission values with the given rule
+ */
+  function rule_met($data, $rule) {
+    $length = count($data);
+
+    for ($i = 1; $i <= $length; $i++) {
+      if (isset($data[$i])) {
+        $number_of_selections = count($data[$i]);
+        for ($j = 0; $j < $number_of_selections; $j++) {
+          if(in_array($data[$i][$j], $rule)) {
+            $index = array_search($data[$i][$j], $rule);
+            unset($rule[$index]);
+            //Reindex the keys in array
+            $rule = array_values($rule);
+          }
+        }
+      }
+    }
+    return empty($rule);
+  }
+
+/**
+ *
+ */
+  function get_component1($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', '1')
+      ->execute()
+      ->fetchAll();
+    dsm($query);
+    dsm($submission);
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        $results[] = $ruleset;
+      }
+    }
+    dsm($results);
+
+    return get_random_element($results);
+  }
+
+/**
  * @return array
  * Generate the results for Component 2: Career Development Course
  */
@@ -735,7 +694,7 @@ function get_feds_positions($tasks) {
       if (in_array("CLUBS", $exp)) {
         $results_list = array_merge($results_list, $comp3_fed_clubs);
       }
-      if (in_array("HOUSEHLTH", $exp)) {
+      if (in_array("HOUSEATHL", $exp)) {
         $results_list = array_merge($results_list, get_housing_athletics_positions($faculty, $major, $tasks));
       }
       if (in_array("FEDS", $exp)) {
@@ -761,7 +720,7 @@ function get_feds_positions($tasks) {
     }
 
     //Debug
-    dsm($results_list);
+    //dsm($results_list);
 
     $results = array();
     $descr = array();
@@ -817,7 +776,8 @@ function get_feds_positions($tasks) {
       $pd_courses[] = "PD10";
     }
 
-    dsm($pd_courses);
+    //Debug
+    //dsm($pd_courses);
     $results[] = get_random_element($pd_courses);
 
     //Now obtain the corresponding description for each result
@@ -885,9 +845,8 @@ function get_feds_positions($tasks) {
     global $comp3_urls;
     //TODO: Decide whether to put these into const_defs.php and combine in comp3_urls
     $on_campus_general = array(
-      "University Colleges",
-      "Student Societies",
-      "Offices and Services",
+      "University colleges",
+      "Student societies",
       "Faculties",
       "Feds services",
       "Student services",
@@ -897,7 +856,7 @@ function get_feds_positions($tasks) {
       "Full-time",
       "Part-time",
       "Volunteering",
-      "Service Learning",
+      "Service learning",
     );
 
     $capstone = array(
@@ -923,8 +882,7 @@ function get_feds_positions($tasks) {
     elseif (in_array($string, $capstone)) {
       return "https://uwaterloo.ca/edge/capstone-workshop";
     }
-    //PD1 is the only exception since it cannot be used as a comp3
-    elseif ($string == "PD1" || (!is_pd_course($string) && is_course($string))) {
+    elseif (!is_pd_course($string) && is_course($string)) {
       $link = "https://ugradcalendar.uwaterloo.ca/courses/";
       $course_alpha = "";
       $course_num = "";
@@ -979,10 +937,64 @@ function get_feds_positions($tasks) {
 
   function gen_descr($key, $descr){
     print "<p>" . t('@descr', array('@descr' => $descr));
-    if(!is_pd_course($key) && is_course($key)) {
+    if($key == "PD1" || (!is_pd_course($key) && is_course($key))) {
       link_to_edge_courses();
     }
     print "</p>";
+  }
+
+/**
+ * @param $string
+ *
+ * @return mixed
+ * Process the string so that it can properly added to a pdf template
+ */
+  function pdf_process($key, $string) {
+    $value = preg_replace('/  +/', ' ' , preg_replace(array('/  +/', '/\n/', '/\r/'), ' ', $string));
+    if((is_course($key) && !is_pd_course($key)) || $key == "PD1") {
+      $value .= 'EDGE courses.';
+    }
+    return $value;
+  }
+
+/**
+ * @param $sid
+ * @param $comp1
+ * @param $comp2
+ * @param $comp3
+ * @param $comp4
+ * Write to database for pdf use
+ */
+  function pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4) {
+    //Attempt to write to database for pdf use
+    $result_db = new stdClass();
+    $result_db->sid = $sid;
+    $result_db->component1 = $comp1[0];
+    $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
+    $result_db->component2 = $comp2[0];
+    $result_db->component2_descr = pdf_process($comp2[0], $comp2[1]);
+    $result_db->component3a = $comp3['RESULT'][0];
+    $result_db->component3a_descr = pdf_process($comp3['RESULT'][0], $comp3['DESCR'][0]);
+    $result_db->component3b = $comp3['RESULT'][1];
+    $result_db->component3b_descr = pdf_process($comp3['RESULT'][1], $comp3['DESCR'][1]);
+    $result_db->component3c = $comp3['RESULT'][2];
+    $result_db->component3c_descr = pdf_process($comp3['RESULT'][2], $comp3['DESCR'][2]);
+    $result_db->component3_pd = $comp3['RESULT'][3];
+    $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
+    $result_db->component4 = $comp4[0];
+    $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);
+    $query = db_select('find_your_edge_results', 'fyer')
+      ->fields('fyer')
+      ->condition('sid', $sid)
+      ->execute()
+      ->fetchAll();
+
+    if(count($query) == 0) {
+      drupal_write_record('find_your_edge_results', $result_db);
+    }
+    else{
+      drupal_write_record('find_your_edge_results', $result_db, 'sid');
+    }
   }
 
   $comp1 = get_comp1();
@@ -990,32 +1002,9 @@ function get_feds_positions($tasks) {
   $comp3 = get_comp3();
   $comp4 = get_comp4();
 
-  //Test code for custom token
-  //Attempt to write to database
-  /*$result_db = new stdClass();
-  $result_db->sid = $sid;
-  $result_db->component1 = $comp1[0];
-  $result_db->component1_descr = $comp1[1];
-  $result_db->component2 = $comp2[0];
-  $result_db->component2_descr = $comp2[1];
-  $result_db->component3a = $comp3['RESULT'][0];
-  $result_db->component3a_descr = $comp3['DESCR'][0];
-  $result_db->component3b = $comp3['RESULT'][1];
-  $result_db->component3b_descr = $comp3['DESCR'][1];
-  $result_db->component3c = $comp3['RESULT'][2];
-  $result_db->component3c_descr = $comp3['DESCR'][2];
-  $result_db->component4 = $comp4[0];
-  $result_db->component4_descr = $comp4[0];
-  $query = db_select('find_your_edge_results', 'fyer')
-    ->fields('fyer')
-    ->condition('sid', $sid)
-    ->execute()
-    ->fetchAll();
-  if(count($query) == 0) {
-    drupal_write_record('find_your_edge_results', $result_db);
-  }
-  echo l("PDF", fillpdf_pdf_link($form_id = 3, null, $webform = array('nid'=>3,'sid'=>$sid)));*/
+  pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4);
 
+  get_component1($submission);
 
 
 
@@ -1028,15 +1017,14 @@ function get_feds_positions($tasks) {
 <!--TODO: REQUIRED: adjust URLS to match production (back-button, breadcrumbs) -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
-<!--TODO: Add a print option/button -->
 <!--TODO: Check if JS is getting used on other nodes -->
-<!--TODO: purge submissions -->
-<!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
+<!--TODO: purge submissions and results table-->
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
 <!--TODO: Check edge case for Don positions -->
 <!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
+<!--TODO: Add in proper KEYS for international and others -->
 
 <div class="flex-container">
 
@@ -1163,7 +1151,7 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-block">
+  <div id="pd-block" class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($comp3["RESULT"][3] , gen_link($comp3["RESULT"][3])); ?>
@@ -1177,7 +1165,15 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+
+  <?php
+    if ($submission->data[1][0] == 1) {
+      print '<div id="pd-descr-international" class="flex-comp-descr pd-block">';
+    }
+    else {
+      print '<div id="pd-descr" class="flex-comp-descr pd-block">';
+    }
+  ?>
     <div>
       <?php gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]); ?>
     </div>
@@ -1218,6 +1214,22 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
+  <div class="flex-message margin-top">
+    <p> Click
+      <?php
+        if($submission->data[1][0] == 1) {
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+        }
+        else {
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+        }
+        ?>
+        to generate a PDF version of your EDGE path.
+    </p>
+  </div>
+
   <div class="flex-back-button-wrapper">
     <div id ="back-button" class="edge-action-button-wrapper adjust-height">
       <div class="call-to-action-wrapper">
@@ -1248,8 +1260,8 @@ function get_feds_positions($tasks) {
         </a>
       </div>
     </div>
-    <div class="top-hover-wrapper">
-      <p class="top-hover">Please note that your path through EDGE is randomly generated.
+    <div class="text-box-hover-wrapper">
+      <p class="text-box-hover">Please note that your path through EDGE is randomly generated.
         You may need to randomize several times to receive different results depending on your responses.
       </p>
     </div>

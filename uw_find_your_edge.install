@@ -9,7 +9,7 @@ function uw_find_your_edge_schema() {
   $schema = array();
 
   $schema['find_your_edge_rulesets'] = array(
-    'description' => 'Table for storing information for results',
+    'description' => 'Table for storing the results for every result',
     'fields' => array(
       'ruleset_id' => array(
         'description' => 'The unique identifier for the ruleset',
@@ -21,7 +21,26 @@ function uw_find_your_edge_schema() {
         'type' => 'text',
         'not null' => TRUE,
       ),
-      //TODO: Add in fields for url, descr and result
+      'result' => array(
+        'description' => 'The result text',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'description' => 'The description text for the result',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'url' => array(
+        'description' => 'The url that is mapped to the result',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component' => array(
+        'description' => 'The component which the ruleset will be used in',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
     ),
   );
   $schema['find_your_edge_results'] = array(
@@ -79,6 +98,16 @@ function uw_find_your_edge_schema() {
       ),
       'component3c_descr' => array(
         'description' => 'The description text for Component 3c',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3_pd' => array(
+        'description' => 'The resulting PD course',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component3_pd_descr' => array(
+        'description' => 'The description for the PD course',
         'type' => 'text',
         'not null' => TRUE,
       ),

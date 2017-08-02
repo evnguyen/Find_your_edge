@@ -59,7 +59,6 @@
   global $comp3_mathsoc;
   global $comp3_bioinformatics_club ;
   global $compr3_farmsa ;
-  global $comp3_offices_services;
   global $comp3_student_services;
   global $comp3_feds_services;
   global $comp3_first_aid;
@@ -237,7 +236,7 @@
     "SCBUS 223",
   );
   $comp3_uni_college = array(
-    "University Colleges",
+    "University colleges",
   );
   $comp3_renison_don = array(
     "Renison Don",
@@ -255,7 +254,7 @@
     "St. Paul's Peer Leader",
   );
   $comp3_student_soc = array(
-    "Student Societies",
+    "Student societies",
   );
   $comp3_gbda_soc = array(
     "GBDA Society",
@@ -277,9 +276,6 @@
   );
   $compr3_farmsa = array(
     "FARMSA",
-  );
-  $comp3_offices_services = array(
-    "Offices and Services",
   );
   $comp3_student_services = array(
     "Student services",
@@ -306,7 +302,7 @@
     "Co-op Connection",
   );
   $comp3_fed_clubs = array(
-    "Feds Clubs",
+    "Feds clubs",
   );
   $comp3_food_bank = array(
     "Food Bank",
@@ -384,7 +380,7 @@
     "Volunteering",
   );
   $comp3_service_learning = array(
-    "Service Learning",
+    "Service learning",
   );
 
 /**
@@ -412,16 +408,15 @@
 
   /**
    * Array for descriptions. Each key represents their own description
-   * TODO: Fix line breaks for consistency
    */
 
   $comp1_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
-    "CCA/EDGE Workshop" => "You can earn this credit by completing a workshop with
-      the Centre for Career Action (CCA).",
+    "CCA/EDGE Workshop" => "You can earn this credit by completing a workshop 
+      with the Centre for Career Action (CCA).",
 
     //Note: this description is to be appended to the course code
     //      This is also to be appended with the return value of link_to_edge_courses()
@@ -432,8 +427,8 @@
 
   $comp2_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
     //Note: This description is to be appended to the appropriate course code
     //      This is also to be appended with the return value of link_to_edge_courses()
@@ -443,8 +438,8 @@
 
   $comp3_descr = array(
     "No Experiences" => "We’re having trouble finding experiences for your EDGE.
-     That doesn't mean they don't exist. Consider retaking the quiz or contacting
-     the EDGE team for assistance.",
+      That doesn't mean they don't exist. Consider retaking the quiz or contacting
+      the EDGE team for assistance.",
 
     //On-campus experiences
     //Note: This description is to be appended to the appropriate course code.
@@ -472,7 +467,7 @@
       faculty as an Outreach Volunteer and completing a PD course. Click the
       box to learn more about the position.",
 
-    "University Colleges" => "You can earn EDGE credit by being active within a
+    "University colleges" => "You can earn EDGE credit by being active within a
       university college and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
@@ -494,7 +489,7 @@
       working as a living-learning peer leader in St. Paul’s and completing a
       PD course. Click the box to learn more about this experience.",
 
-    "Student Societies" => "You can earn EDGE credit by being active within
+    "Student societies" => "You can earn EDGE credit by being active within
       a student society and completing a PD course. Click the box to visit
       our list of EDGE experiences.",
 
@@ -525,10 +520,6 @@
     "FARMSA" => "You can earn EDGE credit by taking on an executive role in the
       Financial Analysis and Risk Management Student Association (FARMSA) and
       completing a PD course. Click the box to learn more about your society.",
-
-    "Offices and Services" => "You can earn EDGE credit by giving your time to
-      a club, office, or service on campus and completing a PD course. Click the
-      box for more details regarding on-campus experiences.",
 
     "Feds services" => "It’s possible to earn EDGE credit by working or
       volunteering with Feds and related services. Click the box to learn more
@@ -562,7 +553,7 @@
       Connection and completing a PD course. Click the box to learn more about
       this experience.",
 
-    "Feds Clubs" => "You can earn EDGE credit by taking on an executive role
+    "Feds clubs" => "You can earn EDGE credit by taking on an executive role
       within a Feds club and completing a PD course. Click the box to learn more
       about this experience.",
 
@@ -644,7 +635,7 @@
       and completing a PD course. Click the box for more details regarding
       off-campus experiences.",
 
-    "Service Learning" => "You can earn EDGE credit by engaging in service
+    "Service learning" => "You can earn EDGE credit by engaging in service
       learning (e.g. a Habitat for Humanity trip) and completing a PD courses.
       Click the box for more details regarding off-campus experiences.",
 
@@ -726,7 +717,7 @@
 
     "Co-op Connection" => "http://www.feds.ca/coop/",
 
-    "Feds Clubs" => "http://www.feds.ca/clubs-section/clubs-listing/",
+    "Feds clubs" => "http://www.feds.ca/clubs-section/clubs-listing/",
 
     "Food Bank" => "http://www.feds.ca/foodbank/",
 
@@ -761,6 +752,8 @@
     "Student Computing Consultant" => "https://uwaterloo.ca/housing/technology/support/scc",
 
     "Student Ambassador" => "https://uwaterloo.ca/find-out-more/visit-waterloo/visitors-centre/jobs",
+
+    "PD1" => "https://uwaterloo.ca/professional-development-program/courses/pd1-career-fundamentals",
 
     "PD3" => "https://uwaterloo.ca/professional-development-program/courses/pd3-communication",
 
