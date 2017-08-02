@@ -34,7 +34,7 @@
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
   //Debug
-  dsm($submission);
+  //dsm($submission);
 
 /**
  * @param $list -> an array which holds the list of elements to be chosen from
@@ -472,6 +472,61 @@ function get_feds_positions($tasks) {
   }
 
 /**
+ * @param $data
+ * @param $rule
+ *
+ * @return bool
+ * Cross checks submission values with the given rule
+ */
+  function rule_met($data, $rule) {
+    $length = count($data);
+
+    for ($i = 1; $i <= $length; $i++) {
+      if (isset($data[$i])) {
+        $number_of_selections = count($data[$i]);
+        for ($j = 0; $j < $number_of_selections; $j++) {
+          if(in_array($data[$i][$j], $rule)) {
+            $index = array_search($data[$i][$j], $rule);
+            unset($rule[$index]);
+            //Reindex the keys in array
+            $rule = array_values($rule);
+          }
+        }
+      }
+    }
+    return empty($rule);
+  }
+
+/**
+ *
+ */
+  function get_component1($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', '1')
+      ->execute()
+      ->fetchAll();
+    dsm($query);
+    dsm($submission);
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        $results[] = $ruleset;
+      }
+    }
+    dsm($results);
+
+    return get_random_element($results);
+  }
+
+/**
  * @return array
  * Generate the results for Component 2: Career Development Course
  */
@@ -665,7 +720,7 @@ function get_feds_positions($tasks) {
     }
 
     //Debug
-    dsm($results_list);
+    //dsm($results_list);
 
     $results = array();
     $descr = array();
@@ -721,7 +776,8 @@ function get_feds_positions($tasks) {
       $pd_courses[] = "PD10";
     }
 
-    dsm($pd_courses);
+    //Debug
+    //dsm($pd_courses);
     $results[] = get_random_element($pd_courses);
 
     //Now obtain the corresponding description for each result
@@ -901,40 +957,55 @@ function get_feds_positions($tasks) {
     return $value;
   }
 
+/**
+ * @param $sid
+ * @param $comp1
+ * @param $comp2
+ * @param $comp3
+ * @param $comp4
+ * Write to database for pdf use
+ */
+  function pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4) {
+    //Attempt to write to database for pdf use
+    $result_db = new stdClass();
+    $result_db->sid = $sid;
+    $result_db->component1 = $comp1[0];
+    $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
+    $result_db->component2 = $comp2[0];
+    $result_db->component2_descr = pdf_process($comp2[0], $comp2[1]);
+    $result_db->component3a = $comp3['RESULT'][0];
+    $result_db->component3a_descr = pdf_process($comp3['RESULT'][0], $comp3['DESCR'][0]);
+    $result_db->component3b = $comp3['RESULT'][1];
+    $result_db->component3b_descr = pdf_process($comp3['RESULT'][1], $comp3['DESCR'][1]);
+    $result_db->component3c = $comp3['RESULT'][2];
+    $result_db->component3c_descr = pdf_process($comp3['RESULT'][2], $comp3['DESCR'][2]);
+    $result_db->component3_pd = $comp3['RESULT'][3];
+    $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
+    $result_db->component4 = $comp4[0];
+    $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);
+    $query = db_select('find_your_edge_results', 'fyer')
+      ->fields('fyer')
+      ->condition('sid', $sid)
+      ->execute()
+      ->fetchAll();
+
+    if(count($query) == 0) {
+      drupal_write_record('find_your_edge_results', $result_db);
+    }
+    else{
+      drupal_write_record('find_your_edge_results', $result_db, 'sid');
+    }
+  }
+
   $comp1 = get_comp1();
   $comp2 = get_comp2();
   $comp3 = get_comp3();
   $comp4 = get_comp4();
 
-  //Attempt to write to database for pdf use
-  $result_db = new stdClass();
-  $result_db->sid = $sid;
-  $result_db->component1 = $comp1[0];
-  $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
-  $result_db->component2 = $comp2[0];
-  $result_db->component2_descr = pdf_process($comp2[0], $comp2[1]);
-  $result_db->component3a = $comp3['RESULT'][0];
-  $result_db->component3a_descr = pdf_process($comp3['RESULT'][0], $comp3['DESCR'][0]);
-  $result_db->component3b = $comp3['RESULT'][1];
-  $result_db->component3b_descr = pdf_process($comp3['RESULT'][1], $comp3['DESCR'][1]);
-  $result_db->component3c = $comp3['RESULT'][2];
-  $result_db->component3c_descr = pdf_process($comp3['RESULT'][2], $comp3['DESCR'][2]);
-  $result_db->component3_pd = $comp3['RESULT'][3];
-  $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
-  $result_db->component4 = $comp4[0];
-  $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);
-  $query = db_select('find_your_edge_results', 'fyer')
-    ->fields('fyer')
-    ->condition('sid', $sid)
-    ->execute()
-    ->fetchAll();
+  pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4);
 
-  if(count($query) == 0) {
-    drupal_write_record('find_your_edge_results', $result_db);
-  }
-  else{
-    drupal_write_record('find_your_edge_results', $result_db, 'sid');
-  }
+  get_component1($submission);
+
 
 
 ?>
@@ -946,15 +1017,14 @@ function get_feds_positions($tasks) {
 <!--TODO: REQUIRED: adjust URLS to match production (back-button, breadcrumbs) -->
 <!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
-<!--TODO: Add a print option/button -->
 <!--TODO: Check if JS is getting used on other nodes -->
 <!--TODO: purge submissions and results table-->
-<!--TODO: Idea: re-write logic where there is a function for each question that returns a modified array -->
 <!--TODO: Use const in const_defs -->
 <!--TODO: Only need to check $major, since there are no overlapping majors -->
 <!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
 <!--TODO: Check edge case for Don positions -->
 <!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
+<!--TODO: Add in proper KEYS for international and others -->
 
 <div class="flex-container">
 
@@ -1146,13 +1216,13 @@ function get_feds_positions($tasks) {
 
   <div class="flex-message margin-top">
     <p> Click
-
       <?php
         if($submission->data[1][0] == 1) {
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
           print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
         }
         else {
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
           print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
         }
         ?>

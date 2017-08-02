@@ -9,7 +9,7 @@ function uw_find_your_edge_schema() {
   $schema = array();
 
   $schema['find_your_edge_rulesets'] = array(
-    'description' => 'Table for storing information for results',
+    'description' => 'Table for storing the results for every result',
     'fields' => array(
       'ruleset_id' => array(
         'description' => 'The unique identifier for the ruleset',
@@ -33,6 +33,11 @@ function uw_find_your_edge_schema() {
       ),
       'url' => array(
         'description' => 'The url that is mapped to the result',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'component' => array(
+        'description' => 'The component which the ruleset will be used in',
         'type' => 'text',
         'not null' => TRUE,
       ),
