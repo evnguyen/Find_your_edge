@@ -154,10 +154,29 @@
  */
   function filter_don_positions($list) {
     $length = count($list);
-    if($list < 3)
 
     for ($i = 0; $i < $length; $i++) {
       if (is_don_position($list[$i])) {
+        unset($list[$i]);
+        //Reindex the keys in array
+        $list = array_values($list);
+        $length--;
+      }
+    }
+    return $list;
+  }
+
+  /**
+ * @param $list
+ *
+ * @return array
+ * Helper function which filters the list into a list with only one Don position
+ */
+  function filter_don($list) {
+    $length = count($list);
+
+    for ($i = 0; $i < $length; $i++) {
+      if (is_don_position($list[$i]->result)) {
         unset($list[$i]);
         //Reindex the keys in array
         $list = array_values($list);
@@ -272,7 +291,7 @@
     $results = array();
 
     if($faculty == "ENV") {
-      if(in_array("COMM", $tasks) || in_array("LEAD", $tasks) || in_array("TEAM", $tasks)){
+      if(in_array("MARKCOMMS", $tasks) || in_array("LEAD", $tasks) || in_array("TEAM", $tasks)){
         $results = array_merge($results, $comp3_stpaul_leader);
       }
     }
@@ -480,8 +499,9 @@ function get_feds_positions($tasks) {
  */
   function rule_met($data, $rule) {
     $length = count($data);
-
-    for ($i = 1; $i <= $length; $i++) {
+    //reindex array
+    $data = array_values($data);
+    for ($i = 0; $i < $length; $i++) {
       if (isset($data[$i])) {
         $number_of_selections = count($data[$i]);
         for ($j = 0; $j < $number_of_selections; $j++) {
@@ -506,22 +526,25 @@ function get_feds_positions($tasks) {
       ->condition('component', '1')
       ->execute()
       ->fetchAll();
-    dsm($query);
-    dsm($submission);
+    //dsm($query);
+    //dsm($submission);
 
     $length = count($query);
     $results = array();
     for ($i = 0; $i < $length; $i++) {
       $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      //TODO: Delete duplicate rulesets
       if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
         $ruleset = new stdClass();
         $ruleset->result = $query[$i]->result;
         $ruleset->description = $query[$i]->description;
         $ruleset->url = $query[$i]->url;
-        $results[] = $ruleset;
+        if (!in_array($ruleset, $results)) {
+          $results[] = $ruleset;
+        }
       }
     }
-    dsm($results);
+    //dsm($results);
 
     return get_random_element($results);
   }
@@ -549,6 +572,40 @@ function get_feds_positions($tasks) {
     }
     $retval[] = $retval[0] . $comp2_descr["COURSE"];
     return $retval;
+  }
+
+
+/**
+ * @param $submission
+ *
+ * @return string
+ */
+  function get_component2($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', '2')
+      ->execute()
+      ->fetchAll();
+    //dsm($query);
+    //dsm($submission);
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        if (!in_array($ruleset, $results)) {
+          $results[] = $ruleset;
+        }
+      }
+    }
+    //dsm($results);
+
+    return get_random_element($results);
   }
 
 /**
@@ -720,7 +777,7 @@ function get_feds_positions($tasks) {
     }
 
     //Debug
-    //dsm($results_list);
+    dsm($results_list);
 
     $results = array();
     $descr = array();
@@ -754,7 +811,7 @@ function get_feds_positions($tasks) {
     if (in_array("COMM", $pd_skills)) {
       $pd_courses[] = "PD3";
     }
-    if (in_array("TEAM", $pd_skills)) {
+    if (in_array("TEAMWORK", $pd_skills)) {
       $pd_courses[] = "PD4";
     }
     if (in_array("PROMAN", $pd_skills)) {
@@ -797,6 +854,217 @@ function get_feds_positions($tasks) {
 
   }//End function
 
+
+
+  function get_component3($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', '3')
+      ->execute()
+      ->fetchAll();
+
+    $faculties = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%FAC%', 'LIKE')
+      ->condition('result', array('Faculties'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $university_colleges = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%UC%', 'LIKE')
+      ->condition('result', array('University colleges'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $student_society = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%SSOC%', 'LIKE')
+      ->condition('result', array('Student societies'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $clubs = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%CLUBS%', 'LIKE')
+      ->condition('result', array('Feds clubs'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $housing = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%HOUSEATHL%', 'LIKE')
+      ->condition('result', array('Student services'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $feds = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer', array('result'))
+      ->condition('rule', '%FEDS%', 'LIKE')
+      ->condition('result', array('Feds services'), 'NOT IN')
+      ->execute()
+      ->fetchCol();
+
+    $has_faculty = FALSE;
+    $has_university_college = FALSE;
+    $has_student_society = FALSE;
+    $has_clubs = FALSE;
+    $has_housing = FALSE;
+    $has_feds = FALSE;
+
+    //dsm($query);;
+    //dsm($submission);
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        if (!in_array($ruleset, $results)) {
+          $results[] = $ruleset;
+        }
+        //Check if we've found a specific result
+        if(in_array($ruleset->result, $faculties)) {
+          $has_faculty = TRUE;
+        }
+        elseif(in_array($ruleset->result, $university_colleges)) {
+          $has_university_college = TRUE;
+        }
+        elseif(in_array($ruleset->result, $student_society)) {
+          $has_student_society = TRUE;
+        }
+        elseif(in_array($ruleset->result, $clubs)) {
+          $has_clubs = TRUE;
+        }
+        elseif(in_array($ruleset->result, $housing)) {
+          $has_housing = TRUE;
+        }
+        elseif(in_array($ruleset->result, $feds)) {
+          $has_feds = TRUE;
+        }
+      }
+    }//End for loop
+
+    //If we've gotten a specific result, then unset the general result
+    $results_length = count($results);
+    if($has_faculty) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'Faculties') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+    if($has_university_college) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'University colleges') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+    if($has_student_society) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'Student societies') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+    if($has_housing) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'Student services') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+    if($has_clubs) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'Feds clubs') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+    if($has_feds) {
+      for ($i = 0; $i < $results_length; $i++) {
+        if ($results[$i]->result == 'Feds services') {
+          unset($results[$i]);
+          //Reindex the keys in array
+          $results = array_values($results);
+          break;
+        }
+      }
+    }
+
+    //dsm($results);
+
+    for ($i = 0; $i < 3; $i++) {
+      $return_list[] = get_random_element($results);
+      //Delete from array to avoid duplicates
+      $index = array_search($return_list[$i], $results);
+      unset($results[$index]);
+      //Reindex the keys in array
+      $results = array_values($results);
+
+      //If we've found a Don position, filter out the rest so we can't get another
+      //This should only be true at most ONCE
+      if (is_don_position($return_list[$i]->result)) {
+        $results = filter_don($results);
+      }
+    }
+
+    //dsm($return_list);
+    return $return_list;
+  }
+
+
+/**
+ *
+ */
+  function get_component_pd($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', 'pd')
+      ->execute()
+      ->fetchAll();
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        if (!in_array($ruleset, $results)) {
+          $results[] = $ruleset;
+        }
+      }
+    }
+    //dsm($results);
+
+    return get_random_element($results);
+  }
+
+
+
 /**
  * @return array
  * Generate result for Component 4: Capstone Workshop
@@ -833,6 +1101,37 @@ function get_feds_positions($tasks) {
     }
     $retval[] = $comp4_descr[$retval[0]];
     return $retval;
+  }
+
+/**
+ * @param $submission
+ *
+ * @return string
+ */
+  function get_component4($submission) {
+    $query = db_select('find_your_edge_rulesets', 'fyer')
+      ->fields('fyer')
+      ->condition('component', '4')
+      ->execute()
+      ->fetchAll();
+
+    $length = count($query);
+    $results = array();
+    for ($i = 0; $i < $length; $i++) {
+      $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
+      if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
+        $ruleset = new stdClass();
+        $ruleset->result = $query[$i]->result;
+        $ruleset->description = $query[$i]->description;
+        $ruleset->url = $query[$i]->url;
+        if (!in_array($ruleset, $results)) {
+          $results[] = $ruleset;
+        }
+      }
+    }
+    //dsm($results);
+
+    return get_random_element($results);
   }
 
 /**
@@ -950,7 +1249,8 @@ function get_feds_positions($tasks) {
  * Process the string so that it can properly added to a pdf template
  */
   function pdf_process($key, $string) {
-    $value = preg_replace('/  +/', ' ' , preg_replace(array('/  +/', '/\n/', '/\r/'), ' ', $string));
+    //$value = preg_replace('/  +/', ' ' , preg_replace(array('/  +/', '/\n/', '/\r/'), ' ', $string));
+    $value = preg_replace('/<a href=.*/', '', $string);
     if((is_course($key) && !is_pd_course($key)) || $key == "PD1") {
       $value .= 'EDGE courses.';
     }
@@ -965,9 +1265,9 @@ function get_feds_positions($tasks) {
  * @param $comp4
  * Write to database for pdf use
  */
-  function pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4) {
+  function pdf_store_results($sid, $component1, $component2, $component3, $component_pd, $component4) {
     //Attempt to write to database for pdf use
-    $result_db = new stdClass();
+    /*$result_db = new stdClass();
     $result_db->sid = $sid;
     $result_db->component1 = $comp1[0];
     $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
@@ -982,7 +1282,23 @@ function get_feds_positions($tasks) {
     $result_db->component3_pd = $comp3['RESULT'][3];
     $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
     $result_db->component4 = $comp4[0];
-    $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);
+    $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);*/
+    $result_db = new stdClass();
+    $result_db->sid = $sid;
+    $result_db->component1 = $component1->result;
+    $result_db->component1_descr = pdf_process($component1->result, $component1->description);
+    $result_db->component2 = $component2->result;
+    $result_db->component2_descr = pdf_process($component2->result, $component2->description);
+    $result_db->component3a = $component3[0]->result;
+    $result_db->component3a_descr = pdf_process($component3[0]->result, $component3[0]->description);
+    $result_db->component3b = $component3[1]->result;
+    $result_db->component3b_descr = pdf_process($component3[1]->result, $component3[1]->description);
+    $result_db->component3c = $component3[2]->result;
+    $result_db->component3c_descr = pdf_process($component3[2]->result, $component3[2]->description);
+    $result_db->component3_pd = $component_pd->result;
+    $result_db->component3_pd_descr = pdf_process($component_pd->result, $component_pd->description);
+    $result_db->component4 = $component4->result;
+    $result_db->component4_descr = pdf_process($component4->result, $component4->description);
     $query = db_select('find_your_edge_results', 'fyer')
       ->fields('fyer')
       ->condition('sid', $sid)
@@ -997,17 +1313,17 @@ function get_feds_positions($tasks) {
     }
   }
 
-  $comp1 = get_comp1();
+  /*$comp1 = get_comp1();
   $comp2 = get_comp2();
   $comp3 = get_comp3();
-  $comp4 = get_comp4();
+  $comp4 = get_comp4();*/
+  $component1 = get_component1($submission);
+  $component2 = get_component2($submission);
+  $component3 = get_component3($submission);
+  $component_pd = get_component_pd($submission);
+  $component4 = get_component4($submission);
 
-  pdf_store_results($sid, $comp1, $comp2, $comp3, $comp4);
-
-  get_component1($submission);
-
-
-
+  pdf_store_results($sid, $component1, $component2, $component3, $component_pd, $component4);
 ?>
 
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
@@ -1025,6 +1341,7 @@ function get_feds_positions($tasks) {
 <!--TODO: Check edge case for Don positions -->
 <!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
 <!--TODO: Add in proper KEYS for international and others -->
+<!--TODO: Check up on NOT IN sql query -->
 
 <div class="flex-container">
 
@@ -1046,20 +1363,22 @@ function get_feds_positions($tasks) {
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-      <?php gen_href_start($comp1[0], gen_link($comp1[0])); ?>
+      <?php //gen_href_start($comp1[0], gen_link($comp1[0]));
+            gen_href_start($component1->result, $component1->url) ?>
         <div class="call-to-action-wrapper">
           <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp1[0] ?> </div>
+            <div class="call-to-action-big-text"> <?php print $component1->result ?> </div>
           </div>
         </div>
-      <?php gen_href_end($comp1[0]) ?>
+      <?php gen_href_end($component1->result) ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp1[0], $comp1[1]); ?>
+      <?php //gen_descr($comp1[0], $comp1[1]);
+            print $component1->description?>
     </div>
   </div>
 
@@ -1070,20 +1389,22 @@ function get_feds_positions($tasks) {
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp2[0], gen_link($comp2[0])); ?>
+        <?php //gen_href_start($comp2[0], gen_link($comp2[0]));
+              gen_href_start($component2->result, $component2->url); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
-              <div class="call-to-action-big-text"> <?php print $comp2[0] ?> </div>
+              <div class="call-to-action-big-text"> <?php print $component2->result ?> </div>
             </div>
           </div>
-        <?php gen_href_end($comp2[0]); ?>
+        <?php gen_href_end($component2->result); ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp2[0], $comp2[1]); ?>
+      <?php //gen_descr($comp2[0], $comp2[1]);
+            print $component2->description ?>
     </div>
   </div>
 
@@ -1094,73 +1415,77 @@ function get_feds_positions($tasks) {
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp3["RESULT"][0] , gen_link($comp3["RESULT"][0])); ?>
+        <?php //gen_href_start($comp3["RESULT"][0] , gen_link($comp3["RESULT"][0]));
+               gen_href_start($component3[0]->result , $component3[0]->url);?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
-              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][0] ?> </div>
+              <div class="call-to-action-big-text"> <?php print $component3[0]->result ?> </div>
             </div>
           </div>
-        <?php gen_href_end($comp3["RESULT"][0]); ?>
+        <?php gen_href_end($component3[0]->result); ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp3["RESULT"][0], $comp3["DESCR"][0]); ?>
+      <?php //gen_descr($comp3["RESULT"][0], $comp3["DESCR"][0]);
+            print $component3[0]->description ?>
     </div>
   </div>
 
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp3["RESULT"][1] , gen_link($comp3["RESULT"][1])); ?>
+        <?php gen_href_start($component3[1]->result , $component3[1]->url); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
-              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][1] ?> </div>
+              <div class="call-to-action-big-text"> <?php print $component3[1]->result ?> </div>
             </div>
           </div>
-        <?php gen_href_end($comp3["RESULT"][1]); ?>
+        <?php gen_href_end($component3[1]->result); ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp3["RESULT"][1], $comp3["DESCR"][1]); ?>
+      <?php //gen_descr($comp3["RESULT"][1], $comp3["DESCR"][1]);
+            print $component3[1]->description ?>
     </div>
   </div>
 
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp3["RESULT"][2] , gen_link($comp3["RESULT"][2])); ?>
+        <?php gen_href_start($component3[2]->result , $component3[2]->url); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
-              <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][2] ?> </div>
+              <div class="call-to-action-big-text"> <?php print $component3[2]->result ?> </div>
             </div>
           </div>
-        <?php gen_href_end($comp3["RESULT"][2]); ?>
+        <?php gen_href_end($component3[2]->result); ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]); ?>
+      <?php //gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]);
+            print $component3[2]->description ?>
     </div>
   </div>
 
   <div id="pd-block" class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp3["RESULT"][3] , gen_link($comp3["RESULT"][3])); ?>
+        <?php gen_href_start($component_pd->result , $component_pd->url); ?>
         <div class="call-to-action-wrapper">
           <div class="call-to-action-theme-uWaterloo">
-            <div class="call-to-action-big-text"> <?php print $comp3["RESULT"][3] ?> </div>
+            <div class="call-to-action-big-text"> <?php print $component_pd->result ?> </div>
           </div>
         </div>
-        <?php gen_href_end($comp3["RESULT"][3]); ?>
+        <?php gen_href_end($component_pd->result); ?>
       </div>
     </div>
   </div>
@@ -1175,7 +1500,8 @@ function get_feds_positions($tasks) {
     }
   ?>
     <div>
-      <?php gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]); ?>
+      <?php //gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]);
+            print $component_pd->description ?>
     </div>
   </div>
 
@@ -1197,20 +1523,21 @@ function get_feds_positions($tasks) {
   <div class="flex-comp-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php gen_href_start($comp4[0], gen_link($comp4[0])); ?>
+        <?php gen_href_start($component4->result, $component4->url); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
-              <div class="call-to-action-big-text"> <?php print $comp4[0] ?> </div>
+              <div class="call-to-action-big-text"> <?php print $component4->result ?> </div>
             </div>
           </div>
-        <?php gen_href_end($comp4[0]); ?>
+        <?php gen_href_end($component4->result); ?>
       </div>
     </div>
   </div>
 
   <div class="flex-comp-descr">
     <div>
-      <?php gen_descr($comp4[0], $comp4[1]); ?>
+      <?php //gen_descr($comp4[0], $comp4[1]);
+            print $component4->description ?>
     </div>
   </div>
 
