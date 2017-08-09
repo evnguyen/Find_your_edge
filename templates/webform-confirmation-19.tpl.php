@@ -957,6 +957,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
@@ -967,6 +968,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
@@ -977,6 +979,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
@@ -987,6 +990,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
@@ -997,6 +1001,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
@@ -1007,6 +1012,7 @@ function get_feds_positions($tasks) {
           unset($results[$i]);
           //Reindex the keys in array
           $results = array_values($results);
+          $results_length--;
           break;
         }
       }
