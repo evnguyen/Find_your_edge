@@ -33,6 +33,7 @@
   $sid = $_GET['sid'];
   global $submission;
   $submission = webform_get_submission($node->nid, $sid);
+  $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
   //Debug
   //dsm($submission);
 
@@ -1017,9 +1018,8 @@ function get_feds_positions($tasks) {
       while (count($results) < 3) {
         $ruleset = new stdClass();
         $ruleset->result = "No Experiences";
-        $ruleset->description = "We’re having trouble finding experiences for your EDGE.
-          That doesn't mean they don't exist. Consider retaking the quiz or contacting
-          the EDGE team for assistance.";
+        //No lines breaks since it will be picked up when generating the PDF
+        $ruleset->description = "We’re having trouble finding experiences for your EDGE. That doesn't mean they don't exist. Consider retaking the quiz or contacting the EDGE team for assistance.";
         $ruleset->url = "";
         $results[] = $ruleset;
       }
@@ -1558,12 +1558,12 @@ function get_feds_positions($tasks) {
     <p> Click
       <?php
         if($submission->data[1][0] == 1) {
-          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
         }
         else {
-          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid . '">here</a>';
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';
+          print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">here</a>';
         }
         ?>
         to generate a PDF version of your EDGE path.
