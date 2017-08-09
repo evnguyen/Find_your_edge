@@ -533,7 +533,6 @@ function get_feds_positions($tasks) {
     $results = array();
     for ($i = 0; $i < $length; $i++) {
       $rule = explode(',', str_replace(' ', '', $query[$i]->rule));
-      //TODO: Delete duplicate rulesets
       if ($rule[0] == 'NORULE' || rule_met($submission->data, $rule)) {
         $ruleset = new stdClass();
         $ruleset->result = $query[$i]->result;
@@ -1014,18 +1013,32 @@ function get_feds_positions($tasks) {
 
     //dsm($results);
 
-    for ($i = 0; $i < 3; $i++) {
-      $return_list[] = get_random_element($results);
-      //Delete from array to avoid duplicates
-      $index = array_search($return_list[$i], $results);
-      unset($results[$index]);
-      //Reindex the keys in array
-      $results = array_values($results);
+    if (count($results) < 3) {
+      while (count($results) < 3) {
+        $ruleset = new stdClass();
+        $ruleset->result = "No Experiences";
+        $ruleset->description = "We’re having trouble finding experiences for your EDGE.
+          That doesn't mean they don't exist. Consider retaking the quiz or contacting
+          the EDGE team for assistance.";
+        $ruleset->url = "";
+        $results[] = $ruleset;
+      }
+      $return_list = $results;
+    }
+    else {
+      for ($i = 0; $i < 3; $i++) {
+        $return_list[] = get_random_element($results);
+        //Delete from array to avoid duplicates
+        $index = array_search($return_list[$i], $results);
+        unset($results[$index]);
+        //Reindex the keys in array
+        $results = array_values($results);
 
-      //If we've found a Don position, filter out the rest so we can't get another
-      //This should only be true at most ONCE
-      if (is_don_position($return_list[$i]->result)) {
-        $results = filter_don($results);
+        //If we've found a Don position, filter out the rest so we can't get another
+        //This should only be true at most ONCE
+        if (is_don_position($return_list[$i]->result)) {
+          $results = filter_don($results);
+        }
       }
     }
 
@@ -1595,7 +1608,3 @@ function get_feds_positions($tasks) {
   </div>
 
 </div>
-
-
-
-
