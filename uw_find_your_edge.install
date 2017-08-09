@@ -5,6 +5,11 @@
  * uw_find_your_edge module install/schema hooks
  */
 
+
+/**
+ * @return array
+ * Implements hook_schema().
+ */
 function uw_find_your_edge_schema() {
   $schema = array();
 

@@ -57,35 +57,7 @@ function uw_find_your_edge_node_load($nodes, $types) {
   }
 }
 
-
-/**
- * Defines a new field type for the webform.
- */
-/*
-function uw_find_your_edge_webform_component_info() {
-  $components = array();
-  $components['btn'] = array(
-    'label' => t('Btn Test'),
-    'description' => t('Create a new button with similar properties to a radio buttton'),
-    'features' => array(
-      'csv' => TRUE,
-      'email' => TRUE,
-      'email_address' => FALSE,
-      'email_name' => FALSE,
-      'required' => FALSE,
-      'title_display' => TRUE,
-      'title_inline' => FALSE,
-      'conditional' => FALSE,
-      'group' => FALSE,
-      'spam_analysis' => FALSE,
-      'attachment' => FALSE,
-    ),
-    'file' => 'btn_test.inc',
-  );
-  return $components;
-}
-*/
-function uw_find_your_edge_webform_submission_presave($node, $submission) {
+/*function uw_find_your_edge_webform_submission_presave($node, $submission) {
   //dsm("Inside hook_presave");
   if (isset($node) && $node->nid == 19) {
     //TODO: Need to be able to check if user has gone back to previous question. Check if index 15 is NULL
@@ -94,8 +66,12 @@ function uw_find_your_edge_webform_submission_presave($node, $submission) {
       //dsm($submission->data[11][0]);
     }
   }
-}
+}*/
 
+/**
+ * @return array
+ * Implements hook_menu().
+ */
 function uw_find_your_edge_menu() {
   //TODO: Check for nid, then create the new link
   $items = array();
@@ -114,7 +90,7 @@ function uw_find_your_edge_menu() {
 
 /**
  * @return mixed
- * Implements hook_token_info()
+ * Implements hook_token_info().
  */
 function uw_find_your_edge_token_info() {
   $info['types']['find_your_edge'] = array(
@@ -187,13 +163,13 @@ function uw_find_your_edge_token_info() {
  * @param array $options
  *
  * @return array
- * Implements hook_tokens()
+ * Implements hook_tokens().
  */
 function uw_find_your_edge_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   $sanitize = !empty($options['sanitize']);
 
-  if(isset($_GET['sid'])) {
+  if (isset($_GET['sid'])) {
     $sid = $_GET['sid'];
     $query = db_select('find_your_edge_results', 'fyer')
       ->fields('fyer')
@@ -203,7 +179,7 @@ function uw_find_your_edge_tokens($type, $tokens, array $data = array(), array $
   }
 
   foreach ($tokens as $name => $original) {
-    if(isset($query) && count($query) > 0) {
+    if (isset($query) && count($query) > 0) {
       switch ($name) {
         case 'component1':
           $replacements[$original] = $query[0]->component1;

@@ -7,11 +7,17 @@
  */
 
 /**
+ * @file
+ * Handlers for configuring ruelsets
+ */
+
+/**
  * TODO: Need a way to prompt user there is unsaved work ->
  * TODO: Add a method to import CSV file?
  * TODO: Need a way to check for empty textfield?
- * TODO: Add some cool CSS
+ * TODO: Add some cool CSS (red delete button, red 'unsaved' ruleset)
  * TODO: Add no experiences fieldset OR use norule for it and just add some logic
+ * TODO: Add drupal_set_message for all deletions
  */
 
 /**
@@ -22,7 +28,7 @@
  * @param int $start
  *
  * @return int
- * Creates new forms to be saved
+ * Creates new empty forms to be saved.
  */
 function generate_form(&$form, $add_count, $ids, $component, $start = 0) {
   $index = $start;
@@ -120,7 +126,7 @@ function webform_ruleset_callback($form, $form_state) {
  * @param $form_state
  *
  * @return mixed
- * Another AJAX callback function to be only used to delete unsaved rulesets
+ * Another AJAX callback function to be only used to delete unsaved rulesets.
  */
 function webform_ruleset_unsaved_callback($form, $form_state) {
   $element = $form_state['triggering_element']['#name'];
@@ -133,18 +139,18 @@ function webform_ruleset_unsaved_callback($form, $form_state) {
  * @param $element
  * @param $form_state
  * @param $form
- * Validation check for component value
+ * Validation check for component value.
  */
 function webform_ruleset_component_validate($element, &$form_state, $form) {
   if ($element['#value'] != '1' && $element['#value'] != '2' &&
       $element['#value'] != '3' && $element['#value'] != 'pd' &&
       $element['#value'] != '4' && !empty($element['#value'])) {
-     form_error($element, t('Component value must be either 1, 2, 3, pd, 4.'));
-   }
+      form_error($element, t('Component value must be either 1, 2, 3, pd, 4.'));
+  }
 }
 
 /**
- * Implements hook_form()
+ * Implements hook_form().
  * @param $form
  * @param $form_state
  *
@@ -152,7 +158,7 @@ function webform_ruleset_component_validate($element, &$form_state, $form) {
  */
 function webform_ruleset_form($form, &$form_state) {
 
-  if(!isset($form_state['ruleset_add_count_comp1'])){
+  if (!isset($form_state['ruleset_add_count_comp1'])) {
     //$form_state['ruleset_add_count'] = 0;
     $form_state['ruleset_add_count_comp1'] = 0;
     $form_state['ruleset_add_count_comp2'] = 0;
@@ -220,7 +226,7 @@ function webform_ruleset_form($form, &$form_state) {
 
   //Then create existing forms within each component
   for ($i = 0; $i < $form_state['existing_rules_count']; $i++) {
-    if(isset($query[$i])){
+    if (isset($query[$i])) {
       $form['component' . $query[$i]->component]['ruleset' . $query[$i]->ruleset_id] = array(
         '#type' => 'fieldset',
         '#title' => t('Ruleset'),
@@ -264,7 +270,7 @@ function webform_ruleset_form($form, &$form_state) {
         '#value' => t('Delete ruleset'),
         '#submit' => array('webform_ruleset_form_delete_ruleset'),
         '#name' => 'delete_ruleset' . $query[$i]->ruleset_id,
-        '#ajax' =>array(
+        '#ajax' => array(
           'callback' => 'webform_ruleset_callback',
           'wrapper' => 'component' . $query[$i]->component . '-fieldset-wrapper',
         ),
@@ -273,11 +279,11 @@ function webform_ruleset_form($form, &$form_state) {
   }
 
   //Then create empty forms
-  $start = generate_form($form, $form_state['ruleset_add_count_comp1'], $form_state['ruleset_ids_to_save'],'component1');
-  $start = generate_form($form, $form_state['ruleset_add_count_comp2'], $form_state['ruleset_ids_to_save'],'component2', $start);
-  $start = generate_form($form, $form_state['ruleset_add_count_comp3'], $form_state['ruleset_ids_to_save'],'component3', $start);
-  $start = generate_form($form, $form_state['ruleset_add_count_comppd'], $form_state['ruleset_ids_to_save'],'componentpd', $start);
-  generate_form($form, $form_state['ruleset_add_count_comp4'], $form_state['ruleset_ids_to_save'],'component4', $start);
+  $start = generate_form($form, $form_state['ruleset_add_count_comp1'], $form_state['ruleset_ids_to_save'], 'component1');
+  $start = generate_form($form, $form_state['ruleset_add_count_comp2'], $form_state['ruleset_ids_to_save'], 'component2', $start);
+  $start = generate_form($form, $form_state['ruleset_add_count_comp3'], $form_state['ruleset_ids_to_save'], 'component3', $start);
+  $start = generate_form($form, $form_state['ruleset_add_count_comppd'], $form_state['ruleset_ids_to_save'], 'componentpd', $start);
+  generate_form($form, $form_state['ruleset_add_count_comp4'], $form_state['ruleset_ids_to_save'], 'component4', $start);
 
   //Finally create the rest of the action buttons
   $form['component1']['add_new_ruleset'] = array(
@@ -285,7 +291,7 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Add new ruleset'),
     '#submit' => array('webform_ruleset_form_add_ruleset'),
     '#name' => 'component1_add',
-    '#ajax' =>array(
+    '#ajax' => array(
       'callback' => 'webform_ruleset_callback',
       'wrapper' => 'component1-fieldset-wrapper',
     ),
@@ -295,7 +301,7 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Add new ruleset'),
     '#submit' => array('webform_ruleset_form_add_ruleset'),
     '#name' => 'component2_add',
-    '#ajax' =>array(
+    '#ajax' => array(
       'callback' => 'webform_ruleset_callback',
       'wrapper' => 'component2-fieldset-wrapper',
     ),
@@ -305,7 +311,7 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Add new ruleset'),
     '#submit' => array('webform_ruleset_form_add_ruleset'),
     '#name' => 'component3_add',
-    '#ajax' =>array(
+    '#ajax' => array(
       'callback' => 'webform_ruleset_callback',
       'wrapper' => 'component3-fieldset-wrapper',
     ),
@@ -315,7 +321,7 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Add new ruleset'),
     '#submit' => array('webform_ruleset_form_add_ruleset'),
     '#name' => 'componentpd_add',
-    '#ajax' =>array(
+    '#ajax' => array(
       'callback' => 'webform_ruleset_callback',
       'wrapper' => 'componentpd-fieldset-wrapper',
     ),
@@ -325,7 +331,7 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Add new ruleset'),
     '#submit' => array('webform_ruleset_form_add_ruleset'),
     '#name' => 'component4_add',
-    '#ajax' =>array(
+    '#ajax' => array(
       'callback' => 'webform_ruleset_callback',
       'wrapper' => 'component4-fieldset-wrapper',
     ),
@@ -340,11 +346,22 @@ function webform_ruleset_form($form, &$form_state) {
   return $form;
 }
 
+/**
+ * @param $node
+ *
+ * @return mixed
+ * Handler for obtaining form.
+ */
 function webform_ruleset_get_form($node) {
   $output = drupal_get_form('webform_ruleset_form');
   return $output;
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ * Submit handler.
+ */
 function webform_ruleset_form_submit($form, &$form_state) {
   $ruleset = new stdClass();
   //dsm($form_state);
@@ -394,6 +411,11 @@ function webform_ruleset_form_submit($form, &$form_state) {
   $form_state['ruleset_add_count_comp4'] = 0;
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ * Submit handler for adding new empty ruleset.
+ */
 function webform_ruleset_form_add_ruleset($form, &$form_state) {
   $component = $form_state['triggering_element']['#name'];
   if ($component == 'component1_add') {
@@ -419,6 +441,11 @@ function webform_ruleset_form_add_ruleset($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
 }
 
+/**
+ * @param $form
+ * @param $form_state
+ * Submit handler for deleting a ruleset.
+ */
 function webform_ruleset_form_delete_ruleset($form, &$form_state) {
   $ruleset_id = get_number($form_state['triggering_element']['#name']);
   //If creation/deletion gets messed up, delete by rule value
@@ -433,7 +460,7 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
     ->execute()
     ->fetchAll();
   if (count($query) == 0) {
-    if(($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save'])) !== false) {
+    if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save'])) !== FALSE) {
       unset($form_state['ruleset_ids_to_save'][$index]);
       //Re-index array
       $form_state['ruleset_ids_to_save'] = array_values($form_state['ruleset_ids_to_save']);
@@ -479,13 +506,21 @@ function get_number($string) {
     if (ctype_digit($string[$i])) {
       $number .= $string[$i];
     }
-    elseif ($string[$i] == '-'){
+    elseif ($string[$i] == '-') {
       break;
     }
   }
   return $number;
 }
 
+/**
+ * @param $string
+ *
+ * @return mixed
+ * Returns the component number portion of a delete button.
+ * All unsaved rulesets will have a delete button with #name having the form
+ * delete_rulesetID-componentID.
+ */
 function get_component_number($string) {
   $length = drupal_strlen($string);
   for ($i = 0; $i < $length; $i++) {
