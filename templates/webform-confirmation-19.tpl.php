@@ -35,7 +35,7 @@
   $submission = webform_get_submission($node->nid, $sid);
   $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
   //Debug
-  //dsm($submission);
+  dsm($submission);
 
 /**
  * @param $list -> an array which holds the list of elements to be chosen from
@@ -544,7 +544,7 @@ function get_feds_positions($tasks) {
         }
       }
     }
-    //dsm($results);
+    dsm($results);
 
     return get_random_element($results);
   }
@@ -603,7 +603,7 @@ function get_feds_positions($tasks) {
         }
       }
     }
-    //dsm($results);
+    dsm($results);
 
     return get_random_element($results);
   }
@@ -1012,7 +1012,7 @@ function get_feds_positions($tasks) {
       }
     }
 
-    //dsm($results);
+    dsm($results);
 
     if (count($results) < 3) {
       while (count($results) < 3) {
@@ -1071,7 +1071,7 @@ function get_feds_positions($tasks) {
         }
       }
     }
-    //dsm($results);
+    dsm($results);
 
     return get_random_element($results);
   }
@@ -1502,7 +1502,6 @@ function get_feds_positions($tasks) {
       </div>
     </div>
   </div>
-
 
   <?php
     if ($submission->data[1][0] == 1) {
