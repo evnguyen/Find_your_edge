@@ -132,6 +132,22 @@ function uw_find_your_edge_schema() {
 }
 
 function uw_find_your_edge_install() {
+  /*
+   * (69, \'ON, UC, ENV, MARKCOMMS\', \'St. Paul\\'s Peer Leader\', \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
+
+(70, \'ON, UC, ENV, LEAD\', \'St. Paul\\'s Peer Leader\', \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
+
+(71, \'ON, UC, ENV, TEAM\', \'St. Paul\\'s Peer Leader\', \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
+
+(73, \'ON, UC, TEAM\', \'St Paul\\'s Don\', \'You can earn EDGE credit by working as a St. Paul’s Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
+
+(77, \'ON, UC, LEAD\', \'St Paul\\'s Don\', \'You can earn EDGE credit by working as a St. Paul’s Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
+
+(125, \'ON, FEDS, SUPPORT\', \'The Women\\'s Centre\', \'You can earn EDGE credit by working with The Women’s Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/women/\', \'3\'),
+
+(133, \'ON, FEDS, HLTHLIFE\', \'The Women\\'s Centre\', \'You can earn EDGE credit by working with The Women’s Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/women/\', \'3\'),
+
+   */
   db_query('INSERT INTO `find_your_edge_rulesets` (`ruleset_id`, `rule`, `result`, `description`, `url`, `component`) VALUES
 (10, \'NORULE\', \'PD1\', \'PD1 counts as an equivalency for the career development course. For a full list of equivalencies, visit our list of <a href=\"https://uwaterloo.ca/edge/edge-courses\" target=\"_blank\">EDGE courses.</a>\', \'https://uwaterloo.ca/professional-development-program/courses/pd1-career-fundamentals\', \'2\'),
 (11, \'ART\', \'ARTS 111\', \'ARTS 111 counts as an equivalency for the career development course. For a full list of equivalencies, visit our list of <a href=\"https://uwaterloo.ca/edge/edge-courses\" target=\"_blank\">EDGE courses.</a>\', \'https://ugradcalendar.uwaterloo.ca/courses/ARTS/111\', \'2\'),
@@ -192,15 +208,10 @@ function uw_find_your_edge_install() {
 (66, \'ON, FAC, SCI, EARTH\', \'EARTH Museum Volunteer\', \'You can earn EDGE credit by volunteering with an on-campus museum and completing a PD course. Click the box to learn more about the position.\', \'https://uwaterloo.ca/earth-sciences-museum/volunteers\', \'3\'),
 (67, \'ON, FAC, SCI\', \'SCI Outreach Volunteer\', \'You can earn EDGE credit by promoting your faculty as an Outreach Volunteer and completing a PD course. Click the box to learn more about the position.\', \'https://uwaterloo.ca/science/community-outreach\', \'3\'),
 (68, \'ON, FAC\', \'Faculties\', \'You can earn EDGE credit by being active within your faculty and completing a PD course. Click the box to visit our list of EDGE experiences.\', \'https://uwaterloo.ca/edge/students/edge-experiences\', \'3\'),
-(69, \'ON, UC, ENV, MARKCOMMS\', "St. Paul\'s Peer Leader", \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
-(70, \'ON, UC, ENV, LEAD\', "St. Paul\'s Peer Leader", \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
-(71, \'ON, UC, ENV, TEAM\', "St. Paul\'s Peer Leader", \'You can earn EDGE credit by working as a living-learning peer leader in St. Paul’s and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
 (72, \'ON, UC, TEAM\', \'Renison Don\', \'You can earn EDGE credit by working as a Renison Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/renison/tour/dons\', \'3\'),
-(73, \'ON, UC, TEAM\', "St Paul\'s Don", \'You can earn EDGE credit by working as a St. Paul’s Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
 (74, \'ON, UC, SUPPORT\', \'Renison BASE\', \'You can earn EDGE credit by working with Renison’s BASE program and completing a PD course. Click the box to learn more about this program.\', \'https://uwaterloo.ca/bridge-to-academic-success-in-english/\', \'3\'),
 (75, \'ON, UC, SUPPORT\', \'Renison ELI\', \'You can earn EDGE credit by working with Renison’s English Language Institute (ELI) and completing a PD course. Click the box to learn more about this program.\', \'https://uwaterloo.ca/english-language-institute/\', \'3\'),
 (76, \'ON, UC, LEAD\', \'Renison Don\', \'You can earn EDGE credit by working as a Renison Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/renison/tour/dons\', \'3\'),
-(77, \'ON, UC, LEAD\', "St Paul\'s Don", \'You can earn EDGE credit by working as a St. Paul’s Don and completing a PD course. Click the box to learn more about this experience.\', \'https://uwaterloo.ca/stpauls/about-st-pauls-university-college/were-hiring\', \'3\'),
 (78, \'ON, UC\', \'University colleges\', \'You can earn EDGE credit by being active within a university college and completing a PD course. Click the box to visit our list of EDGE experiences.\', \'https://uwaterloo.ca/edge/students/edge-experiences\', \'3\'),
 (79, \'ON, SSOC, ART, GBDA\', \'GBDA Society\', \'You can earn EDGE credit by taking on an executive role in the Global Business and Digital Arts (GBDA) Society and completing a PD course. Click the box to learn more about your society.\', \'https://uwaterloo.ca/stratford-campus/undergraduate/student-life/gbda-student-opportunities/gbda-society\', \'3\'),
 (80, \'ON, SSOC, ART, HIS\', \'HIST Society\', \'You can earn EDGE credit by taking on an executive role in the History Society and completing a PD course. Click the box to learn more about your society.\', \'https://uwaterloo.ca/history/undergraduate/uw-history-society\', \'3\'),
@@ -248,7 +259,6 @@ function uw_find_your_edge_install() {
 (122, \'ON, FEDS, TEAM\', \'Warrior Tribe\', \'You can earn EDGE credit by working with Feds’ Warrior Tribe and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/warrior-tribe/\', \'3\'),
 (123, \'ON, FEDS, SUPPORT\', \'Glow\', \'You can earn EDGE credit by working with Glow and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/glow/\', \'3\'),
 (124, \'ON, FEDS, SUPPORT\', \'MATES\', \'You can earn EDGE credit by working with Mentor Assistance Through Education and Support (MATES) and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/uw-mates/\', \'3\'),
-(125, \'ON, FEDS, SUPPORT\', "The Women\'s Centre", \'You can earn EDGE credit by working with The Women’s Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/women/\', \'3\'),
 (126, \'ON, FEDS, LEAD\', \'Off Campus Community Don\', \'You can earn EDGE credit by working as an Off Campus Community Don and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/offcampus/\', \'3\'),
 (127, \'ON, FEDS, EVENTS\', \'Co-op Connection\', \'You can earn EDGE credit by working with Feds’ Co-op Connection and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/coop/\', \'3\'),
 (128, \'ON, FEDS, EVENTS\', \'ICSN\', \'You can earn EDGE credit by working with Feds’ International and Canadian Student Network (ICSN) and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/icsn/\', \'3\'),
@@ -256,7 +266,6 @@ function uw_find_your_edge_install() {
 (130, \'ON, FEDS, HLTHLIFE\', \'Campus Response Team\', \'You can earn EDGE credit by working with the Feds Campus Response Team and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/crt/\', \'3\'),
 (131, \'ON, FEDS, HLTHLIFE\', \'Food Bank\', \'You can earn EDGE credit by working with the Feds Food Bank and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/foodbank/\', \'3\'),
 (132, \'ON, FEDS, HLTHLIFE\', \'Sustainable Campus Initiative\', \'You can earn EDGE credit by working with Feds’ Sustainable Campus Initiative and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/sustainability/\', \'3\'),
-(133, \'ON, FEDS, HLTHLIFE\', "The Women\'s Centre", \'You can earn EDGE credit by working with The Women’s Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/women/\', \'3\'),
 (134, \'ON, FEDS, SERROLES\', \'Bike Centre\', \'You can earn EDGE credit by working with the Feds Bike Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/slc/bike-centre/\', \'3\'),
 (135, \'ON, FEDS, SERROLES\', \'Campus Response Team\', \'You can earn EDGE credit by working with the Feds Campus Response Team and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/crt/\', \'3\'),
 (136, \'ON, FEDS, SERROLES\', \'Volunteer Centre\', \'You can earn EDGE credit by working with the Feds Volunteer Centre and completing a PD course. Click the box to learn more about this experience.\', \'http://www.feds.ca/volunteer/\', \'3\'),
