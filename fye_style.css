@@ -14,13 +14,13 @@
 }
 
 @media only screen and (max-width: 999px){
-  .flex-comp-block{
+  .flex-component-block{
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
     margin-bottom: 1.5rem;
   }
 
-  .flex-comp-descr{
+  .flex-component-description{
     flex-basis: 100%;
     -webkit-flex-basis: 100%;
     margin-bottom: 1.5rem;
@@ -78,7 +78,7 @@
     border-top-width: 1px;
   }
 
-  #pd-descr-international{
+  #pd-description-international{
     padding-bottom: 1.5rem;
     border-bottom-style: solid;
     border-bottom-color: #757575;
@@ -88,13 +88,13 @@
 } /**End @media**/
 
 @media only screen and (min-width: 1000px) {
-  .flex-comp-block {
+  .flex-component-block {
     flex-basis: 25%;
     -webkit-flex-basis: 25%;
     margin-bottom: 1.5rem;
   }
 
-  .flex-comp-descr {
+  .flex-component-description {
     flex-basis: 75%;
     -webkit-flex-basis: 75%;
     margin-bottom: 1.5rem;
@@ -152,14 +152,14 @@
     border-top-width: 1px;
   }
 
-  #pd-descr{
+  #pd-description{
     padding-top: 1.5rem;
     border-top-style: solid;
     border-top-color: #757575;
     border-top-width: 1px;
   }
 
-  #pd-descr-international{
+  #pd-description-international{
     padding-top: 1.5rem;
     border-top-style: solid;
     border-top-color: #757575;
@@ -167,7 +167,7 @@
   }
 } /**End @media**/
 
-.flex-comp-title{
+.flex-component-title{
   flex-basis:100%;
   -webkit-flex-basis: 100%;
 }
@@ -200,6 +200,7 @@
   -o-transition: .3s linear;
   transition: .3s linear;
 }
+
 .edge-action-button-gray:hover{
   background-color: #eee;
   color: #757575;

@@ -131,6 +131,9 @@ function uw_find_your_edge_schema() {
   return $schema;
 }
 
+/**
+ * Implements hook_install().
+ */
 function uw_find_your_edge_install() {
 
   db_query('INSERT INTO `find_your_edge_rulesets` (`ruleset_id`, `rule`, `result`, `description`, `url`, `component`) VALUES

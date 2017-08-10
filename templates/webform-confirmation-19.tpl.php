@@ -1375,11 +1375,11 @@ function get_feds_positions($tasks) {
     </p>
   </div>
 
-  <div class="flex-comp-title margin-top">
+  <div class="flex-component-title margin-top">
     <h5>Component 1: Skills Identification and Articulation Workshop</h5>
 </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
       <?php //gen_href_start($comp1[0], gen_link($comp1[0]));
@@ -1394,18 +1394,18 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp1[0], $comp1[1]);
             print $component1->description?>
     </div>
   </div>
 
-  <div class="flex-comp-title margin-top">
+  <div class="flex-component-title margin-top">
     <h5>Component 2: Career Development Course</h5>
   </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php //gen_href_start($comp2[0], gen_link($comp2[0]));
@@ -1420,18 +1420,18 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp2[0], $comp2[1]);
             print $component2->description ?>
     </div>
   </div>
 
-   <div class="flex-comp-title margin-top">
+   <div class="flex-component-title margin-top">
     <h5>Component 3: Work/Community Experiences</h5>
   </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php //gen_href_start($comp3["RESULT"][0] , gen_link($comp3["RESULT"][0]));
@@ -1446,14 +1446,14 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp3["RESULT"][0], $comp3["DESCR"][0]);
             print $component3[0]->description ?>
     </div>
   </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($component3[1]->result , $component3[1]->url); ?>
@@ -1467,14 +1467,14 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp3["RESULT"][1], $comp3["DESCR"][1]);
             print $component3[1]->description ?>
     </div>
   </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($component3[2]->result , $component3[2]->url); ?>
@@ -1488,14 +1488,14 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]);
             print $component3[2]->description ?>
     </div>
   </div>
 
-  <div id="pd-block" class="flex-comp-block">
+  <div id="pd-block" class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($component_pd->result , $component_pd->url); ?>
@@ -1511,10 +1511,10 @@ function get_feds_positions($tasks) {
 
   <?php
     if ($submission->data[1][0] == 1) {
-      print '<div id="pd-descr-international" class="flex-comp-descr pd-block">';
+      print '<div id="pd-description-international" class="flex-component-description pd-block">';
     }
     else {
-      print '<div id="pd-descr" class="flex-comp-descr pd-block">';
+      print '<div id="pd-description" class="flex-component-description pd-block">';
     }
   ?>
     <div>
@@ -1534,11 +1534,11 @@ function get_feds_positions($tasks) {
       ?>
   </div>
 
-  <div class="flex-comp-title margin-top">
+  <div class="flex-component-title margin-top">
     <h5>Component 4: Capstone Workshop</h5>
   </div>
 
-  <div class="flex-comp-block">
+  <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
         <?php gen_href_start($component4->result, $component4->url); ?>
@@ -1552,7 +1552,7 @@ function get_feds_positions($tasks) {
     </div>
   </div>
 
-  <div class="flex-comp-descr">
+  <div class="flex-component-description">
     <div>
       <?php //gen_descr($comp4[0], $comp4[1]);
             print $component4->description ?>

@@ -82,7 +82,6 @@ function generate_form(&$form, $add_count, $ids, $component, $start = 0) {
         'callback' => 'webform_ruleset_unsaved_callback',
         'wrapper' => $component . '-fieldset-wrapper',
       ),
-      //'#attributes' => array('class' => array('edit-delete-ruleset')), TODO: get this to work
     );
   }//End For loop
   return $index;
