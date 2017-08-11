@@ -183,6 +183,12 @@ function webform_ruleset_form($form, &$form_state) {
 
   if (!isset($form_state['ruleset_ids_to_save'])) {
     $form_state['ruleset_ids_to_save'] = array();
+    $form_state['ruleset_ids_to_save_component1'] = array();
+    $form_state['ruleset_ids_to_save_component2'] = array();
+    $form_state['ruleset_ids_to_save_component3'] = array();
+    $form_state['ruleset_ids_to_save_componentpd'] = array();
+    $form_state['ruleset_ids_to_save_component4'] = array();
+
   }
 
 
@@ -278,11 +284,11 @@ function webform_ruleset_form($form, &$form_state) {
   }
 
   //Then create empty forms
-  $start = generate_form($form, $form_state['ruleset_add_count_comp1'], $form_state['ruleset_ids_to_save'], 'component1');
-  $start = generate_form($form, $form_state['ruleset_add_count_comp2'], $form_state['ruleset_ids_to_save'], 'component2', $start);
-  $start = generate_form($form, $form_state['ruleset_add_count_comp3'], $form_state['ruleset_ids_to_save'], 'component3', $start);
-  $start = generate_form($form, $form_state['ruleset_add_count_comppd'], $form_state['ruleset_ids_to_save'], 'componentpd', $start);
-  generate_form($form, $form_state['ruleset_add_count_comp4'], $form_state['ruleset_ids_to_save'], 'component4', $start);
+  generate_form($form, $form_state['ruleset_add_count_comp1'], $form_state['ruleset_ids_to_save_component1'], 'component1');
+  generate_form($form, $form_state['ruleset_add_count_comp2'], $form_state['ruleset_ids_to_save_component2'], 'component2' );
+  generate_form($form, $form_state['ruleset_add_count_comp3'], $form_state['ruleset_ids_to_save_component3'], 'component3');
+  generate_form($form, $form_state['ruleset_add_count_comppd'], $form_state['ruleset_ids_to_save_componentpd'], 'componentpd');
+  generate_form($form, $form_state['ruleset_add_count_comp4'], $form_state['ruleset_ids_to_save_component4'], 'component4');
 
   //Finally create the rest of the action buttons
   $form['component1']['add_new_ruleset'] = array(
@@ -416,27 +422,35 @@ function webform_ruleset_form_submit($form, &$form_state) {
  * Submit handler for adding new empty ruleset.
  */
 function webform_ruleset_form_add_ruleset($form, &$form_state) {
+  //Add 1 to sum since a new unsaved ruleset had been added
+  $sum = $form_state['ruleset_add_count_comp1'] + $form_state['ruleset_add_count_comp2'] +
+    $form_state['ruleset_add_count_comp3'] + $form_state['ruleset_add_count_comppd'] +
+    $form_state['ruleset_add_count_comp4'] + 1;
+  $form_state['ruleset_ids_to_save'][] = $form_state['largest_ruleset_id'] + $sum;
+
   $component = $form_state['triggering_element']['#name'];
   if ($component == 'component1_add') {
     $form_state['ruleset_add_count_comp1']++;
+    $form_state['ruleset_ids_to_save_component1'][] = $form_state['largest_ruleset_id'] + $sum;
   }
   elseif ($component == 'component2_add') {
     $form_state['ruleset_add_count_comp2']++;
+    $form_state['ruleset_ids_to_save_component2'][] = $form_state['largest_ruleset_id'] + $sum;
   }
   elseif ($component == 'component3_add') {
     $form_state['ruleset_add_count_comp3']++;
+    $form_state['ruleset_ids_to_save_component3'][] = $form_state['largest_ruleset_id'] + $sum;
   }
   elseif ($component == 'componentpd_add') {
     $form_state['ruleset_add_count_comppd']++;
+    $form_state['ruleset_ids_to_save_componentpd'][] = $form_state['largest_ruleset_id'] + $sum;
   }
   elseif ($component == 'component4_add') {
     $form_state['ruleset_add_count_comp4']++;
+    $form_state['ruleset_ids_to_save_component4'][] = $form_state['largest_ruleset_id'] + $sum;
   }
-  //$form_state['ruleset_add_count']++;
-  $sum = $form_state['ruleset_add_count_comp1'] + $form_state['ruleset_add_count_comp2'] +
-        $form_state['ruleset_add_count_comp3'] + $form_state['ruleset_add_count_comppd'] +
-        $form_state['ruleset_add_count_comp4'];
-  $form_state['ruleset_ids_to_save'][] = $form_state['largest_ruleset_id'] + $sum;
+
+
   $form_state['rebuild'] = TRUE;
 }
 
@@ -458,7 +472,7 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
     ->condition('ruleset_id', $ruleset_id)
     ->execute()
     ->fetchAll();
-  if (count($query) == 0) {
+  /*if (count($query) == 0) {
     if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save'])) !== FALSE) {
       unset($form_state['ruleset_ids_to_save'][$index]);
       //Re-index array
@@ -479,9 +493,47 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
       if ($form_state['ruleset_add_count_comp4'] > 0) {
         $form_state['ruleset_add_count_comp4']--;
       }
-    }
+    }*/
+    if (count($query) == 0) {
+      if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component1'])) !== FALSE) {
+        unset($form_state['ruleset_ids_to_save_component1'][$index]);
+        //Re-index array
+        $form_state['ruleset_ids_to_save_component1'] = array_values($form_state['ruleset_ids_to_save_component1']);
+      }
+      elseif (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component2'])) !== FALSE) {
+        unset($form_state['ruleset_ids_to_save_component2'][$index]);
+        //Re-index array
+        $form_state['ruleset_ids_to_save_component2'] = array_values($form_state['ruleset_ids_to_save_component2']);
+      }
+      elseif (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component3'])) !== FALSE) {
+        unset($form_state['ruleset_ids_to_save_component3'][$index]);
+        //Re-index array
+        $form_state['ruleset_ids_to_save_component3'] = array_values($form_state['ruleset_ids_to_save_component3']);
+      }
+      elseif (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_componentpd'])) !== FALSE) {
+        unset($form_state['ruleset_ids_to_save_componentpd'][$index]);
+        //Re-index array
+        $form_state['ruleset_ids_to_save_componentpd'] = array_values($form_state['ruleset_ids_to_save_componentpd']);
+      }
+      elseif (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component4'])) !== FALSE) {
+        unset($form_state['ruleset_ids_to_save_component4'][$index]);
+        //Re-index array
+        $form_state['ruleset_ids_to_save_component4'] = array_values($form_state['ruleset_ids_to_save_component4']);
+      }
+
+      $index = array_search($ruleset_id, $form_state['ruleset_ids_to_save']);
+      unset($form_state['ruleset_ids_to_save'][$index]);
+      //Re-index array
+      $form_state['ruleset_ids_to_save'] = array_values($form_state['ruleset_ids_to_save']);
+
+      $form_state['ruleset_add_count_comp1'] = count($form_state['ruleset_ids_to_save_component1']);
+      $form_state['ruleset_add_count_comp2'] = count($form_state['ruleset_ids_to_save_component2']);
+      $form_state['ruleset_add_count_comp3'] = count($form_state['ruleset_ids_to_save_component3']);
+      $form_state['ruleset_add_count_comppd'] = count($form_state['ruleset_ids_to_save_componentpd']);
+      $form_state['ruleset_add_count_comp4'] = count($form_state['ruleset_ids_to_save_component4']);
+
     //dsm($form_state['flagged_unsaved_ruleset_id']);
-  }
+    }
 
   db_delete('find_your_edge_rulesets')
     ->condition('ruleset_id', $ruleset_id)

@@ -25,22 +25,11 @@
  * Include constant definitions
  * This section includes the file that holds all the constant definitions
  */
-  include 'const_defs.php';
 
 /**
- * Obtain the values of the current submission
- */
-  $sid = $_GET['sid'];
-  global $submission;
-  $submission = webform_get_submission($node->nid, $sid);
-  $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
-  //Debug
-  dsm($submission);
-
-/**
+ * Helper function for getting a random element in an array
  * @param $list -> an array which holds the list of elements to be chosen from
  * @return string
- * Helper function for getting a random element in an array
  */
   function get_random_element($list) {
     $min = 0;
@@ -50,44 +39,13 @@
     return $retval;
   }
 
-/**
- * @return string
- * Helper function to return the major selected
- */
-  function get_major() {
-    global $submission;
-    $faculty = $submission->data[2][0];
-    if ($faculty == "AHS") {
-      $major = $submission->data[3][0];
-    }
-    elseif ($faculty == "ART") {
-      $major = $submission->data[4][0];
-    }
-    elseif ($faculty == "ENV") {
-      $major = $submission->data[5][0];
-    }
-    elseif ($faculty == "MATH") {
-      $major = $submission->data[6][0];
-    }
-    elseif ($faculty == "SCI") {
-      $major = $submission->data[7][0];
-    }
-    elseif ($faculty == "NOFAC") {
-      $major = "NOMAJOR";
-    }
-    else{
-      print '<script> console.log("Error: Having trouble finding $major")</script>';
-      return "null";
-    }
-    return $major;
-  }
 
 /**
+ * Helper function that checks if a string contains a number. Returns false
+ * otherwise.
  * @param $string
  *
  * @return bool
- * Helper function that checks if a string contains a number. Returns false
- * otherwise.
  */
   function has_number($string) {
     $len = drupal_strlen($string);
@@ -100,12 +58,12 @@
   }
 
 /**
- * @param $string
- * @return bool
  * Helper function to check if string is a course code
  * This assumes all course code will always start with a letter and end with either
  * a number or an uppercase letter. Furthermore, every course code will have at
  * least one number
+ * @param $string
+ * @return bool
  */
   function is_course($string) {
     $first = $string[0];
@@ -120,11 +78,11 @@
   }
 
 /**
- * @param $string
- * @return bool
  * Helper function to check if a string is a PD course
  * This assumes that every PD course will start with "PD" and the last character
  * of the string is a number
+ * @param $string
+ * @return bool
  */
   function is_pd_course($string) {
     $pd = $string[0] . $string[1];
@@ -133,10 +91,10 @@
   }
 
 /**
+ * Helper function to check if position is a Don position
  * @param $string
  *
  * @return bool
- * Helper function to check if position is a Don position
  */
   function is_don_position($string) {
     $length = drupal_strlen($string);
@@ -148,10 +106,10 @@
   }
 
 /**
+ * Helper function which filters the list into a list with only one Don position
  * @param $list
  *
  * @return array
- * Helper function which filters the list into a list with only one Don position
  */
   function filter_don_positions($list) {
     $length = count($list);
@@ -167,11 +125,11 @@
     return $list;
   }
 
-  /**
+/**
+ * Helper function which filters the list into a list with only one Don position
  * @param $list
  *
  * @return array
- * Helper function which filters the list into a list with only one Don position
  */
   function filter_don($list) {
     $length = count($list);
@@ -188,315 +146,11 @@
   }
 
 /**
- * @param $faculty
- * @param $major
- *
- * @return array
- * Helper function to get Faculty type experiences
- */
-  function get_faculty_positions($faculty, $major) {
-    global $comp3_faculties;
-    global $comp3_ahs_ambassador;
-    global $comp3_kin_trainer;
-    global $comp3_earth_museum;
-    global $comp3_sci_outreach;
-    $results = array();
-
-    if ($faculty == "AHS") {
-      if ($major == "KIN") {
-        $results = array_merge($results, $comp3_kin_trainer);
-      }
-      $results = array_merge($results, $comp3_ahs_ambassador);
-    }
-    elseif ($faculty == "SCI") {
-      if ($major == "EARTH") {
-        $results = array_merge($results, $comp3_earth_museum);
-      }
-      $results = array_merge($results, $comp3_sci_outreach);
-    }
-    else {
-      $results = array_merge($results, $comp3_faculties);
-    }
-
-    return $results;
-  }
-
-/**
- * @param $faculty
- * @param $major
- *
- * @return array
- * Helper function to return Student Society positions
- */
-  function get_student_society_positions($faculty, $major) {
-    global $comp3_student_soc;
-    global $comp3_gbda_soc;
-    global $comp3_hist_soc;
-    global $comp3_psych_soc ;
-    global $comp3_soc_soc;
-    global $comp3_mathsoc;
-    global $comp3_bioinformatics_club ;
-    global $compr3_farmsa ;
-    $results = array();
-
-    if ($faculty == "ART") {
-      if ($major == "GBDA") {
-        $results = array_merge($results, $comp3_gbda_soc);
-      }
-      elseif ($major == "HIS") {
-        $results = array_merge($results, $comp3_hist_soc);
-      }
-      elseif ($major == "PSYC") {
-        $results = array_merge($results, $comp3_psych_soc);
-      }
-      elseif ($major == "SOC") {
-        $results = array_merge($results, $comp3_soc_soc);
-      }
-    }
-    elseif ($faculty == "MATH") {
-      if ($major == "CS") {
-        $results = array_merge($results, $comp3_bioinformatics_club);
-      }
-      elseif ($major == "ACTSC" || $major == "STAT") {
-        $results = array_merge($results, $compr3_farmsa);
-      }
-      $results = array_merge($results, $comp3_mathsoc);
-    }
-    elseif ($faculty == "SCI") {
-      if ($major == "BIO") {
-        $results = array_merge($results, $comp3_bioinformatics_club);
-      }
-    }
-
-    if (empty($results)) {
-      $results = array_merge($results, $comp3_student_soc);
-    }
-
-    return $results;
-  }
-
-/**
- * @param $faculty
- * @param $skills
- *
- * @return array
- * Helper function to get University college positions
- */
-  function get_university_colleges_positions($faculty, $tasks) {
-    global $comp3_uni_college;
-    global $comp3_renison_don;
-    global $comp3_renison_base;
-    global $comp3_renison_eli;
-    global $comp3_stpaul_don;
-    global $comp3_stpaul_leader;
-    $results = array();
-
-    if($faculty == "ENV") {
-      if(in_array("MARKCOMMS", $tasks) || in_array("LEAD", $tasks) || in_array("TEAM", $tasks)){
-        $results = array_merge($results, $comp3_stpaul_leader);
-      }
-    }
-    if (in_array("TEAM", $tasks)) {
-      $results = array_merge($results, $comp3_renison_don);
-      $results = array_merge($results, $comp3_stpaul_don);
-    }
-
-    if (in_array("SUPPORT", $tasks)) {
-      $results = array_merge($results, $comp3_renison_base);
-      $results = array_merge($results, $comp3_renison_eli);
-    }
-
-    if (in_array("LEAD", $tasks)) {
-      $results = array_merge($results, $comp3_renison_don);
-      $results = array_merge($results, $comp3_stpaul_don);
-    }
-
-    if (empty($results)) {
-      $results = array_merge($results, $comp3_uni_college);
-    }
-    return array_unique($results);
-  }
-
-/**
- * @param $faculty
- * @param $major
- * @param $tasks
- *
- * @return array
- * Helper function to get Housing and Althletics positions
- */
-function get_housing_athletics_positions($faculty, $major ,$tasks) {
-  global $comp3_student_services;
-  global $comp3_first_aid;
-  global $comp3_intramural_referee;
-  global $comp3_lifeguard;
-  global $comp3_leave_the_pack;
-  global $comp3_health_educator;
-  global $comp3_single_sexy_performer;
-  global $comp3_residence_don;
-  global $comp3_library_associate;
-  global $comp3_food_services;
-  global $comp3_computing_consultant;
-  global $comp3_student_ambassador;
-
-  $results = array();
-  if($faculty == "MATH" && $major == "CS" && in_array("SERROLES", $tasks)){
-    $results = array_merge($results, $comp3_computing_consultant);
-  }
-
-  if (in_array("TEAM", $tasks)) {
-    $results = array_merge($results, $comp3_intramural_referee);
-    $results = array_merge($results, $comp3_single_sexy_performer);
-    $results = array_merge($results, $comp3_residence_don);
-    $results = array_merge($results, $comp3_library_associate);
-    $results = array_merge($results, $comp3_food_services);
-    $results = array_merge($results, $comp3_student_ambassador);
-  }
-
-  if (in_array("LEAD", $tasks)) {
-    $results = array_merge($results, $comp3_health_educator);
-    $results = array_merge($results, $comp3_residence_don);
-    $results = array_merge($results, $comp3_student_ambassador);
-  }
-
-  if (in_array("EVENTS", $tasks)) {
-    $results = array_merge($results, $comp3_student_ambassador);
-  }
-
-  if (in_array("MARKCOMMS", $tasks)) {
-    $results = array_merge($results, $comp3_computing_consultant);
-    $results = array_merge($results, $comp3_library_associate);
-    $results = array_merge($results, $comp3_student_ambassador);
-  }
-
-  if (in_array("HLTHLIFE", $tasks)) {
-    $results = array_merge($results, $comp3_first_aid);
-    $results = array_merge($results, $comp3_intramural_referee);
-    $results = array_merge($results, $comp3_lifeguard);
-    $results = array_merge($results, $comp3_leave_the_pack);
-    $results = array_merge($results, $comp3_health_educator);
-    $results = array_merge($results, $comp3_single_sexy_performer);
-  }
-
-  if (in_array("SERROLES", $tasks)) {
-    $results = array_merge($results, $comp3_computing_consultant);
-    $results = array_merge($results, $comp3_library_associate);
-    $results = array_merge($results, $comp3_food_services);
-  }
-
-  if (empty($results)) {
-    $results = array_merge($results, $comp3_student_services);
-  }
-  return array_unique($results);
-}
-
-function get_feds_positions($tasks) {
-  global $comp3_feds_services;
-  global $comp3_bike_centre;
-  global $comp3_response_team;
-  global $comp3_coop_connection;
-  global $comp3_food_bank;
-  global $comp3_glow;
-  global $comp3_student_network;
-  global $comp3_mates;
-  global $comp3_community_don;
-  global $comp3_sustainable_campus;
-  global $comp3_volunteer_centre;
-  global $comp3_warrior_tribe;
-  global $comp3_womens_centre;
-
-  $results = array();
-
-  if (in_array("TEAM", $tasks)) {
-    $results = array_merge($results, $comp3_response_team);
-    $results = array_merge($results, $comp3_coop_connection);
-    $results = array_merge($results, $comp3_food_bank);
-    $results = array_merge($results, $comp3_student_network);
-    $results = array_merge($results, $comp3_mates);
-    $results = array_merge($results, $comp3_community_don);
-    $results = array_merge($results, $comp3_sustainable_campus);
-    $results = array_merge($results, $comp3_volunteer_centre);
-    $results = array_merge($results, $comp3_warrior_tribe);
-  }
-
-  if (in_array("SUPPORT", $tasks)) {
-    $results = array_merge($results, $comp3_glow);
-    $results = array_merge($results, $comp3_mates);
-    $results = array_merge($results, $comp3_womens_centre);
-  }
-
-  if (in_array("LEAD", $tasks)) {
-    $results = array_merge($results, $comp3_community_don);
-  }
-
-  if (in_array("EVENTS", $tasks)) {
-    $results = array_merge($results, $comp3_coop_connection);
-    $results = array_merge($results, $comp3_student_network);
-  }
-
-  if (in_array("HLTHLIFE", $tasks)) {
-    $results = array_merge($results, $comp3_bike_centre);
-    $results = array_merge($results, $comp3_response_team);
-    $results = array_merge($results, $comp3_food_bank);
-    $results = array_merge($results, $comp3_sustainable_campus);
-    $results = array_merge($results, $comp3_womens_centre);
-  }
-
-  if (in_array("SERROLES", $tasks)) {
-    $results = array_merge($results, $comp3_bike_centre);
-    $results = array_merge($results, $comp3_response_team);
-    $results = array_merge($results, $comp3_volunteer_centre);
-    $results = array_merge($results, $comp3_warrior_tribe);
-  }
-
-  if (empty($results)) {
-    $results = array_merge($results, $comp3_feds_services);
-  }
-  return array_unique($results);
-
-}
-
-/**
- * @return array
- * Generate the results for Component 1: Skills identification
- */
-  //TODO: Change if conditions to switch statements if required
-  function get_comp1() {
-    global $submission;
-    global $comp1_all_courses;
-    global $comp1_ahs_courses;
-    global $comp1_env_courses;
-    global $comp1_math_courses;
-    global $comp1_descr;
-
-    if ($submission->data[2][0] == "AHS") {
-      $retval[] = get_random_element($comp1_ahs_courses);
-    }
-    elseif ($submission->data[2][0] == "ENV") {
-      $retval[] = get_random_element($comp1_env_courses);
-    }
-    elseif ($submission->data[2][0] == "MATH") {
-      $retval[] = get_random_element($comp1_math_courses);
-    }
-    else {
-      $retval[] = get_random_element($comp1_all_courses);
-    }
-
-    if (is_course($retval[0])) {
-      $retval[] = $retval[0] . $comp1_descr["COURSE"];
-    }
-    else {
-      $retval[] = $comp1_descr[$retval[0]];
-    }
-    return $retval;
-  }
-
-/**
+ * Cross checks submission values with the given rule
  * @param $data
  * @param $rule
  *
  * @return bool
- * Cross checks submission values with the given rule
  */
   function rule_met($data, $rule) {
     $length = count($data);
@@ -519,7 +173,10 @@ function get_feds_positions($tasks) {
   }
 
 /**
+ * Obtains the 1st component of the EDGE path
+ * @param $submission
  *
+ * @return string
  */
   function get_component1($submission) {
     $query = db_select('find_your_edge_rulesets', 'fyer')
@@ -549,33 +206,9 @@ function get_feds_positions($tasks) {
     return get_random_element($results);
   }
 
-/**
- * @return array
- * Generate the results for Component 2: Career Development Course
- */
-  function get_comp2() {
-    global $submission;
-    global $comp2_all_courses;
-    global $comp2_arts_all_courses;
-    global $comp2_arts_psci_courses;
-    global $comp2_descr;
-
-    $major = get_major();
-    if ($submission->data[2][0] == "ART" && $major == "PSCI") {
-      $retval[] = get_random_element($comp2_arts_psci_courses);
-    }
-    elseif ($submission->data[2][0] == "ART") {
-      $retval[] = get_random_element($comp2_arts_all_courses);
-    }
-    else {
-      $retval[] = get_random_element($comp2_all_courses);
-    }
-    $retval[] = $retval[0] . $comp2_descr["COURSE"];
-    return $retval;
-  }
-
 
 /**
+ * Obtains the 2nd component of the EDGE path
  * @param $submission
  *
  * @return string
@@ -609,253 +242,14 @@ function get_feds_positions($tasks) {
   }
 
 /**
+ * Obtains the 3rd component of the EDGE path.
+ * Note: Only 1 Don position can be used as an experience at a time.
+ * Furthermore, once a specific on-campus experience has been found, its
+ * corresponding general result will be removed from the list of possible results
+ * @param $submission
+ *
  * @return array
- * Generate the results for Component 3: Work/Community Experiences
  */
-  function get_comp3() {
-    global $submission;
-    global $comp3_ahs_health_courses;
-    global $comp3_ahs_kin_courses;
-    global $comp3_ahs_therap_courses;
-    global $comp3_ahs_rec_courses;
-    global $comp3_arts_drama_courses;
-    global $comp3_arts_fine_courses;
-    global $comp3_arts_gbda_courses;
-    global $comp3_arts_ger_courses;
-    global $comp3_arts_ls_courses;
-    global $comp3_arts_pac_courses;
-    global $comp3_arts_psci_courses;
-    global $comp3_arts_psych_courses;
-    global $comp3_arts_sds_courses;
-    global $comp3_arts_smf_courses;
-    global $comp3_arts_soc_courses;
-    global $comp3_env_enbus_courses;
-    global $comp3_env_ers_courses;
-    global $comp3_env_indev_courses;
-    global $comp3_env_integ_courses;
-    global $comp3_sci_scbus_courses;
-    global $comp3_fed_clubs;
-    global $comp3_full_time;
-    global $comp3_part_time;
-    global $comp3_volunteering;
-    global $comp3_service_learning;
-    global $comp3_descr;
-
-    $results_list = array();
-    $faculty = $submission->data[2][0];
-    $major = get_major();
-    $tasks = $submission->data[14];
-    if (in_array("ACA", $submission->data[8])) {
-      if ($faculty == "AHS") {
-        switch ($major) {
-          case "HLTH":
-            $results_list = array_merge($results_list, $comp3_ahs_health_courses);
-            break;
-          case "KIN":
-            $results_list = array_merge($results_list, $comp3_ahs_kin_courses);
-            break;
-          case "RECBUS":
-            $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
-            break;
-          case "THERAP":
-            $results_list = array_merge($results_list, $comp3_ahs_therap_courses);
-            $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
-            break;
-          case "TOUR":
-            $results_list = array_merge($results_list, $comp3_ahs_rec_courses);
-            break;
-          default:
-            break;
-        }
-      }
-      elseif ($faculty == "ART") {
-        switch ($major) {
-          case "THEAT":
-            $results_list = array_merge($results_list, $comp3_arts_drama_courses);
-            break;
-          case "FINE":
-            $results_list = array_merge($results_list, $comp3_arts_fine_courses);
-            break;
-          case "GBDA":
-            $results_list = array_merge($results_list, $comp3_arts_gbda_courses);
-            break;
-          case "GER":
-            $results_list = array_merge($results_list, $comp3_arts_ger_courses);
-            break;
-          case "LS":
-            $results_list = array_merge($results_list, $comp3_arts_ls_courses);
-            break;
-          case "PACS":
-            $results_list = array_merge($results_list, $comp3_arts_pac_courses);
-            break;
-          case "PSCI":
-            $results_list = array_merge($results_list, $comp3_arts_psci_courses);
-            break;
-          case "PSYCH":
-            $results_list = array_merge($results_list, $comp3_arts_psych_courses);
-            break;
-          case "SDS":
-            $results_list = array_merge($results_list, $comp3_arts_sds_courses);
-            break;
-          case "SMF":
-            $results_list = array_merge($results_list, $comp3_arts_smf_courses);
-            break;
-          case "SOC":
-            $results_list = array_merge($results_list, $comp3_arts_soc_courses);
-            break;
-          default:
-            break;
-        }
-      }
-      elseif ($faculty == "ENV") {
-        switch ($major) {
-          case "ENBUS":
-            $results_list = array_merge($results_list, $comp3_env_enbus_courses);
-            break;
-          case "ERS":
-            $results_list = array_merge($results_list, $comp3_env_ers_courses);
-            break;
-          case "INDEV":
-            $results_list = array_merge($results_list, $comp3_env_indev_courses);
-            break;
-          case "INTEG":
-            $results_list = array_merge($results_list, $comp3_env_integ_courses);
-            break;
-          default:
-            break;
-        }
-      }
-      elseif ($faculty == "SCI") {
-        switch ($major) {
-          case "SCBUS":
-            $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
-            break;
-          case "BIOTECO":
-            $results_list = array_merge($results_list, $comp3_sci_scbus_courses);
-            break;
-        }
-      }
-    }//End outer if (type==aca)
-
-    if (in_array("ON", $submission->data[8])) {
-      $exp = $submission->data[9];
-      if (in_array("FAC", $exp)) {
-        $results_list = array_merge($results_list, get_faculty_positions($faculty, $major));
-      }
-      if (in_array("UC", $exp)) {
-        $results_list = array_merge($results_list, get_university_colleges_positions($faculty, $tasks));
-      }
-      if (in_array("SSOC", $exp)) {
-        $results_list = array_merge($results_list, get_student_society_positions($faculty, $major));
-      }
-      if (in_array("CLUBS", $exp)) {
-        $results_list = array_merge($results_list, $comp3_fed_clubs);
-      }
-      if (in_array("HOUSEATHL", $exp)) {
-        $results_list = array_merge($results_list, get_housing_athletics_positions($faculty, $major, $tasks));
-      }
-      if (in_array("FEDS", $exp)) {
-        $results_list = array_merge($results_list, get_feds_positions($tasks));
-      }
-    }
-
-    if (in_array("OFF", $submission->data[8])) {
-      $exp = $submission->data[10];
-      //Full time and Part time can only available to Non-international students
-      if (in_array("FULL", $exp) && $submission->data[1][0] == 2) {
-        $results_list = array_merge($results_list, $comp3_full_time);
-      }
-      if (in_array("PART", $exp) && $submission->data[1][0] == 2) {
-        $results_list = array_merge($results_list, $comp3_part_time);
-      }
-      if (in_array("VOL", $exp)) {
-        $results_list = array_merge($results_list, $comp3_volunteering);
-      }
-      if (in_array("SERVICE", $exp)) {
-        $results_list = array_merge($results_list, $comp3_service_learning);
-      }
-    }
-
-    //Debug
-    dsm($results_list);
-
-    $results = array();
-    $descr = array();
-    //Must check if there is not enough experiences
-    if (count($results_list) < 3) {
-      while (count($results_list) < 3) {
-        $results_list[] = "No Experiences";
-      }
-      $results = $results_list;
-    }
-    else {
-      for ($i = 0; $i < 3; $i++) {
-        $results[$i] = get_random_element($results_list);
-        //Delete from array to avoid duplicates
-        $element = array_search($results[$i], $results_list);
-        unset($results_list[$element]);
-        //Reindex the keys in array
-        $results_list = array_values($results_list);
-
-        //If we've found a Don position, filter out the rest so we can't get another
-        //This should only be true at most ONCE
-        if (is_don_position($results[$i])) {
-          $results_list = filter_don_positions($results_list);
-        }
-      }
-    }
-
-    //Obtain the PD course
-    $pd_skills = $submission->data[15];
-    $pd_courses = array();
-    if (in_array("COMM", $pd_skills)) {
-      $pd_courses[] = "PD3";
-    }
-    if (in_array("TEAMWORK", $pd_skills)) {
-      $pd_courses[] = "PD4";
-    }
-    if (in_array("PROMAN", $pd_skills)) {
-      $pd_courses[] = "PD5";
-    }
-    if (in_array("SOLVE", $pd_skills)) {
-      $pd_courses[] = "PD6";
-    }
-    if (in_array("CONFLICT", $pd_skills)) {
-      $pd_courses[] = "PD7";
-    }
-    if (in_array("INTERCULT", $pd_skills)) {
-      $pd_courses[] = "PD8";
-    }
-    if (in_array("ETHICDEC", $pd_skills)) {
-      $pd_courses[] = "PD9";
-    }
-    if (in_array("ETHICS", $pd_skills)) {
-      $pd_courses[] = "PD10";
-    }
-
-    //Debug
-    //dsm($pd_courses);
-    $results[] = get_random_element($pd_courses);
-
-    //Now obtain the corresponding description for each result
-    for ($i = 0; $i < 4; $i++) {
-      if (is_course($results[$i]) && !is_pd_course($results[$i])) {
-        $descr[] = $results[$i] . $comp3_descr["COURSE"];
-      }
-      else {
-        $descr[] = $comp3_descr[$results[$i]];
-      }
-    }
-    $retval = array(
-      "RESULT" => $results,
-      "DESCR" => $descr,
-    );
-    return $retval;
-
-  }//End function
-
-
-
   function get_component3($submission) {
     $query = db_select('find_your_edge_rulesets', 'fyer')
       ->fields('fyer')
@@ -1054,7 +448,10 @@ function get_feds_positions($tasks) {
 
 
 /**
+ * Obtains the PD course for the EDGE path
+ * @param $submission
  *
+ * @return string
  */
   function get_component_pd($submission) {
     $query = db_select('find_your_edge_rulesets', 'fyer')
@@ -1083,46 +480,8 @@ function get_feds_positions($tasks) {
   }
 
 
-
 /**
- * @return array
- * Generate result for Component 4: Capstone Workshop
- */
-  function get_comp4() {
-    global $submission;
-    global $comp4_capstone_work;
-    global $comp4_capstone_grad;
-    global $comp4_capstone_prof;
-    global $comp4_capstone_noplan;
-    global $comp4_capstone_other;
-    global $comp4_descr;
-
-    $plans = $submission->data[11][0];
-    $retval = array();
-    switch ($plans) {
-      case "WORK":
-        $retval[] = get_random_element($comp4_capstone_work);
-        break;
-      case "GRAD":
-        $retval[] = get_random_element($comp4_capstone_grad);
-        break;
-      case "PROF":
-        $retval[] = get_random_element($comp4_capstone_prof);
-        break;
-      case "NOPLAN":
-        $retval[] = get_random_element($comp4_capstone_noplan);
-        break;
-      case "OTHER":
-        $retval[] = get_random_element($comp4_capstone_other);
-        break;
-      default:
-        break;
-    }
-    $retval[] = $comp4_descr[$retval[0]];
-    return $retval;
-  }
-
-/**
+ * Obtains the 4th component of the EDGE path
  * @param $submission
  *
  * @return string
@@ -1153,76 +512,6 @@ function get_feds_positions($tasks) {
     return get_random_element($results);
   }
 
-/**
- * @param $string -> the string of the course code
- * @return string -> The return value will have the form
- * https://ugradcalendar.uwaterloo.ca/courses/$string[0-i]/$string[i-j]
- * The purpose of this function is to generate the href for the course code.
- */
-  function gen_link($string) {
-    global $comp3_urls;
-    //TODO: Decide whether to put these into const_defs.php and combine in comp3_urls
-    $on_campus_general = array(
-      "University colleges",
-      "Student societies",
-      "Faculties",
-      "Feds services",
-      "Student services",
-    );
-
-    $off_campus_general = array(
-      "Full-time",
-      "Part-time",
-      "Volunteering",
-      "Service learning",
-    );
-
-    $capstone = array(
-      "Working Full-time",
-      "Graduate School",
-      "Professional School",
-      "No Plans",
-      "Other",
-    );
-
-    if ($string == "No Experiences") {
-      return "";
-    }
-    elseif ($string == "CCA/EDGE Workshop") {
-      return "https://uwaterloo.ca/career-action/appointments-workshops";
-    }
-    elseif (in_array($string, $on_campus_general)) {
-      return "https://uwaterloo.ca/edge/students/edge-experiences";
-    }
-    elseif (in_array($string, $off_campus_general)) {
-      return "https://uwaterloo.ca/edge/students/types-edge-experiences";
-    }
-    elseif (in_array($string, $capstone)) {
-      return "https://uwaterloo.ca/edge/capstone-workshop";
-    }
-    elseif (!is_pd_course($string) && is_course($string)) {
-      $link = "https://ugradcalendar.uwaterloo.ca/courses/";
-      $course_alpha = "";
-      $course_num = "";
-      $len = strlen($string);
-      $string = str_replace(' ', '', $string);
-      for ($i = 0; $i < strlen($string); $i++) {
-        $char = $string[$i];
-        if (!ctype_alpha($char)) {
-          $course_num = substr($string, $i, $len);
-          break;
-        }
-        else {
-          $course_alpha .= $char;
-        }
-      }
-      $link .= $course_alpha . "/" . $course_num;
-      return $link;
-    }
-    else{
-      return $comp3_urls[$string];
-    }
-  }
 
 /**
  * @param $string
@@ -1243,22 +532,6 @@ function get_feds_positions($tasks) {
     if ($string != "No Experiences") {
       print '</a>';
     }
-  }
-
-/**
- * Provides the start and end of <a> tag for edge courses
- */
-  function link_to_edge_courses() {
-    print '<a href="https://uwaterloo.ca/edge/edge-courses" target="_blank">' .
-      t('EDGE courses.') . '</a>';
-  }
-
-  function gen_descr($key, $descr){
-    print "<p>" . t('@descr', array('@descr' => $descr));
-    if($key == "PD1" || (!is_pd_course($key) && is_course($key))) {
-      link_to_edge_courses();
-    }
-    print "</p>";
   }
 
 /**
@@ -1286,22 +559,6 @@ function get_feds_positions($tasks) {
  */
   function pdf_store_results($sid, $component1, $component2, $component3, $component_pd, $component4) {
     //Attempt to write to database for pdf use
-    /*$result_db = new stdClass();
-    $result_db->sid = $sid;
-    $result_db->component1 = $comp1[0];
-    $result_db->component1_descr = pdf_process($comp1[0],$comp1[1]);
-    $result_db->component2 = $comp2[0];
-    $result_db->component2_descr = pdf_process($comp2[0], $comp2[1]);
-    $result_db->component3a = $comp3['RESULT'][0];
-    $result_db->component3a_descr = pdf_process($comp3['RESULT'][0], $comp3['DESCR'][0]);
-    $result_db->component3b = $comp3['RESULT'][1];
-    $result_db->component3b_descr = pdf_process($comp3['RESULT'][1], $comp3['DESCR'][1]);
-    $result_db->component3c = $comp3['RESULT'][2];
-    $result_db->component3c_descr = pdf_process($comp3['RESULT'][2], $comp3['DESCR'][2]);
-    $result_db->component3_pd = $comp3['RESULT'][3];
-    $result_db->component3_pd_descr = pdf_process($comp3['RESULT'][3], $comp3['DESCR'][3]);
-    $result_db->component4 = $comp4[0];
-    $result_db->component4_descr = pdf_process($comp4[0], $comp4[1]);*/
     $result_db = new stdClass();
     $result_db->sid = $sid;
     $result_db->component1 = $component1->result;
@@ -1332,10 +589,12 @@ function get_feds_positions($tasks) {
     }
   }
 
-  /*$comp1 = get_comp1();
-  $comp2 = get_comp2();
-  $comp3 = get_comp3();
-  $comp4 = get_comp4();*/
+  $sid = $_GET['sid'];
+  $submission = webform_get_submission($node->nid, $sid);
+  $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
+  //Debug
+  dsm($submission);
+
   $component1 = get_component1($submission);
   $component2 = get_component2($submission);
   $component3 = get_component3($submission);
@@ -1347,18 +606,8 @@ function get_feds_positions($tasks) {
 
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
-<!--TODO: REQUIRED: adjust nid for production site (breadcrumbs, template file, theme registry) -->
-<!--TODO: REQUIRED: remove todos in production -->
-<!--TODO: REQUIRED: adjust URLS to match production (back-button, breadcrumbs) -->
-<!--TODO: Find a clean way to incorporate course descriptions -->
 <!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
-<!--TODO: Check if JS is getting used on other nodes -->
 <!--TODO: purge submissions and results table-->
-<!--TODO: Use const in const_defs -->
-<!--TODO: Only need to check $major, since there are no overlapping majors -->
-<!--TODO: Next/Prev buttons may need to be reverted to original CSS -->
-<!--TODO: Check edge case for Don positions -->
-<!--TODO: Remove unnecessary arrays from const_defs, just use it as a string instead -->
 <!--TODO: Add in proper KEYS for international and others -->
 <!--TODO: Check up on NOT IN sql query -->
 
@@ -1382,8 +631,7 @@ function get_feds_positions($tasks) {
   <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-      <?php //gen_href_start($comp1[0], gen_link($comp1[0]));
-            gen_href_start($component1->result, $component1->url) ?>
+      <?php gen_href_start($component1->result, $component1->url) ?>
         <div class="call-to-action-wrapper">
           <div class="call-to-action-theme-uWaterloo">
             <div class="call-to-action-big-text"> <?php print $component1->result ?> </div>
@@ -1396,8 +644,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp1[0], $comp1[1]);
-            print $component1->description?>
+      <?php print $component1->description?>
     </div>
   </div>
 
@@ -1408,8 +655,7 @@ function get_feds_positions($tasks) {
   <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php //gen_href_start($comp2[0], gen_link($comp2[0]));
-              gen_href_start($component2->result, $component2->url); ?>
+        <?php gen_href_start($component2->result, $component2->url); ?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $component2->result ?> </div>
@@ -1422,8 +668,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp2[0], $comp2[1]);
-            print $component2->description ?>
+      <?php print $component2->description ?>
     </div>
   </div>
 
@@ -1434,8 +679,7 @@ function get_feds_positions($tasks) {
   <div class="flex-component-block">
     <div class="component_square">
       <div class="call-to-action-top-wrapper">
-        <?php //gen_href_start($comp3["RESULT"][0] , gen_link($comp3["RESULT"][0]));
-               gen_href_start($component3[0]->result , $component3[0]->url);?>
+        <?php gen_href_start($component3[0]->result , $component3[0]->url);?>
           <div class="call-to-action-wrapper">
             <div class="call-to-action-theme-uWaterloo">
               <div class="call-to-action-big-text"> <?php print $component3[0]->result ?> </div>
@@ -1448,8 +692,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp3["RESULT"][0], $comp3["DESCR"][0]);
-            print $component3[0]->description ?>
+      <?php print $component3[0]->description ?>
     </div>
   </div>
 
@@ -1469,8 +712,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp3["RESULT"][1], $comp3["DESCR"][1]);
-            print $component3[1]->description ?>
+      <?php print $component3[1]->description ?>
     </div>
   </div>
 
@@ -1490,8 +732,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp3["RESULT"][2], $comp3["DESCR"][2]);
-            print $component3[2]->description ?>
+      <?php print $component3[2]->description ?>
     </div>
   </div>
 
@@ -1518,8 +759,7 @@ function get_feds_positions($tasks) {
     }
   ?>
     <div>
-      <?php //gen_descr($comp3["RESULT"][3], $comp3["DESCR"][3]);
-            print $component_pd->description ?>
+      <?php print $component_pd->description ?>
     </div>
   </div>
 
@@ -1554,8 +794,7 @@ function get_feds_positions($tasks) {
 
   <div class="flex-component-description">
     <div>
-      <?php //gen_descr($comp4[0], $comp4[1]);
-            print $component4->description ?>
+      <?php print $component4->description ?>
     </div>
   </div>
 
