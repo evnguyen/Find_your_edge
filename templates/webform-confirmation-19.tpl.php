@@ -417,9 +417,10 @@
     if (count($results) < 3) {
       while (count($results) < 3) {
         $ruleset = new stdClass();
-        $ruleset->result = "No Experiences";
+        $ruleset->result = "Other Experience";
         //No lines breaks since it will be picked up when generating the PDF
-        $ruleset->description = "We’re having trouble finding experiences for your EDGE. That doesn't mean they don't exist. Consider retaking the quiz or contacting the EDGE team for assistance.";
+        //TODO: fix for PDF
+        $ruleset->description = "We couldn't create a full set of experiences based on your responses. You can still complete this milestone using experiences that aren't in our database. Visit our page devoted to the different <a href=\"https://uwaterloo.ca/edge/students/types-edge-experiences\" target=\"_blank\">types of EDGE experiences</a> to learn more about the criteria for this milestone.";
         $ruleset->url = "";
         $results[] = $ruleset;
       }
@@ -546,6 +547,9 @@
     if((is_course($key) && !is_pd_course($key)) || $key == "PD1") {
       $value .= 'EDGE courses.';
     }
+    elseif ($key == "Other Experience") {
+      $value .= 'types of EDGE experiences to learn more about the criteria for this milestone.';
+    }
     return $value;
   }
 
@@ -614,18 +618,21 @@
 <div class="flex-container">
 
   <div class="flex-message">
-    <p>Based on your program of study and interests, here are some courses and
-      experiences you can take to fulfill the components of the EDGE program.
-      You don't have to complete these courses and experience in the order in
-      which they're displayed. Make sure to check out the prerequisites and
-      scheduling governing your results before planning your journey through EDGE.
-      If you need help making a plan, contact Ben McDonald at
-    <a href="mailto:ben.mcdonald@uwaterloo.ca">ben.mcdonald@uwaterloo.ca.</a>
+    <p>We're recommending the following EDGE courses, workshops and opportunities
+      based on your responses. You can complete these milestones during any term
+      and in almost any order you choose. It may be possible for you to complete
+      EDGE with an entirely different set of milestones — these are just recommendations.
+      The choice is ultimately yours.</p>
+    <p>If you're ready to take the next step, you can register for EDGE by submitting the
+      <a href="https://uwaterloo.ca/edge/registration-form" target="_blank">registration form</a>
+      available on our website. If you have any questions or concerns about the registration process,
+      contact EDGE instructional support coordinator Ben McDonald at
+      <a href="mailto:ben.mcdonald@uwaterloo.ca">ben.mcdonald@uwaterloo.ca.</a>
     </p>
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Component 1: Skills Identification and Articulation Workshop</h5>
+    <h5>Skills Identification and Articulation Workshop</h5>
 </div>
 
   <div class="flex-component-block">
@@ -649,7 +656,7 @@
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Component 2: Career Development Course</h5>
+    <h5>Career Development Course</h5>
   </div>
 
   <div class="flex-component-block">
@@ -673,7 +680,7 @@
   </div>
 
    <div class="flex-component-title margin-top">
-    <h5>Component 3: Work/Community Experiences</h5>
+    <h5>Work and Community Experiences</h5>
   </div>
 
   <div class="flex-component-block">
@@ -766,16 +773,16 @@
   <div>
     <?php
         if($submission->data[1][0] == 1) {
-          print '<p> There may be additional factors and/or complications 
-          related to pursuing full- or part-time work based on work permits, 
-          student visas, etc. Please contact the EDGE team at <a href="mailto:edge@uwaterloo.ca">edge@uwaterloo.ca</a> 
-          for more information. </p>';
+          print '<p> If you\'re an international student, you may need to adjust your path 
+          through EDGE depending on your student visa and/or work permits. It\'s possible to complete 
+          EDGE with experiential learning courses and on-campus experiences that don\'t involve permits. 
+          For more information, contact the EDGE team at <a href="mailto:edge@uwaterloo.ca">edge@uwaterloo.ca</a>. </p>';
         }
       ?>
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Component 4: Capstone Workshop</h5>
+    <h5>Capstone Workshop</h5>
   </div>
 
   <div class="flex-component-block">
@@ -802,8 +809,8 @@
     <p> Click
       <?php
         if($submission->data[1][0] == 1) {
-          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          //print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
         }
         else {
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';

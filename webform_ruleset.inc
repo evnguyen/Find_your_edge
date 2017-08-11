@@ -12,11 +12,8 @@
  */
 
 /**
- * TODO: Need a way to prompt user there is unsaved work ->
  * TODO: Add a method to import CSV file?
- * TODO: Need a way to check for empty textfield?
  * TODO: Add some cool CSS (red delete button, red 'unsaved' ruleset)
- * TODO: Add no experiences fieldset OR use norule for it and just add some logic
  * TODO: Add drupal_set_message for all deletions
  */
 
@@ -190,7 +187,6 @@ function webform_ruleset_form($form, &$form_state) {
     $form_state['ruleset_ids_to_save_component4'] = array();
 
   }
-
 
   //First create base form
   $form['component1'] = array(
@@ -462,7 +458,6 @@ function webform_ruleset_form_add_ruleset($form, &$form_state) {
 function webform_ruleset_form_delete_ruleset($form, &$form_state) {
   $ruleset_id = get_number($form_state['triggering_element']['#name']);
   //If creation/deletion gets messed up, delete by rule value
-  //$rule = $form_state['values']['rule' . $ruleset_id];
 
   //dsm($form_state['triggering_element']['#name']);
 
@@ -472,28 +467,7 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
     ->condition('ruleset_id', $ruleset_id)
     ->execute()
     ->fetchAll();
-  /*if (count($query) == 0) {
-    if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save'])) !== FALSE) {
-      unset($form_state['ruleset_ids_to_save'][$index]);
-      //Re-index array
-      $form_state['ruleset_ids_to_save'] = array_values($form_state['ruleset_ids_to_save']);
-      //$form_state['ruleset_add_count']--;
-      if ($form_state['ruleset_add_count_comp1'] > 0) {
-        $form_state['ruleset_add_count_comp1']--;
-      }
-      if ($form_state['ruleset_add_count_comp2'] > 0) {
-        $form_state['ruleset_add_count_comp2']--;
-      }
-      if ($form_state['ruleset_add_count_comp3'] > 0) {
-        $form_state['ruleset_add_count_comp3']--;
-      }
-      if ($form_state['ruleset_add_count_comppd'] > 0) {
-        $form_state['ruleset_add_count_comppd']--;
-      }
-      if ($form_state['ruleset_add_count_comp4'] > 0) {
-        $form_state['ruleset_add_count_comp4']--;
-      }
-    }*/
+
     if (count($query) == 0) {
       if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component1'])) !== FALSE) {
         unset($form_state['ruleset_ids_to_save_component1'][$index]);
