@@ -1,18 +1,3 @@
-.uw-site-content{
-  width: 100%;
-}
-
-.flex-container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: row;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-}
-
 @media only screen and (max-width: 999px){
   .flex-component-block{
     flex-basis: 100%;
@@ -166,6 +151,21 @@
     border-top-width: 1px;
   }
 } /**End @media**/
+
+.uw-site-content{
+  width: 100%;
+}
+
+.flex-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+}
 
 .flex-component-title{
   flex-basis:100%;

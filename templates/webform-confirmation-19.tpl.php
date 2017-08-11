@@ -809,8 +809,8 @@
     <p> Click
       <?php
         if($submission->data[1][0] == 1) {
-          print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
-          //print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
         }
         else {
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';
