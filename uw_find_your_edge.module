@@ -126,6 +126,24 @@ function uw_find_your_edge_config_form($form, &$form_state) {
     '#default_value' => variable_get('uw_find_your_edge_nid', 19),
     '#required' => TRUE,
   );
+  $form['uw_find_your_edge_fid_regular'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form ID for regular students'),
+    '#size' => 5,
+    '#maxlength' => 5,
+    '#description' => t('Specify which form to use when generating the PDF for regular students'),
+    '#default_value' => variable_get('uw_find_your_edge_fid_regular', 0),
+    '#required' => TRUE,
+  );
+  $form['uw_find_your_edge_fid_international'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Form ID for international students'),
+    '#size' => 5,
+    '#maxlength' => 5,
+    '#description' => t('Specify which form to use when generating the PDF for international students'),
+    '#default_value' => variable_get('uw_find_your_edge_fid_international', 0),
+    '#required' => TRUE,
+  );
   drupal_theme_rebuild();
   return system_settings_form($form);
 }

@@ -810,12 +810,14 @@
     <p> Click
       <?php
         if($submission->data[1][0] == 1) {
+          $fid = variable_get('uw_find_your_edge_fid_international', 0);
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=46&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
         }
         else {
+          $fid = variable_get('uw_find_your_edge_fid_regular', 0);
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';
-          print '<a href="/edge/fillpdf?fid=44&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">here</a>';
         }
         ?>
         to generate a PDF version of your EDGE path.
