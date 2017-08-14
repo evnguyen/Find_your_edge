@@ -89,6 +89,33 @@ function uw_find_your_edge_menu() {
   return $items;
 }
 
+function uw_find_your_edge_block_info() {
+  $blocks = array();
+  $blocks['uw_find_your_edge'] = array(
+    'info' => t('Find your EDGE'),
+    'status' => 1,
+    'region' => 'dashboard_sidebar',
+    'weight' => 99,
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+
+  return $blocks;
+}
+
+function uw_find_your_edge_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'uw_find_your_edge':
+      $block['subject'] = t('Find your EDGE');
+      $block['content'] = array(
+        '#title' => t('EDGE'),
+        '#markup' => '<a href="config/content/uw_find_your_edge_config">Configure quiz</a>',
+      );
+      break;
+  }
+  return $block;
+}
+
 function uw_find_your_edge_config_form($form, &$form_state) {
   $form['uw_find_your_edge_nid'] = array(
     '#type' => 'textfield',
