@@ -446,7 +446,6 @@ function webform_ruleset_form_add_ruleset($form, &$form_state) {
     $form_state['ruleset_ids_to_save_component4'][] = $form_state['largest_ruleset_id'] + $sum;
   }
 
-
   $form_state['rebuild'] = TRUE;
 }
 
@@ -457,17 +456,13 @@ function webform_ruleset_form_add_ruleset($form, &$form_state) {
  */
 function webform_ruleset_form_delete_ruleset($form, &$form_state) {
   $ruleset_id = get_number($form_state['triggering_element']['#name']);
-  //If creation/deletion gets messed up, delete by rule value
 
-  //dsm($form_state['triggering_element']['#name']);
-
-  //Check if we are deleting an unsaved ruleset, if we are, then unset from list of unsaved rulesets
   $query = db_select('find_your_edge_rulesets', 'fyer')
     ->fields('fyer')
     ->condition('ruleset_id', $ruleset_id)
     ->execute()
     ->fetchAll();
-
+  //Check if we are deleting an unsaved ruleset, if we are, then unset from list of unsaved rulesets
     if (count($query) == 0) {
       if (($index = array_search($ruleset_id, $form_state['ruleset_ids_to_save_component1'])) !== FALSE) {
         unset($form_state['ruleset_ids_to_save_component1'][$index]);
@@ -511,7 +506,6 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
 
   db_delete('find_your_edge_rulesets')
     ->condition('ruleset_id', $ruleset_id)
-    //->condition('rule', $rule)
     ->execute();
   $form_state['rebuild'] = TRUE;
 }

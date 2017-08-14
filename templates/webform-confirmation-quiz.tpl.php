@@ -184,8 +184,6 @@
       ->condition('component', '1')
       ->execute()
       ->fetchAll();
-    //dsm($query);
-    //dsm($submission);
 
     $length = count($query);
     $results = array();
@@ -201,8 +199,6 @@
         }
       }
     }
-    dsm($results);
-
     return get_random_element($results);
   }
 
@@ -219,8 +215,6 @@
       ->condition('component', '2')
       ->execute()
       ->fetchAll();
-    //dsm($query);
-    //dsm($submission);
 
     $length = count($query);
     $results = array();
@@ -236,8 +230,6 @@
         }
       }
     }
-    dsm($results);
-
     return get_random_element($results);
   }
 
@@ -305,9 +297,6 @@
     $has_clubs = FALSE;
     $has_housing = FALSE;
     $has_feds = FALSE;
-
-    //dsm($query);;
-    //dsm($submission);
 
     $length = count($query);
     $results = array();
@@ -412,14 +401,11 @@
       }
     }
 
-    dsm($results);
-
     if (count($results) < 3) {
       while (count($results) < 3) {
         $ruleset = new stdClass();
         $ruleset->result = "Other Experience";
         //No lines breaks since it will be picked up when generating the PDF
-        //TODO: fix for PDF
         $ruleset->description = "We couldn't create a full set of experiences based on your responses. You can still complete this milestone using experiences that aren't in our database. Visit our page devoted to the different <a href=\"https://uwaterloo.ca/edge/students/types-edge-experiences\" target=\"_blank\">types of EDGE experiences</a> to learn more about the criteria for this milestone.";
         $ruleset->url = "";
         $results[] = $ruleset;
@@ -442,8 +428,6 @@
         }
       }
     }
-
-    //dsm($return_list);
     return $return_list;
   }
 
@@ -475,8 +459,6 @@
         }
       }
     }
-    dsm($results);
-
     return get_random_element($results);
   }
 
@@ -508,8 +490,6 @@
         }
       }
     }
-    //dsm($results);
-
     return get_random_element($results);
   }
 
@@ -517,20 +497,20 @@
 /**
  * @param $string
  * @param $link
- * Provides the start <a> tag if $string is not "No Experiences"
+ * Provides the start <a> tag if $string is not "Other Experience"
  */
   function gen_href_start($string, $link){
-    if ($string != "No Experiences") {
+    if ($string != "Other Experience") {
       print  '<a href="' . $link . '" target="_blank">';
     }
   }
 
 /**
  * @param $string
- * Provides the end <a> tag if $string is not "No Experiences"
+ * Provides the end <a> tag if $string is not "Other Experience"
  */
   function gen_href_end($string){
-    if ($string != "No Experiences") {
+    if ($string != "Other Experience") {
       print '</a>';
     }
   }
@@ -562,7 +542,6 @@
  * Write to database for pdf use
  */
   function pdf_store_results($sid, $component1, $component2, $component3, $component_pd, $component4) {
-    //Attempt to write to database for pdf use
     $result_db = new stdClass();
     $result_db->sid = $sid;
     $result_db->component1 = $component1->result;
@@ -597,7 +576,7 @@
   $submission = webform_get_submission($node->nid, $sid);
   $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
   //Debug
-  dsm($submission);
+  //dsm($submission);
 
   $component1 = get_component1($submission);
   $component2 = get_component2($submission);
@@ -610,11 +589,7 @@
 
 <!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
 <!--TODO: BUG: CAPTCHA session reuse attack detected -->
-<!--TODO: Clean up using coding standards/use drupal wrapper functions AND Clean up dead code -->
 <!--TODO: purge submissions and results table-->
-<!--TODO: Add in proper KEYS for international and others -->
-<!--TODO: Check up on NOT IN sql query -->
-<!--TODO: Add check for when SID does not exist for webform_get_submission -->
 
 <div class="flex-container">
 
@@ -759,7 +734,7 @@
   </div>
 
   <?php
-    if ($submission->data[1][0] == 1) {
+    if (isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
       print '<div id="pd-description-international" class="flex-component-description pd-block">';
     }
     else {
@@ -773,7 +748,7 @@
 
   <div>
     <?php
-        if($submission->data[1][0] == 1) {
+        if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
           print '<p> If you\'re an international student, you may need to adjust your path 
           through EDGE depending on your student visa and/or work permits. It\'s possible to complete 
           EDGE with experiential learning courses and on-campus experiences that don\'t involve permits. 
@@ -809,7 +784,7 @@
   <div class="flex-message margin-top">
     <p> Click
       <?php
-        if($submission->data[1][0] == 1) {
+        if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
           $fid = variable_get('uw_find_your_edge_fid_international', 0);
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
           print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
