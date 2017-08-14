@@ -20,7 +20,7 @@
 function uw_find_your_edge_page_build() {
   $path = current_path();
   $nid = variable_get('uw_find_your_edge_nid', 19);
-  if ($path == 'node/'. $nid .'/done') {
+  if ($path == 'node/' . $nid . '/done') {
     $breadcrumb = drupal_get_breadcrumb();
     $breadcrumb[1] = l(t('Find your EDGE'), '/find-your-edge');
     array_pop($breadcrumb);
