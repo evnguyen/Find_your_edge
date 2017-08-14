@@ -2,3 +2,4 @@ name = Find Your Edge
 description = Module which processes the submission data of the Find Your Edge webform and themes the confirmation page accordingly
 core = 7.x
 scripts[] = js/fye_script.js
+configure = admin/config/content/uw_find_your_edge_config

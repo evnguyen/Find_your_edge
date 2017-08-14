@@ -32,15 +32,16 @@ function uw_find_your_edge_page_build() {
  * Changes the confirmation page's theme.
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
-  //dsm('inside theme_registry_alter');
-  $value = "testvalue";
   //WMS-DEV nid = 36
+  $nid = variable_get('uw_find_your_edge_nid', 19);
+  $node = menu_get_object();
+  
+  //TODO: uw_find_your_edge_nid works but cache must be cleared
   $theme_registry['webform_confirmation_19'] = array(
     'template' => 'webform-confirmation-19',
     'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',
     'theme path' => drupal_get_path('module', 'uw_find_your_edge'),
     'type' => 'theme',
-    'variables' => array('test' => $value),
   );
 }
 
@@ -73,7 +74,30 @@ function uw_find_your_edge_menu() {
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
+
+  $items['admin/config/content/uw_find_your_edge_config'] = array(
+    'title' => 'Find Your EDGE Config',
+    'description' => 'Configure the settings for the Find Your EDGE quiz tool.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('uw_find_your_edge_config_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
   return $items;
+}
+
+function uw_find_your_edge_config_form($form, &$form_state) {
+  $form['uw_find_your_edge_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Target Node ID'),
+    '#size' => 5,
+    '#maxlength' => 5,
+    '#description' => t('Target which webform for the EDGE quiz tool'),
+    '#default_value' => variable_get('uw_find_your_edge_nid', 19),
+    '#required' => TRUE,
+  );
+  drupal_theme_rebuild();
+  return system_settings_form($form);
 }
 
 /**
