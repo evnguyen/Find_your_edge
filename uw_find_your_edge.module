@@ -19,7 +19,8 @@
  */
 function uw_find_your_edge_page_build() {
   $path = current_path();
-  if ($path == "node/19/done") {
+  $nid = variable_get('uw_find_your_edge_nid', 19);
+  if ($path == 'node/'. $nid .'/done') {
     $breadcrumb = drupal_get_breadcrumb();
     $breadcrumb[1] = l(t('Find your EDGE'), '/find-your-edge');
     array_pop($breadcrumb);
@@ -35,14 +36,15 @@ function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
   //WMS-DEV nid = 36
   $nid = variable_get('uw_find_your_edge_nid', 19);
   $node = menu_get_object();
-  
+  //dsm($nid);
   //TODO: uw_find_your_edge_nid works but cache must be cleared
-  $theme_registry['webform_confirmation_19'] = array(
-    'template' => 'webform-confirmation-19',
+  $theme_registry['webform_confirmation_' . $nid] = array(
+    'template' => 'webform-confirmation-quiz',
     'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',
     'theme path' => drupal_get_path('module', 'uw_find_your_edge'),
     'type' => 'theme',
   );
+  //dsm($theme_registry);
 }
 
 /**
@@ -52,7 +54,8 @@ function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
  */
 function uw_find_your_edge_node_load($nodes, $types) {
   //dsm($nodes);
-  if (isset($nodes[19]->title) && $nodes[19]->title == 'Find your EDGE') {
+  $nid = variable_get('uw_find_your_edge_nid', 19);
+  if (isset($nodes[$nid]) && $nodes[$nid]->nid == $nid) {
     drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') .
       '/fye_style.css', array('group' => CSS_DEFAULT, 'weight' => 99));
   }
@@ -108,7 +111,8 @@ function uw_find_your_edge_config_form($form, &$form_state) {
  * @return bool
  */
 function uw_find_your_edge_access($node) {
-  return ($node->nid == 19);
+  $nid = variable_get('uw_find_your_edge_nid', 19);
+  return ($node->nid == $nid);
 }
 
 /**
