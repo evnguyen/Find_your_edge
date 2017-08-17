@@ -598,7 +598,7 @@
       based on your responses. You can complete these milestones during any term
       and in almost any order you choose. It may be possible for you to complete
       EDGE with an entirely different set of milestones — these are just recommendations.
-      The choice is ultimately yours.</p>
+      The choice is ultimately yours. Each milestone will provide a link for further information in a separate tab.</p>
     <p>If you're ready to take the next step, you can register for EDGE by submitting the
       <a href="https://uwaterloo.ca/edge/registration-form" target="_blank">registration form</a>
       available on our website. If you have any questions or concerns about the registration process,
@@ -608,7 +608,7 @@
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Skills Identification and Articulation Workshop</h5>
+    <h2>Skills Identification and Articulation Workshop</h2>
 </div>
 
   <div class="flex-component-block">
@@ -632,7 +632,7 @@
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Career Development Course</h5>
+    <h2>Career Development Course</h2>
   </div>
 
   <div class="flex-component-block">
@@ -656,7 +656,7 @@
   </div>
 
    <div class="flex-component-title margin-top">
-    <h5>Work and Community Experiences</h5>
+    <h2>Work and Community Experiences</h2>
   </div>
 
   <div class="flex-component-block">
@@ -758,7 +758,7 @@
   </div>
 
   <div class="flex-component-title margin-top">
-    <h5>Capstone Workshop</h5>
+    <h2>Capstone Workshop</h2>
   </div>
 
   <div class="flex-component-block">
@@ -782,20 +782,19 @@
   </div>
 
   <div class="flex-message margin-top">
-    <p> Click
+    <p> View a
       <?php
         if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
           $fid = variable_get('uw_find_your_edge_fid_international', 0);
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         else {
           $fid = variable_get('uw_find_your_edge_fid_regular', 0);
           //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';
-          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">here</a>';
+          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         ?>
-        to generate a PDF version of your EDGE path.
     </p>
   </div>
 
@@ -818,7 +817,7 @@
   <div class="flex-redo-button-wrapper">
     <div id="redo-button" class="edge-action-button-wrapper alignment adjust-height">
       <div class="call-to-action-wrapper">
-        <a href="">
+        <a id="redo-button-href" href="">
           <div id="redo-hover-area" class="call-to-action-wrapper adjust-height">
             <div class="edge-action-button-gray">
               <div class="call-to-action-big-text">

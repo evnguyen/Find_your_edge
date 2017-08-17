@@ -18,6 +18,11 @@
             $('.text-box-hover-wrapper').hide();
           }
         );
+        $('#redo-button-href').focus(
+          function(){
+            $('.text-box-hover-wrapper').show();
+          }
+        );
       }
       $(window).resize(function() {
         var width = $(window).width();
@@ -33,6 +38,11 @@
             },
             function(){
               $('.text-box-hover-wrapper').hide();
+            }
+          );
+          $('#redo-button-href').focus(
+            function(){
+              $('.text-box-hover-wrapper').show();
             }
           );
         }

@@ -152,6 +152,10 @@
   }
 } /**End @media**/
 
+h2 {
+  font-size: 1.125rem
+}
+
 .uw-site-content{
   width: 100%;
 }
