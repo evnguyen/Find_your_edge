@@ -23,6 +23,11 @@
             $('.text-box-hover-wrapper').show();
           }
         );
+        $('#redo-button-href').blur(
+          function(){
+            $('.text-box-hover-wrapper').hide();
+          }
+        );
       }
       $(window).resize(function() {
         var width = $(window).width();
@@ -43,6 +48,11 @@
           $('#redo-button-href').focus(
             function(){
               $('.text-box-hover-wrapper').show();
+            }
+          );
+          $('#redo-button-href').blur(
+            function(){
+              $('.text-box-hover-wrapper').hide();
             }
           );
         }
