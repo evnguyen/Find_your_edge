@@ -114,7 +114,8 @@
   }
 
   .text-box-hover-wrapper{
-    background-color: #fffaaa;
+    background-color: #000;
+    color: #fdd54f;
     width: 65%;
     float: right;
     padding: 0.5rem;

@@ -784,15 +784,18 @@
   <div class="flex-message margin-top">
     <p> View a
       <?php
+      $nid = variable_get('uw_find_your_edge_nid', 0);
         if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
-          $fid = variable_get('uw_find_your_edge_fid_international', 0);
-          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">here</a>';
-          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
+          $fid = variable_get('uw_find_your_edge_fid_fid_international', 0);
+          $url = fillpdf_pdf_link($form_id = $fid , $node_id = $nid);
+          //print '<a href=' . $url . '"&fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
+          print '<a href=' . $url . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         else {
           $fid = variable_get('uw_find_your_edge_fid_regular', 0);
-          //print '<a href="https://d7/fdsu1/fillpdf?fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">here</a>';
-          print '<a href="/edge/fillpdf?fid=' . $fid . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
+          $url = fillpdf_pdf_link($form_id = $fid , $node_id = $nid);
+          //print '<a href=' . $url . '&fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">PDF version of your EDGE path</a>';
+          print '<a href=' . $url . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         ?>
     </p>
