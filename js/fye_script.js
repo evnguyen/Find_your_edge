@@ -7,7 +7,7 @@
   Drupal.behaviors.convertBehavior = {
     attach: function (context) {
 
-      var width = $(window).width();
+      /*var width = $(window).width();
       if (width > 983) {
         $('.text-box-hover-wrapper').hide();
         $('#redo-hover-area').hover(
@@ -56,74 +56,7 @@
             }
           );
         }
-      });
-
-      /*
-       var width = $(window).width();
-      if (width < 983) {
-        $('.webform-next, .webform-previous, .button-primary').css({
-          'float':'',
-          'width':'100%'
-        });
-      }
-      else {
-        $('.webform-next, .button-primary').css({
-          'float':'right',
-          'width':'30%'
-        });
-        $('.webform-previous').css({
-          'float':'none',
-          'width':'30%'
-        });
-        $('.webform-next').css({
-          'float':'right',
-          'width':'30%'
-        });
-        $('.text-box-hover-wrapper').hide();
-        $('#redo-hover-area').hover(
-          function(){
-            $('.text-box-hover-wrapper').show();
-          },
-          function(){
-            $('.text-box-hover-wrapper').hide();
-          }
-        );
-      }
-      $(window).resize(function() {
-        var width = $(window).width();
-        if (width < 983) {
-          $('.webform-next, .webform-previous, .button-primary').css({
-            'float':'',
-            'width':'100%'
-          });
-          $('.text-box-hover-wrapper').show();
-          $('#redo-hover-area').off('hover')
-        }
-        else {
-          $('.webform-next, .button-primary').css({
-            'float':'right',
-            'width':'30%'
-          });
-          $('.webform-previous').css({
-            'float':'none',
-            'width':'30%'
-          });
-          $('.webform-next').css({
-            'float':'right',
-            'width':'30%'
-          });
-          $('.text-box-hover-wrapper').hide();
-          $('#redo-hover-area').hover(
-            function(){
-              $('.text-box-hover-wrapper').show();
-            },
-            function(){
-              $('.text-box-hover-wrapper').hide();
-            }
-          );
-        }
-      });
-       */
+      });*/
     }//End attach
   };
 }(jQuery));

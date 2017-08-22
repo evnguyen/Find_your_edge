@@ -43,10 +43,10 @@
   .text-box-hover-wrapper{
     background-color: #fffaaa;
     padding: 0.5rem;
-    float:left;
+    float: left;
     margin-top: 0.5rem;
     border-style: solid;
-    border-color:#000;
+    border-color: #000;
     border-width: 1px;
   }
 
