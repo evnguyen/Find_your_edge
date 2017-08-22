@@ -786,7 +786,7 @@
       <?php
       $nid = variable_get('uw_find_your_edge_nid', 0);
         if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
-          $fid = variable_get('uw_find_your_edge_fid_fid_international', 0);
+          $fid = variable_get('uw_find_your_edge_fid_international', 0);
           $url = fillpdf_pdf_link($form_id = $fid , $node_id = $nid);
           //print '<a href=' . $url . '"&fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
           print '<a href=' . $url . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
