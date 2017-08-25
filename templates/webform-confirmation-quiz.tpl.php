@@ -199,6 +199,15 @@
         }
       }
     }
+
+    if(empty($results)) {
+      $ruleset = new stdClass();
+      $ruleset->result = "Skills Workshop";
+      $ruleset->description = "The skills identification and articulation workshop will help you recognize your skills and express them to potential employers. Click the box to learn more about the skills workshop.";
+      $ruleset->url = "https://uwaterloo.ca/edge/skills-identification-articulation-workshop";
+      $results[] = $ruleset;
+    }
+
     return get_random_element($results);
   }
 
@@ -229,6 +238,13 @@
           $results[] = $ruleset;
         }
       }
+    }
+    if(empty($results)) {
+      $ruleset = new stdClass();
+      $ruleset->result = "Career Course";
+      $ruleset->description = "The career development course will help you develop core career-seeking skills like résumé writing and interviewing. Click the box to learn more about the career development course.";
+      $ruleset->url = "https://uwaterloo.ca/edge/career-development-course";
+      $results[] = $ruleset;
     }
     return get_random_element($results);
   }
@@ -431,7 +447,6 @@
     return $return_list;
   }
 
-
 /**
  * Obtains the PD course for the EDGE path
  * @param $submission
@@ -459,6 +474,15 @@
         }
       }
     }
+
+    if(empty($results)) {
+      $ruleset = new stdClass();
+      $ruleset->result = "PD Course";
+      $ruleset->description = "You can develop your professional skills by completing a PD course in tandem with an on- or off-campus experience. Click the box to learn more about PD courses.";
+      $ruleset->url = "https://uwaterloo.ca/professional-development-program/courses";
+      $results[] = $ruleset;
+    }
+
     return get_random_element($results);
   }
 
@@ -490,6 +514,15 @@
         }
       }
     }
+
+    if(empty($results)) {
+      $ruleset = new stdClass();
+      $ruleset->result = "Capstone Workshop";
+      $ruleset->description = "You’ll use the capstone workshop to make a plan of action for your life post-graduation, whatever it entails. Click the box for more details regarding the capstone workshop.";
+      $ruleset->url = "https://uwaterloo.ca/edge/students/types-edge-experiences";
+      $results[] = $ruleset;
+    }
+
     return get_random_element($results);
   }
 
@@ -788,13 +821,11 @@
         if(isset($submission->data[1][0]) && $submission->data[1][0] == 1) {
           $fid = variable_get('uw_find_your_edge_fid_international', 0);
           $url = fillpdf_pdf_link($form_id = $fid , $node_id = $nid);
-          //print '<a href=' . $url . '"&fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
           print '<a href=' . $url . '&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         else {
           $fid = variable_get('uw_find_your_edge_fid_regular', 0);
           $url = fillpdf_pdf_link($form_id = $fid , $node_id = $nid);
-          //print '<a href=' . $url . '&fid=3&webform[sid]=' . $sid . '&sid=' . $sid . '&token=' . $access_token .  '">PDF version of your EDGE path</a>';
           print '<a href=' . $url . '&webform[sid]=' . $sid . '&sid=' . $sid  . '&token=' . $access_token . '">PDF version of your EDGE path</a>';
         }
         ?>
@@ -804,7 +835,11 @@
   <div class="flex-back-button-wrapper">
     <div id ="back-button" class="edge-action-button-wrapper adjust-height">
       <div class="call-to-action-wrapper">
-        <a href="/edge/find-your-edge">
+        <?php
+          $nid = variable_get('uw_find_your_edge_nid', 0);
+          $url = url('/node/' . $nid);
+          print '<a href="' . $url . '">';
+        ?>
           <div class="call-to-action-wrapper adjust-height">
             <div class="edge-action-button-gray"> 
               <div class="call-to-action-big-text">

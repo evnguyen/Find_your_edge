@@ -41,7 +41,8 @@
   }
 
   .text-box-hover-wrapper{
-    background-color: #fffaaa;
+    background-color: #000;
+    color: #ffffff;
     padding: 0.5rem;
     float: left;
     margin-top: 0.5rem;
