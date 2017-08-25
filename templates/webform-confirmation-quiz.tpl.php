@@ -608,8 +608,6 @@
   $sid = $_GET['sid'];
   $submission = webform_get_submission($node->nid, $sid);
   $access_token = token_replace('[submission:access-token]', array('webform-submission' => $submission));
-  //Debug
-  //dsm($submission);
 
   $component1 = get_component1($submission);
   $component2 = get_component2($submission);
@@ -619,10 +617,6 @@
 
   pdf_store_results($sid, $component1, $component2, $component3, $component_pd, $component4);
 ?>
-
-<!--TODO: BUG: Stop webpage refresh from re-running the function calls -->
-<!--TODO: BUG: CAPTCHA session reuse attack detected -->
-<!--TODO: purge submissions and results table-->
 
 <div class="flex-container">
 

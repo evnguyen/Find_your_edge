@@ -33,17 +33,14 @@ function uw_find_your_edge_page_build() {
  * @param $theme_registry
  */
 function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
-  //WMS-DEV nid = 36
   $nid = variable_get('uw_find_your_edge_nid', 19);
   $node = menu_get_object();
-  //dsm($nid);
   $theme_registry['webform_confirmation_' . $nid] = array(
     'template' => 'webform-confirmation-quiz',
     'path' => drupal_get_path('module', 'uw_find_your_edge') . '/templates',
     'theme path' => drupal_get_path('module', 'uw_find_your_edge'),
     'type' => 'theme',
   );
-  //dsm($theme_registry);
 }
 
 /**
@@ -52,7 +49,6 @@ function uw_find_your_edge_theme_registry_alter(&$theme_registry) {
  * @param $types
  */
 function uw_find_your_edge_node_load($nodes, $types) {
-  //dsm($nodes);
   $nid = variable_get('uw_find_your_edge_nid', 19);
   if (isset($nodes[$nid]) && $nodes[$nid]->nid == $nid) {
     drupal_add_css(drupal_get_path('module', 'uw_find_your_edge') .

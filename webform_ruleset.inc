@@ -12,12 +12,6 @@
  */
 
 /**
- * TODO: Add a method to import CSV file?
- * TODO: Add some cool CSS (red delete button, red 'unsaved' ruleset)
- * TODO: Add drupal_set_message for all deletions
- */
-
-/**
  * @param $form
  * @param $add_count
  * @param $ids
@@ -127,7 +121,6 @@ function webform_ruleset_callback($form, $form_state) {
 function webform_ruleset_unsaved_callback($form, $form_state) {
   $element = $form_state['triggering_element']['#name'];
   $component = get_component_number($element);
-  //dsm($component);
   return $form[$component];
 }
 
@@ -169,7 +162,6 @@ function webform_ruleset_form($form, &$form_state) {
     ->execute()
     ->fetchAll();
 
-  //dsm($query);
   $form_state['existing_rules_count'] = count($query);
   if ($form_state['existing_rules_count'] > 0) {
     $form_state['largest_ruleset_id'] = $query[$form_state['existing_rules_count']-1]->ruleset_id;
@@ -342,8 +334,6 @@ function webform_ruleset_form($form, &$form_state) {
     '#value' => t('Save'),
   );
 
-  //dsm($form);
-  //dsm($form_state);
   return $form;
 }
 
@@ -365,7 +355,6 @@ function webform_ruleset_get_form($node) {
  */
 function webform_ruleset_form_submit($form, &$form_state) {
   $ruleset = new stdClass();
-  //dsm($form_state);
   $query = db_select('find_your_edge_rulesets', 'fyer')
     ->fields('fyer')
     ->execute()
@@ -501,7 +490,6 @@ function webform_ruleset_form_delete_ruleset($form, &$form_state) {
       $form_state['ruleset_add_count_comppd'] = count($form_state['ruleset_ids_to_save_componentpd']);
       $form_state['ruleset_add_count_comp4'] = count($form_state['ruleset_ids_to_save_component4']);
 
-    //dsm($form_state['flagged_unsaved_ruleset_id']);
     }
 
   db_delete('find_your_edge_rulesets')
