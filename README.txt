@@ -6,7 +6,7 @@ Installation
 ------------
 Upon installation, the following are required:
 1) A webform to be targeted.
-2) Two forms for international and regular students respectively.
+2) Two PDF templates for international and regular students respectively.
 3) The first question will need to be "Are you an international student" radio
    question. Answer keys:
    1|Yes, I'm an international student
